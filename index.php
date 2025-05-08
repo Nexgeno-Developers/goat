@@ -1,7 +1,7 @@
 <?php  
     
-    echo "<h3>No Permission to Access</h3><br>";
-    exit();
+    // echo "<h3>No Permission to Access</h3><br>";
+    // exit();
 
     if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
         $ip = $_SERVER['HTTP_CLIENT_IP'];
