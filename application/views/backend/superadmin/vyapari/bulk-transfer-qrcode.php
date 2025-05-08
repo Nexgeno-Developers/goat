@@ -1,0 +1,48 @@
+<?php $vyapari_id = $param1; $action = $param2; ?>
+<form method="POST" class="d-block ajaxForm" action="<?php echo route('manage_vyapari/bulk_transfer_qrcode/'.$vyapari_id); ?>">
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label for="name"><?php echo get_phrase('notes'); ?></label>
+            <textarea class="form-control" rows="2" name = "notes" required></textarea>
+            <small class="form-text text-muted"><?php echo get_phrase('provide_notes'); ?></small>
+            <input type="hidden" id="bulk_qrcode_ids" name="bulk_qrcode_ids" value="">
+        </div>
+        <div class="col-md-12 mb-2">
+            <label>Vyapari ID</label>
+            <select class="form-control form-select select12" id="vyapari" name="t_vyapari_id" required>
+                <option value="">Select</option>
+                <?php $vyapari = $this->db->select(['vyapari_id', 'name'])->from('app_vyapari')->where('vyapari_id !=', $vyapari_id)->get()->result(); foreach($vyapari as $row) { ?>
+                    <option value="<?= $row->vyapari_id ?>"><?= vyapari_id($row->vyapari_id).' / '.ucfirst($row->name) ?></option>
+                <?php } ?>
+            </select>  
+            <small class="form-text text-muted"><?php echo get_phrase('provide_vyapari'); ?></small>
+        </div>        
+        <div class="form-group  col-md-12">
+            <button class="btn btn-block btn-primary" type="submit"><?php echo get_phrase('submit'); ?></button>
+        </div>
+    </div>
+</form>
+
+<script>
+  $(".ajaxForm").validate({}); // Jquery form validation initialization
+  $(".ajaxForm").submit(function(e) {
+      var form = $(this);
+      ajaxSubmit(e, form, refreshPage);
+  });
+
+  var refreshPage = function(){
+      setTimeout(function(){ location.reload(); }, 1500);
+  }
+  
+    $( document ).ready(function() {
+        var qrcode_ids = [];
+        $(".complaints_checkbox:checked").each(function(){
+            qrcode_ids.push($(this).val());
+        });
+        $('#bulk_qrcode_ids').val(qrcode_ids.join(','));
+    });  
+    
+     $(document).ready(function(){
+        initSelect2(['#vyapari']);
+    });   
+</script>

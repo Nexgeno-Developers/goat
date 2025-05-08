@@ -1,0 +1,12 @@
+* text=auto
+*.css linguist-vendored
+*.scss linguist-vendored
+*.js linguist-vendored
+*.php text eol=lf
+*.html text eol=lf
+*.js text eol=lf
+*.md text eol=lf
+CHANGELOG.md export-ignore
+
+
+

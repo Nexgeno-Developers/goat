@@ -1,0 +1,29 @@
+# Ignore .htaccess
+.htaccess
+.htaccess.*
+
+# Ignore upload directories
+/uploads/biometric_excel_files/
+/uploads/csv_file/
+/uploads/users/
+/uploads/vyapari_photo/
+
+# Ignore vendor directory (if managed by Composer)
+vendor/
+
+# Ignore CI session files
+ci_sessions/
+/ci_sessions/
+
+# Ignore all .lock and .zip files
+*.lock
+*.zip
+*.xlsx
+*.xls
+*.sql
+
+error_log
+/application/logs
+/application/third_party
+/application/libraries/
+

@@ -1,0 +1,9 @@
+Update instructions from version 7.1 to 7.2 -
+PLEASE READ AND FOLLOW THE STEPS CAREFULLY.
+
+If your application has been customized, Then keep your file backup and follow the step-by-step instructions below.
+
+1. Login to the admin panel and go to System Settings. You will get a field of product update. Upload the update_7.2.zip file here.
+
+If you face any kind of difficulties, let us know through tickets.
+That's it.
