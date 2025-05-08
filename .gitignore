@@ -8,8 +8,6 @@
 /uploads/users/
 /uploads/vyapari_photo/
 
-# Ignore vendor directory (if managed by Composer)
-vendor/
 
 # Ignore CI session files
 ci_sessions/
