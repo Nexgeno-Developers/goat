@@ -9,6 +9,12 @@
 /uploads/vyapari_photo/
 
 
+# Ignore all files in uploads/users
+uploads/users/*
+
+# But do not ignore placeholder.jpg
+!uploads/users/placeholder.jpg
+
 # Ignore CI session files
 ci_sessions/
 /ci_sessions/
