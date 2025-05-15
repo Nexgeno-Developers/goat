@@ -9,18 +9,18 @@ if($user_type == 'parent'){
 <!-- ========== Left Sidebar Start ========== -->
 <div class="left-side-menu left-side-menu-detached content-main">
 
-  <div class="leftbar-user">
+  <!-- <div class="leftbar-user">
     <a href="javascript: void(0);">
-      <img src="<?php echo $this->user_model->get_user_image($this->session->userdata('user_id')); ?>?<?php echo time() ?>" alt="user-image" height="42" class="rounded-circle shadow-sm">
+      <img src="<?php //echo $this->user_model->get_user_image($this->session->userdata('user_id')); ?>?<?php //echo time() ?>" alt="user-image" height="42" class="rounded-circle shadow-sm">
       <?php
-      $user_details = $this->user_model->get_user_details($this->session->userdata('user_id'));
+      //$user_details = $this->user_model->get_user_details($this->session->userdata('user_id'));
       ?>
-      <span class="leftbar-user-name"><?php echo $user_details['name']; ?></span>
+      <span class="leftbar-user-name"><?php //echo $user_details['name']; ?></span>
     </a>
-  </div>
+  </div> -->
   <!--- Sidemenu -->
   <ul class="metismenu side-nav side-nav-light">
-    <li class="side-nav-title side-nav-item"><?php echo get_phrase('navigation'); ?></li>
+    <!-- <li class="side-nav-title side-nav-item"><?php echo get_phrase('navigation'); ?></li> -->
     <li class="side-nav-item">
       <a href="<?php echo site_url($controller.'/dashboard'); ?>" class="side-nav-link">
         <i class="dripicons-meter"></i>
@@ -90,9 +90,9 @@ if($user_type == 'parent'){
        <span><?php echo get_phrase('reports'); ?></span>
        </a>
        <ul class="side-nav-second-level collapse" aria-expanded="false">
-          <?/* collapse<li>
+          <?php /* collapse<li>
              <a href="<?php echo site_url($controller.'/manage_vyapari'); ?>">Vyapari registration</a>
-          </li>*/?>
+          </li>*/ ?>
           
           <?php if(access('pass_block_report')){ ?>
           <li>

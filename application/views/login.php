@@ -19,6 +19,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     
+    
     <style>
     
     
@@ -34,7 +35,7 @@
     margin-right: auto;
 }
         span.logtext {
-    color: #fff;
+    color: #000;
     font-size: 24px;
     padding: 0px 30px;
 }
@@ -46,11 +47,10 @@
 }
 
 img.lohimg {
-       width: 130px;
-    object-fit: contain;
-    height: 130px;
+       width: 140px;
     background: #fff;
     padding: 12px;
+    height:140px;
     border-radius: 50%;
 }
 h4.lohhead, p.logdec {
@@ -73,35 +73,38 @@ h4.lohhead, p.logdec {
     bottom: 0;
     min-height: 100vh;
     padding: 0;
-    background-position: center;
+        background-position: center;
 }
 
-.login-section {
-    background-image: linear-gradient(to bottom, #ff0000, #ff8100);
-}
+/* .login-section {
+   background-image: linear-gradient(to bottom, #0fa4ed, #b36a20);
+} */
 
 .login-section .form-control {
-    border-radius: 50px;
+    border-radius: 10px;
     height: 45px;
     font-size: 16px;
     color: #000 !important;
     padding: 0px 25px;
+    border:1px solid #EAEAEA !important;
 }
 .login-section input::placeholder {
-    color: #555 !important;
+    color: #999 !important;
 }
 .login-section .form-group {
     margin-bottom: 1.4rem;
 }
 .login-section button {
-    background: #2c3ca9 !important;
+    background: #71357C !important;
     border: 0 !important;
     height: 46px;
-    border-radius: 50px !important;
-    width: 166px !important;
-    font-size: 16px !important;
+    border-radius: 10px !important;
+    width: 100%;
+    font-size: 15px !important;
     margin-left: auto;
     margin-right: auto;
+    text-transform:uppercase;
+    box-shadow: none !important;
 }
 
 .login_main_box
@@ -114,6 +117,15 @@ h4.lohhead, p.logdec {
     padding: 30px 0;
 }
 
+.left_login_img
+{
+    padding: 15px 0px;
+    height: 100vh !important;
+}
+img.download_img {
+    width: 100%;
+    margin-top: 30px;
+}
 
 @media(max-width:767px)
 {
@@ -147,7 +159,13 @@ img.lohimg {
         
         
         <div class="row">
-            <div class="col-md-6 login_main_box">
+
+        <div class="col-lg-5 h-100">
+        <img class="left_login_img" src="<?php echo base_url('assets/backend/images/login_image_new.webp'); ?>" alt="Login Image">
+        </div>
+
+
+            <div class="col-md-7 login_main_box">
                 <div class="auth-fluid-form-box">
             <div class="align-items-center h-100">
                 <div class="card-body">
@@ -160,8 +178,8 @@ img.lohimg {
                         </a>
                     </div>
                     <!-- title-->
-                    <h4 class="lohhead mt-0 text-center"><?php echo get_phrase('sign_in'); ?></h4>
-                    <p class="logdec text-muted mb-4 text-center"><?php echo get_phrase('enter_your_email_address_and_password_to_access_account'); ?>.</p>
+                    <!-- <h4 class="lohhead mt-0 text-center"><?php //echo get_phrase('sign_in'); ?></h4>
+                    <p class="logdec text-muted mb-4 text-center"><?php //echo get_phrase('enter_your_email_address_and_password_to_access_account'); ?>.</p> -->
 
                     <!-- form -->
                     <form action="<?php echo site_url('login/validate_login'); ?>" method="post" id="loginForm">
@@ -170,17 +188,17 @@ img.lohimg {
                             <input class="form-control" type="email" name="email" id="emailaddress" required="" placeholder="Enter your email">
                         </div>
                         <div class="form-group">
-                            <?/*<a href="javascript: void(0);" class="text-muted float-right" onclick="forgotPass();"><small><?php echo get_phrase('forgot_your_password'); ?>?</small></a>*/?>
+                            <?php /*<a href="javascript: void(0);" class="text-muted float-right" onclick="forgotPass();"><small><?php echo get_phrase('forgot_your_password'); ?>?</small></a>*/ ?>
                             <!--<label for="password"><?php //echo get_phrase('password'); ?></label>-->
                             <input class="form-control" type="password" name="password" required="" id="password" placeholder="Enter your password">
                             <span class="text-danger" id="error_message"></span>
                         </div>
                         <div class="form-group mb-0 text-center">
-                            <button class="btn btn-primary btn-block" type="submit"><i class="fa fa-sign-in" aria-hidden="true"></i> <?php echo get_phrase('log_in'); ?> </button>
+                            <button class="btn btn-primary btn-block" type="submit"><?php echo get_phrase('log_in'); ?> </button>
                         </div>
                     </form>
 
-                    <?/*<form action="<?php echo site_url('login/retrieve_password'); ?>" method="post" id="forgotForm" style="display: none;">
+                    <?php /*<form action="<?php echo site_url('login/retrieve_password'); ?>" method="post" id="forgotForm" style="display: none;">
                         <div class="form-group">
                             <a href="javascript: void(0);" class="text-muted float-right" onclick="backToLogin();"><small><?php echo get_phrase('back_to_login'); ?></small></a>
                             <label for="forgotEmail"><?php echo get_phrase('email'); ?></label>
@@ -189,14 +207,18 @@ img.lohimg {
                         <div class="form-group mb-0 text-center">
                             <button class="btn btn-primary btn-block" type="submit"><i class="mdi mdi-login"></i> <?php echo get_phrase('sent_password_reset_link'); ?> </button>
                         </div>
-                    </form>*/?>
+                    </form>*/ ?>
+
+<div class="">
+                    <a href="/"> <img class="download_img" src="<?php echo base_url('assets/backend/images/download_banner.webp'); ?>" alt="Login Image"></a>
+                </div>
              
                 </div> 
             </div> 
         </div>
             </div>
             
-             <div class="col-lg-6 bg-img clip-home h-100"></div>
+             
         </div>
         
 </div>

@@ -1,6 +1,7 @@
 <!-- Topbar Start -->
+<div class="container-fluid">
 <div class="navbar-custom topnav-navbar topnav-navbar-dark">
-    <div class="container-fluid">
+    
 
         <!-- LOGO -->
         <a href="<?php echo site_url($this->session->userdata('role')); ?>" class="topnav-logo" style = "min-width: unset;">

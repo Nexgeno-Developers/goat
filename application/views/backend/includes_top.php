@@ -10,6 +10,7 @@
 <link href="<?php echo base_url(); ?>assets/backend/css/vendor/simplemde.min.css" rel="stylesheet" type="text/css" />
 <!-- third party css end -->
 
+<link href="https://fonts.cdnfonts.com/css/satoshi" rel="stylesheet">
 <!-- App css -->
 <link href="<?php echo base_url(); ?>assets/backend/css/icons.min.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo base_url(); ?>assets/backend/css/app.min.css" rel="stylesheet" type="text/css" />
@@ -41,5 +42,10 @@
 <style>
     .enlarged .side-nav .side-nav-item .side-nav-link:active, .enlarged .side-nav .side-nav-item .side-nav-link:focus, .enlarged .side-nav .side-nav-item .side-nav-link:hover {
     color: #313a46;
+}
+
+body
+{
+    font-family: 'Satoshi', sans-serif !important;
 }
 </style>

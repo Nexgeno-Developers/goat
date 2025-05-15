@@ -5,7 +5,7 @@
   <div class="col-xl-12 breadcrumes">
     <div class="card">
       <div class="card-body">
-        <h4 class="page-title"> <i class="mdi mdi-view-dashboard title_icon"></i> <?php echo get_phrase('dashboard'); ?> </h4>
+        <h4 class="page-title"> <i class="mdi mdi-home title_icon"></i> <?php echo get_phrase('dashboard'); ?> </h4>
       </div> <!-- end card body-->
     </div> <!-- end card -->
   </div><!-- end col-->
@@ -17,14 +17,14 @@
 <div class="dashboard_box">
 <div class="row ">
     
-    <div class="col-md-6">
+    <div class="col-md-12">
         <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-                <div class="card card-stats three">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-6">
+                <div class="card card-stats two">
                      <a class="dashbox" href="reports/inward">
                     <div class="card-header card-header-warning card-header-icon">
                         <div class="card-icon">
-                            <img src="../assets/backend/images/icon-3.png" alt="">
+                            <img src="../assets/backend/images/arrow_icon1.svg" alt="">
                         </div>
                         <p class="card-category"><?php echo get_phrase('Total Goat Inward'); ?></p>
                         <h3 class="card-title"> 
@@ -43,12 +43,12 @@
             </div>
             
                 
-            <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-6 pl-md-1">
                 <div class="card card-stats four">
                     <a class="dashbox" href="reports/outward">
                     <div class="card-header card-header-warning card-header-icon">
                         <div class="card-icon">
-                            <img src="../assets/backend/images/icon-4.png" alt="">
+                            <img src="../assets/backend/images/arrow_icon3.svg" alt="">
                         </div>
                         <p class="card-category"><?php echo get_phrase('Total Goat Outward'); ?></p>
                         <h3 class="card-title"> 
@@ -67,12 +67,12 @@
                 </div>
             </div>
             
-                <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-                    <div class="card card-stats one">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-6 pl-md-1">
+                    <div class="card card-stats five">
                          <a class="dashbox" href="manage_vyapari"> 
                         <div class="card-header card-header-warning card-header-icon">
                             <div class="card-icon">
-                                <img src="../assets/backend/images/icon-1.png" alt="">
+                                <img src="../assets/backend/images/arrow_icon7.svg" alt="">
                             </div>
                             <p class="card-category"><?php echo get_phrase('Total Balance Goat'); ?> </p>
                             <h3 class="card-title"> 
@@ -90,15 +90,13 @@
                     </div>
                 </div>
             
-                <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-                    </div>
-                
-                <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-                    <div class="card card-stats two">
+               
+                <div class="col-lg-4 col-md-4 col-sm-4 col-6">
+                    <div class="card card-stats three">
                         <a class="dashbox" href="reports/blocked">
                         <div class="card-header card-header-warning card-header-icon">
                             <div class="card-icon">
-                                <img src="../assets/backend/images/icon-2.png" alt="">
+                                <img src="../assets/backend/images/arrow_icon8.svg" alt="">
                             </div>
                             <p class="card-category"><?php echo get_phrase('Pass Blocked'); ?>  </p>
                             <h3 class="card-title"> 
@@ -117,12 +115,12 @@
                 </div>
                 
                 
-                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                 <div class="col-lg-4 col-md-4 col-sm-4 col-6 pl-md-1">
                     <div class="card card-stats one">
                          <a class="dashbox" href="manage_vyapari"> 
                         <div class="card-header card-header-warning card-header-icon">
                             <div class="card-icon">
-                                <img src="../assets/backend/images/icon-1.png" alt="">
+                                <img src="../assets/backend/images/arrow_icon9.svg" alt="">
                             </div>
                             <p class="card-category"><?php echo get_phrase('Total Vyapari Registered'); ?> </p>
                             <h3 class="card-title"> 
@@ -153,9 +151,14 @@
        </div> 
     </div>--->
         
-    <div class="col-md-6">
+    <div class="col-md-12">
                 <div class="chart_box">
             <canvas id="myChart"></canvas>
+    </div>
+    </div>
+
+    <div class="col-md-12 mt-3">
+                <div class="chart_box">
             <p>Goat In & Out Graph</p>
         <table class="table table-striped dt-responsive nowrap">
         	<thead>

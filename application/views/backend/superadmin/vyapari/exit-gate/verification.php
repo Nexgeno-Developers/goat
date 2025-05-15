@@ -39,7 +39,7 @@
         </h4>
         
         <div class="card-body exit_button backbutton_css">
-<a class="btn btn-sm btn-success" href="https://goat.deonarmcgm.com/superadmin/dashboard">Back to Dashboard</a>
+<a class="btn btn-sm btn-secondary" href="https://goat.deonarmcgm.com/superadmin/dashboard"><i class="mdi mdi-arrow-left"></i> Back to Dashboard</a>
 </div>
 
 
