@@ -12,6 +12,8 @@
 # Ignore all files in uploads/users
 uploads/users/*
 
+mages/bg_image_dashboard.png
+
 # But do not ignore placeholder.jpg
 !uploads/users/placeholder.jpg
 
@@ -30,4 +32,8 @@ error_log
 /application/logs
 /application/third_party
 /application/libraries/
+/application/config/database.php
+/application/config/config.php
+
+/index.php
 
