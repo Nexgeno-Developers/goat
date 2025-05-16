@@ -288,6 +288,13 @@ class Superadmin extends CI_Controller {
             $page_data['page_title'] = 'Pandol Availability';
             $this->load->view('backend/index', $page_data);
         }
+
+        if($param1 == 'pandol-availability-map')
+        {
+            $page_data['page_name']  = 'vyapari/reports/pandol-availability-map';
+            $page_data['page_title'] = 'Pandol Availability Map';
+            $this->load->view('backend/index', $page_data);
+        }        
         
         if($param1 == 'gwala')
         {
