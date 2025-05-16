@@ -155,6 +155,9 @@ img.lohimg {
 .login-section .card-body {
  padding-top:0px;
 }
+.login_main_box {
+    min-height: auto;
+}
 }
     </style>
 </head>
