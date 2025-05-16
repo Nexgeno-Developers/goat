@@ -14,7 +14,8 @@
 <script src="<?php echo base_url(); ?>assets/backend/js/vendor/buttons.print.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/backend/js/vendor/dataTables.keyTable.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/backend/js/vendor/dataTables.select.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/backend/js/vendor/Chart.bundle.min.js"></script>
+<!-- <script src="<?php echo base_url(); ?>assets/backend/js/vendor/Chart.bundle.min.js"></script> -->
+ <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script> -->
 <script src="<?php echo base_url(); ?>assets/backend/js/vendor/jquery-jvectormap-1.2.2.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/backend/js/vendor/jquery-jvectormap-world-mill-en.js"></script>
 <script src="<?php echo base_url(); ?>assets/backend/js/pages/demo.datatable-init.js"></script>

@@ -34,6 +34,9 @@ error_log
 /application/libraries/
 /application/config/database.php
 /application/config/config.php
+/application/cache/*
+!/application/cache/.htaccess
+!/application/cache/index.html
 
 /index.php
 
