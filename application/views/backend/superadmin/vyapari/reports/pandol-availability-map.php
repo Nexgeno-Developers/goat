@@ -105,7 +105,7 @@
                                         <span class="badge badge-light">Balance: <?php echo $total_balance; ?></span>
                                     </div>
                                     <div class="card-body bg-white fixed-height">
-                                        <div class="d-flex flex-wrap" style="justify-content: center;">
+                                        <div class="d-flex flex-wrap" style="    justify-content: center;">
                                             <?php 
                                             ksort($rooms); // sort room numbers
                                             foreach ($rooms as $room => $balance): 

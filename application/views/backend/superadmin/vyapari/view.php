@@ -12,7 +12,7 @@
     <div class="card">
       <div class="card-body">
           <div class="row">
-        <div class="col-md-10 col-12">
+        <div class="col-md-10 col-7">
         <h4 class="page-title vyapdet">
             <i class="mdi mdi-book-open-page-variant title_icon"></i> <?php echo get_phrase($page_title); ?>
             <!--Allocate QR-->
@@ -21,13 +21,13 @@
         </div>
 
         <?php if(access('allocate_pass_button')){ ?>
-        <div class="col-md-2 col-6">
+        <div class="col-md-2 col-5">
             <button type="button" class="btn btn-outline-success btn-rounded alignToTitle pass" onclick="rightModal('<?php echo site_url('modal/popup/vyapari/allocate-qrcode/'.$vyapari['vyapari_id']); ?>', '<?php echo get_phrase('pass_allocate'); ?>')"> <i class="mdi mdi-plus"></i> <?php echo get_phrase('add_pass'); ?></button>
         </div>
         <?php } ?>
 
        <?php if(access('allocate_pandol')){ ?>
-        <div class="col-md-2 col-6 d-none">
+        <div class="col-md-2 col-5 d-none">
            <button type="button" class="btn btn-outline-primary btn-rounded alignToTitle pandol" onclick="rightModal('<?php echo site_url('modal/popup/vyapari/edit-pandal/'.$vyapari['vyapari_id']); ?>', '<?php echo get_phrase('pandol_allocate'); ?>')"> <i class="mdi mdi-plus"></i> <?php echo get_phrase('add_pandol'); ?></button>
         </div>
         <?php } ?>
@@ -95,7 +95,7 @@
                                                 ?></p>
                             </div>
                             <?php if(access('printid_button')){ ?>
-                        <div class="col-md-2 col-12"><a target="_blank" class="btn btn-success printbtn" href="<?php echo base_url('superadmin/manage_vyapari/print/'.$vyapari['vyapari_id']); ?>">Print</a>
+                        <div class="col-md-2 col-4"><a target="_blank" class="btn btn-success printbtn" href="<?php echo base_url('superadmin/manage_vyapari/print/'.$vyapari['vyapari_id']); ?>">Print</a>
                             
                     </div>
                     <?php } ?>
