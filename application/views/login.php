@@ -146,6 +146,18 @@ img.lohimg {
        width: 100px;
     height: 100px;
 }
+
+.left_login_img {
+    padding: 15px 0px;
+    height: auto !important;
+    width: 100%;
+}
+.login-section .card-body {
+ padding-top:0px;
+}
+.login_main_box {
+    min-height: auto;
+}
 }
     </style>
 </head>
@@ -161,7 +173,8 @@ img.lohimg {
         <div class="row">
 
         <div class="col-lg-5 h-100">
-        <img class="left_login_img" src="<?php echo base_url('assets/backend/images/login_image_new.webp'); ?>" alt="Login Image">
+            <img class="left_login_img d-lg-block d-none" src="<?php echo base_url('assets/backend/images/login_image_new.webp'); ?>" alt="Login Image">
+            <img class="left_login_img d-lg-none d-block" src="<?php echo base_url('assets/backend/images/mobileview_banner.webp'); ?>" alt="Login Image">
         </div>
 
 

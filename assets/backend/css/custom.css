@@ -626,7 +626,7 @@ body[data-layout=detached] .content-page {
 }
 
 .card-body {
-  padding: 17px 20px 20px 20px !important;
+  padding: 10px 20px 9px 20px !important;
 }
 
 h4.page-title {
@@ -904,12 +904,14 @@ div#my_camera {}
   }
 
   .block-rep1 .dt-buttons.btn-group {
-    position: absolute;
-    top: 171px;
-    left: 137px;
+    position: relative;
+    top: 0;
+    right: 0;
   }
 
-
+  .alignToTitle {
+    margin-left: 0 !important;
+  }
 
 
 
@@ -1175,11 +1177,38 @@ span.topnav-logo-lg {
 }
 
 .left-side-menu-detached {
-  min-width: 310px !important;
+  min-width: 250px !important;
   padding-top: 30px !important;
-  padding-left: 30px;
-  padding-right: 30px;
-  max-width: 310px;
+  padding-left: 20px;
+  padding-right: 20px;
+  max-width: 250px;
+}
+
+.pendall_boxex .card-header {
+  padding: 6px 15px !important;
+  border-radius: 0;
+}
+
+.pendall_boxex .card-body.bg-white.fixed-height {
+  padding: 0px !important;
+}
+
+
+.compartment-box {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 0.4rem;
+  width: 75px;
+  min-height: 30px;
+  font-size: 11px;
+  display: flex;
+  flex-direction: column;
+  color: #555;
+  justify-content: center;
+  align-items: center;
+  padding-top: 1px !important;
+  margin: 2px !important;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 body[data-layout=detached] .container-fluid {
@@ -1243,7 +1272,7 @@ body {
     padding: 0;
     background-color: transparent !important;
     border-bottom: 0px solid #e3eaef;
-    text-align: center;
+    text-align: left;
   }
 
   .dashboard_box .card-stats .card-header .card-title {
@@ -1251,10 +1280,7 @@ body {
   }
 
   .dashboard_box .card-footer {
-    padding: 0.45rem 1.5rem;
-    background-color: #fff;
-    border-top: 1px solid #e3eaef;
-    text-align: center;
+    text-align: left;
     font-size: 12px;
   }
 
@@ -1409,5 +1435,50 @@ button.btn.btn-outline-success.btn-rounded.alignToTitle.pass {
   li.paginate_button.previous {
     display: inline-block;
     font-size: 12px;
+  }
+
+  .button-menu-mobile span {
+    background-color: rgb(0 0 0 / 80%) !important;
+  }
+
+  .content-page {
+    padding: 0 0px 0px 0px !important;
+  }
+
+  .pddleft_0 {
+    padding-right: 4px;
+  }
+
+  .pddright_0 {
+    padding-left: 4px;
+  }
+
+  .dashboard_box .card.card-stats {
+    padding: 15px 10px 15px 10px;
+  }
+
+  .dashboard_box .card-stats .card-header .card-title {
+    font-weight: 700;
+    color: #fff;
+    font-size: 30px;
+    padding-bottom: 7px;
+    padding-top: 5px;
+    margin-bottom: 0;
+  }
+
+  .dashboard_box .card [class*=card-header-] .card-icon {
+    float: left;
+    position: absolute;
+    right: 0px;
+    top: 3px;
+  }
+
+  .dashboard_box .card-stats .card-header.card-header-icon img {
+    width: 20px;
+    height: auto;
+    text-align: center;
+    background: #fff;
+    border-radius: 50px;
+    padding: 6px;
   }
 }

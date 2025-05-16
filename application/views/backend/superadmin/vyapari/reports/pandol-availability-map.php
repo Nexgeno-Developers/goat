@@ -95,8 +95,8 @@
     
                     <div class="row">
                         <?php foreach ($grouped_data as $block => $rooms): ?>
-                            <div class="col-md-6 col-lg-4">
-                                <div class="card mb-4">
+                            <div class="col-md-6 col-lg-4 pr-md-1 pl-md-1">
+                                <div class="card mb-4 pendall_boxex">
                                     <?php 
                                         $total_balance = array_sum($rooms); 
                                     ?>
@@ -105,7 +105,7 @@
                                         <span class="badge badge-light">Balance: <?php echo $total_balance; ?></span>
                                     </div>
                                     <div class="card-body bg-white fixed-height">
-                                        <div class="d-flex flex-wrap">
+                                        <div class="d-flex flex-wrap" style="    justify-content: center;">
                                             <?php 
                                             ksort($rooms); // sort room numbers
                                             foreach ($rooms as $room => $balance): 
@@ -151,21 +151,8 @@ $(document).ready(function () {
 });    
 </script>
 <style>
-    .compartment-box {
-        background-color: #f8f9fa;
-        border: 1px solid #dee2e6;
-        border-radius: 0.4rem;
-        width: 65px;
-        min-height: 35px;
-        font-size: 11px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding-top: 3px !important;
-        margin: 2px !important;
-        transition: background-color 0.3s ease, transform 0.3s ease;
-    }
+
+
 
     .compartment-box:hover {
         background-color: #02bdd32b;
@@ -174,7 +161,7 @@ $(document).ready(function () {
 
     .compartment-box .badge {
         font-size: 10px;
-        padding: 2px 6px;
+        padding: 2px 4px;
     }
 
     .card-body.fixed-height {
