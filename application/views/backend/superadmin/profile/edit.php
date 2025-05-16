@@ -61,7 +61,7 @@ $profile_data = $this->user_model->get_profile_data();
         </div> <!-- end card -->
     </div>
 
-    <? /*<div class="col-xl-10 col-lg-12 col-md-12 col-sm-12">
+    <?php /*<div class="col-xl-10 col-lg-12 col-md-12 col-sm-12">
         <div class="card">
             <div class="card-body">
                 <h4 class="header-title"><?php echo get_phrase('change_password') ; ?></h4>

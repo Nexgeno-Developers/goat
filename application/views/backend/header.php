@@ -1,5 +1,5 @@
 <!-- Topbar Start -->
-<div class="container-fluid">
+<div class="container-fluid" style="padding-right:0px;">
 <div class="navbar-custom topnav-navbar topnav-navbar-dark">
     
 
@@ -85,24 +85,24 @@
                 </div>
 
                 <!-- item-->
-                <?/*<a href="<?php echo route('profile'); ?>" class="dropdown-item notify-item">
+                <?php /*<a href="<?php echo route('profile'); ?>" class="dropdown-item notify-item">
                     <i class="mdi mdi-account-circle mr-1"></i>
                     <span><?php echo get_phrase('my_account'); ?></span>
-                </a>*/?>
+                </a>*/ ?>
                 <?php if ($this->session->userdata('user_type') == 'superadmin'): ?>
                     <!-- item-->
-                    <?/*<a href="<?php echo route('system_settings'); ?>" class="dropdown-item notify-item">
+                    <?php /*<a href="<?php echo route('system_settings'); ?>" class="dropdown-item notify-item">
                         <i class="mdi mdi-account-edit mr-1"></i>
                         <span><?php echo get_phrase('settings'); ?></span>
-                    </a>*/?>
+                    </a>*/ ?>
                 <?php endif; ?>
 
                 <?php if ($this->session->userdata('user_type') == 'superadmin' || $this->session->userdata('user_type') == 'admin'): ?>
                     <!-- item-->
-                    <?/*<a href="mailto:support@creativeitem.com?Subject=Help%20On%20This" target="_blank" class="dropdown-item notify-item">
+                    <?php /*<a href="mailto:support@creativeitem.com?Subject=Help%20On%20This" target="_blank" class="dropdown-item notify-item">
                         <i class="mdi mdi-lifebuoy mr-1"></i>
                         <span><?php echo get_phrase('support'); ?></span>
-                    </a>*/?>
+                    </a>*/ ?>
                 <?php endif; ?>
 
                 

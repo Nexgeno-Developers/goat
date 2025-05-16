@@ -1,3 +1,10 @@
+<style>
+    footer.footer.mt-4.text-center {
+    display: none !important;
+}
+</style>
+
+
 <!-- start page title -->
 <div class="row ">
     <div class="col-xl-12">

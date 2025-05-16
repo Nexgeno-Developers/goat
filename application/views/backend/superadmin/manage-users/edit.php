@@ -61,8 +61,8 @@
         <div class="form-group col-md-12 password" style="display:none;">
             <input type="text" class="form-control" name="password">
         </div>         
-        <div class="form-group col-md-12 mt-2">
-            <button class="btn btn-block btn-primary btn-ajax" type="submit"><span class="form-button"><?php echo get_phrase('update_user'); ?></span> <i class="fa fa-spinner fa-spin form-loader" style="display:none"></i></button>
+        <div class="form-group col-md-3 mt-2">
+            <button class="btn btn-block btn-success btn-ajax" type="submit"><span class="form-button"><?php echo get_phrase('update_user'); ?></span> <i class="fa fa-spinner fa-spin form-loader" style="display:none"></i></button>
         </div>        
     </div>
 </form>

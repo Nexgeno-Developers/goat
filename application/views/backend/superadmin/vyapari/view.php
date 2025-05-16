@@ -95,7 +95,7 @@
                                                 ?></p>
                             </div>
                             <?php if(access('printid_button')){ ?>
-                        <div class="col-md-2 col-12"><a target="_blank" class="btn btn-sm btn-success printbtn" href="<?php echo base_url('superadmin/manage_vyapari/print/'.$vyapari['vyapari_id']); ?>">Print</a>
+                        <div class="col-md-2 col-12"><a target="_blank" class="btn btn-success printbtn" href="<?php echo base_url('superadmin/manage_vyapari/print/'.$vyapari['vyapari_id']); ?>">Print</a>
                             
                     </div>
                     <?php } ?>

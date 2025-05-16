@@ -20,6 +20,10 @@
   width: 430px;
 }
 
+.topnav-navbar-dark .topbar-right-menu li.show .nav-link {
+  color: #333 !important;
+}
+
 @media (max-width: 576px) {
   .modal-right {
     min-width: calc(100vw - 40px);
@@ -561,7 +565,7 @@ i.material-icons {
 
 .logoutop a.dropdown-item.notify-item {
   color: #333 !important;
-  margin-top: 7px;
+  margin-top: -11px;
 }
 
 .logoutop .dropdown-item:hover {
@@ -749,6 +753,7 @@ span.text-nowrap {
 
 .repot-btn1 {
   margin-top: 29px;
+  padding-left: 0px;
 }
 
 
