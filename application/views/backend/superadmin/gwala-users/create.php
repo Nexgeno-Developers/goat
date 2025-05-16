@@ -44,17 +44,19 @@
             <input type="text" class="form-control" name="fees" required>
         </div>
         
-        <?/*
+        <?php /*
         <!--<div class="form-group col-md-6">-->
         <!--    <label for="status"><?php echo get_phrase('status'); ?></label>-->
         <!--    <select name="status" class="form-control select2" data-toggle="select2" required>-->
         <!--        <option value="active">Active</option>-->
         <!--        <option value="inactive">Inactive</option>-->
         <!--    </select>-->
-        <!--</div> --> */?>
+        <!--</div> --> */ ?>
+
+<div class="form-group col-md-6"></div>
         
-        <div class="form-group col-md-12 mt-2">
-            <button class="btn btn-block btn-primary btn-ajax" type="submit"><span class="form-button"><?php echo get_phrase('add_gwala'); ?></span> <i class="fa fa-spinner fa-spin form-loader" style="display:none"></i></button>
+        <div class="form-group col-md-2 mt-2">
+            <button class="btn btn-block btn-success btn-ajax" type="submit"><span class="form-button"><?php echo get_phrase('add_gwala'); ?></span> <i class="fa fa-spinner fa-spin form-loader" style="display:none"></i></button>
         </div>        
     </div>
 </form>

@@ -50,8 +50,8 @@
         </div>  
         
 
-        <div class="form-group  col-md-12">
-            <button class="btn btn-block btn-primary" type="submit"><?php echo get_phrase('update'); ?></button>
+        <div class="form-group  col-md-2">
+            <button class="btn btn-block btn-success" type="submit"><?php echo get_phrase('update'); ?></button>
         </div>
     </div>
 </form>

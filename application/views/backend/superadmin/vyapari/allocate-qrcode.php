@@ -150,9 +150,9 @@
                     <div class="col-md-12">
                         <p class="text-center mt-0 h3">Total Passes : <span class="pcount_total text-danger">0</span></p>
                     </div>
-                    <div class="form-group  col-md-12">
-                       <?/*<input type="hidden" name="pandaal_no" value="<?php echo $pandol_no; ?>" required>*/?>
-                       <button class="btn btn-block btn-primary" type="submit"><?php echo get_phrase('submit'); ?></button>
+                    <div class="form-group col-md-2">
+                       <?php /*<input type="hidden" name="pandaal_no" value="<?php echo $pandol_no; ?>" required>*/ ?>
+                       <button class="btn btn-block btn-success" type="submit"><?php echo get_phrase('submit'); ?></button>
                     </div>
                  </div>
               </form>

@@ -71,11 +71,11 @@
             <small id="address_help" class="form-text text-muted"><?php echo get_phrase('provide_vyapari_address'); ?></small>
         </div>  
         
-        <input type="hidden" name="temp_code" class="temp_code" value="<?php echo $temp_code; ?>"
+        <input type="hidden" name="temp_code" class="temp_code" value="<?php echo $temp_code; ?>" />
 
-        <div class="form-group  col-md-12">
-            <button class="btn btn-block btn-primary col col-lg-6" type="submit"><?php echo get_phrase('register'); ?></button>
-            <input class="btn btn-danger col col-lg-6" onclick="reset_data();" type="button" value="Reset">
+        <div class="form-group col-md-12 d-flex">
+            <button class="btn btn-block btn-success col col-lg-2" type="submit"><?php echo get_phrase('register'); ?></button>
+            <input class="btn btn-danger col col-lg-2 ml-2" onclick="reset_data();" type="button" value="Reset">
         </div>
     </div>
 </form>
