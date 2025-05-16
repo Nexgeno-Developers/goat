@@ -109,7 +109,7 @@
                                             <?php 
                                             ksort($rooms); // sort room numbers
                                             foreach ($rooms as $room => $balance): 
-                                                $badgeClass = $balance <= 0 ? 'badge-danger' : ($balance < 10 ? 'badge-warning' : ($balance < 50 ? 'badge-primary' : 'badge-success'));
+                                                $badgeClass = $balance <= 0 ? 'badge-danger' : ($balance < 50 ? 'badge-warning' : ($balance < 100 ? 'badge-primary' : 'badge-success'));
                                             ?>
                                                 <div class="compartment-box m-1 p-1 text-center shadow-sm">
                                                     <div class="font-weight-bold">
