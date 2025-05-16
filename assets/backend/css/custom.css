@@ -1175,11 +1175,38 @@ span.topnav-logo-lg {
 }
 
 .left-side-menu-detached {
-  min-width: 310px !important;
+  min-width: 250px !important;
   padding-top: 30px !important;
-  padding-left: 30px;
-  padding-right: 30px;
-  max-width: 310px;
+  padding-left: 20px;
+  padding-right: 20px;
+  max-width: 250px;
+}
+
+.pendall_boxex .card-header {
+  padding: 6px 15px !important;
+  border-radius: 0;
+}
+
+.pendall_boxex .card-body.bg-white.fixed-height {
+  padding: 10px 10px !important;
+}
+
+
+.compartment-box {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 0.4rem;
+  width: 60px;
+  min-height: 30px;
+  font-size: 11px;
+  display: flex;
+  flex-direction: column;
+  color: #555;
+  justify-content: center;
+  align-items: center;
+  padding-top: 1px !important;
+  margin: 2px !important;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 body[data-layout=detached] .container-fluid {
