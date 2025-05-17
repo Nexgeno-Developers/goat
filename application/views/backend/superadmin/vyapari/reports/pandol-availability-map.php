@@ -19,55 +19,14 @@
         <div class="card">
             <div class="card-body">
                 <?php 
-            	    // $this->db->select('pandaal_no,COUNT(pandaal_no) as balance_pass');
-            	    // $this->db->from('app_qrcode');
-            	    // $this->db->group_by('pandaal_no');
-            	    // $this->db->where('status !=', 'exit');
-            	    // $this->db->where('pandaal_no !=', '');
-            	    // //$this->db->having(array('balance_pass < '=>50));
-            	    // //$this->db->order_by('balance_pass', 'asc');
-            	    // $pandol_report = $this->db->get()->result_array(); 
-            	    // //var_dump($pandol_report);
-                    $this->db->cache_on();
                     $this->db->select("p.name AS pandaal_no, COUNT(q.pandaal_no) AS balance_pass");
                     $this->db->from("app_pandols p");
                     $this->db->join("app_qrcode q", "p.name = q.pandaal_no AND q.status != 'exit'", "left");
                     $this->db->group_by("p.name");
-                    $pandol_report = $this->db->get()->result_array();  
-                    $this->db->cache_off();                  
+                    $pandol_report = $this->db->get()->result_array();               
                 ?>
                 <div class="content">
-                    <?php
-                    /*
-                    // Grouping logic
-                    $grouped_data = [];
-                    $in_between_count = 0;
-
-                    foreach ($pandol_report as $row) {
-                        $pandaal = $row['pandaal_no'];
-
-                        if (strtolower($pandaal) === "in between") {
-                            $in_between_count = $row['balance_pass'];
-                            continue;
-                        }
-
-                        preg_match('/^([A-Za-z0-9]+)-(\d+)$/', $pandaal, $matches);
-                        if ($matches) {
-                            $block = strtoupper($matches[1]); // e.g., S2, S3
-                            $number = $matches[2]; // e.g., 735
-
-                            if (!isset($grouped_data[$block])) {
-                                $grouped_data[$block] = [];
-                            }
-                            $grouped_data[$block][$number] = $row['balance_pass'];
-                        }
-                    }
-
-                        uksort($grouped_data, function($a, $b) {
-                            return strnatcmp($a, $b);
-                        });
-                        */   
-                        
+                    <?php  
                         $grouped_data = [];
                         $in_between_count = 0;
 
