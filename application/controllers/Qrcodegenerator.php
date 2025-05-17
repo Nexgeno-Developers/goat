@@ -1,5 +1,5 @@
 <?php
-echo 'Unavailable';exit;
+//echo 'Unavailable';exit;
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /*

@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 *  http://support.creativeitem.com
 */
 
-require APPPATH.'third_party/PHPExcel/IOFactory.php';
+//require APPPATH.'third_party/PHPExcel/IOFactory.php';
 class Crud_model extends CI_Model {
 
 	protected $school_id;
