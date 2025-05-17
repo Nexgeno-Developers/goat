@@ -176,58 +176,8 @@
     </div>
             
            
-            
-            
-           
-            
-          <div class="col-xl-4 hidden">
-            <div class="card bg-primary">
-              <div class="card-body">
-                <h4 class="header-title text-white mb-2"><?php echo get_phrase('todays_attendance'); ?></h4>
-                <div class="text-center">
-                  <h3 class="font-weight-normal text-white mb-2">
-                    <?php echo $this->crud_model->get_todays_attendance(); ?>
-                  </h3>
-                  <p class="text-light text-uppercase font-13 font-weight-bold"><?php echo $this->crud_model->get_todays_attendance(); ?> <?php echo get_phrase('students_are_attending_today'); ?></p>
-                  <a href="<?php echo route('attendance'); ?>" class="btn btn-outline-light btn-sm mb-1"><?php echo get_phrase('go_to_attendance'); ?>
-                    <i class="mdi mdi-arrow-right ml-1"></i>
-                  </a>
-    
-                </div>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-body">
-                <h4 class="header-title"><?php echo get_phrase('recent_events'); ?><a href="<?php echo route('event_calendar'); ?>" style="color: #6c757d;"><i class = "mdi mdi-export"></i></a></h4>
-                <?php include 'event.php'; ?>
-              </div>
-            </div>
-          </div>
 </div>
 
-</div>
-
-<div class="row hidden">
-  <div class="col-xl-12">
-    <div class="row">
-      <div class="col-xl-8">
-        <div class="card">
-          <div class="card-body">
-            <h4 class="header-title mb-3"><?php echo get_phrase('accounts_of'); ?> <?php echo date('F'); ?> <a href="<?php echo route('invoice'); ?>" style="color: #6c757d"><i class = "mdi mdi-export"></i></a></h4>
-            <?php include 'invoice.php'; ?>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-4">
-        <div class="card">
-          <div class="card-body">
-            <h4 class="header-title mb-3"> <?php echo get_phrase('expense_of'); ?> <?php echo date('F'); ?> <a href="<?php echo route('expense'); ?>" style="color: #6c757d"><i class = "mdi mdi-export"></i></a></h4>
-            <?php include 'expense.php'; ?>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
 
   <div class="col-md-12 mt-1">

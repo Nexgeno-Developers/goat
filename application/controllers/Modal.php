@@ -24,8 +24,8 @@ class Modal extends CI_Controller {
 		$this->load->model('Frontend_model', 'frontend_model');
 
 		if(addon_status('online_courses') != 0){
-			$this->load->model('addons/Lms_model','lms_model');
-			$this->load->model('addons/Video_model','video_model');
+			// $this->load->model('addons/Lms_model','lms_model');
+			// $this->load->model('addons/Video_model','video_model');
 		}
 		/*SET DEFAULT TIMEZONE*/
 		timezone();
