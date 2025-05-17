@@ -95,7 +95,7 @@
     
                     <div class="row">
                         <?php foreach ($grouped_data as $block => $rooms): ?>
-                            <div class="col-md-6 col-lg-4 pr-md-1 pl-md-1">
+                            <div class="col-md-6 col-lg-4 pr-md-1 pl-md-1 mb-2">
                                 <div class="card mb-4 pendall_boxex">
                                     <?php 
                                         $total_balance = array_sum($rooms); 
