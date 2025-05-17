@@ -135,7 +135,16 @@ if($user_type == 'parent'){
         <span> <?php echo get_phrase('Vyapari Prebooking'); ?> </span>
       </a>
     </li>  
-    <?php } ?>    
+    <?php } ?> 
+  
+  <?php if(access('manage_cache')){ ?>
+  <li class="side-nav-item">
+    <a href="<?php echo site_url($controller.'/clear_cache'); ?>" class="side-nav-link" style="background: #f8d7da; border-radius: 10px;">
+      <i class="mdi mdi-refresh"></i>
+      <span> <?php echo get_phrase('Clear Cache'); ?> </span>
+    </a>
+  </li> 
+  <?php } ?>    
 
     <?php
     /*$this->db->order_by('sort_order', 'asc');

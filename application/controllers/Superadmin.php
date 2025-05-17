@@ -791,5 +791,20 @@ class Superadmin extends CI_Controller {
           echo json_encode(array("Status" => "False"));
       }
   }
+
+  public function clear_cache()
+  {
+      // Clear all cache (ensure you have a valid clear_all_cache() helper or method)
+      if (function_exists('clear_all_cache')) {
+          clear_all_cache();
+      }
+
+      // Set a flash message
+      $this->session->set_flashdata('flash_message', get_phrase('all_cache_cleared'));
+
+      // Redirect to previous page
+      $referrer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : base_url();
+      redirect($referrer);
+  } 
   
 }
