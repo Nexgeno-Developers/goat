@@ -3,10 +3,11 @@
 .htaccess.*
 
 # Ignore upload directories
-/uploads/biometric_excel_files/
-/uploads/csv_file/
-/uploads/users/
-/uploads/vyapari_photo/
+uploads/biometric_excel_files/*
+uploads/csv_file/*
+uploads/vyapari_photo/*
+uploads/certificates/*
+uploads/generated-qrcodes/*
 
 
 # Ignore all files in uploads/users
