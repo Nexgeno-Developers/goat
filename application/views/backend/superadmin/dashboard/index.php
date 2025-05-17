@@ -230,6 +230,15 @@
   </div>
 </div>
 
+  <div class="col-md-12 mt-1">
+    <div class="chart_box">
+      <h4 style="text-align:center;">State wise Vyapari Registration</h4>
+      <div style="width: 80%; max-width: 500px; margin: 0 auto;">
+        <canvas id="stateWiseBarChart"></canvas>
+      </div>
+    </div>
+  </div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
 <script>
@@ -400,3 +409,53 @@ $(".widget-flat").mouseenter(function() {
   $('#'+id+'_list').hide();
 });
 </script>
+
+
+
+
+<script>
+let stateLabels = <?= json_encode(array_column($state_wise_vyapari, 'state')) ?>;
+let stateCounts = <?= json_encode(array_column($state_wise_vyapari, 'total')) ?>;
+
+// Combine and sort descending by count
+const combined = stateLabels.map((label, i) => ({
+  label,
+  count: stateCounts[i]
+})).sort((a, b) => b.count - a.count);
+
+stateLabels = combined.map(item => item.label);
+stateCounts = combined.map(item => item.count);
+
+// Color palette
+const lightColors = [
+  'rgba(75, 192, 192, 0.7)',  // green
+  'rgba(153, 102, 255, 0.7)', // purple
+  'rgba(54, 162, 235, 0.7)',  // blue
+  'rgba(255, 159, 64, 0.7)',  // orange
+  'rgba(255, 206, 86, 0.7)',  // yellow
+  'rgba(255, 99, 132, 0.7)',  // red
+  'rgba(199, 199, 199, 0.7)',
+  'rgba(255, 205, 86, 0.7)',
+  'rgba(100, 181, 246, 0.7)',
+  'rgba(174, 213, 129, 0.7)'
+];
+
+new Chart("stateWiseBarChart", {
+  type: "doughnut",
+  data: {
+    labels: stateLabels,
+    datasets: [{
+      backgroundColor: lightColors,
+      data: stateCounts
+    }]
+  },
+  // options: {
+  //   title: {
+  //     display: true,
+  //     text: "World Wide Wine Production 2018"
+  //   }
+  // }
+});
+</script>
+
+

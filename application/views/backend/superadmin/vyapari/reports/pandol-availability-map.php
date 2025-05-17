@@ -28,11 +28,13 @@
             	    // //$this->db->order_by('balance_pass', 'asc');
             	    // $pandol_report = $this->db->get()->result_array(); 
             	    // //var_dump($pandol_report);
+                    $this->db->cache_on();
                     $this->db->select("p.name AS pandaal_no, COUNT(q.pandaal_no) AS balance_pass");
                     $this->db->from("app_pandols p");
                     $this->db->join("app_qrcode q", "p.name = q.pandaal_no AND q.status != 'exit'", "left");
                     $this->db->group_by("p.name");
-                    $pandol_report = $this->db->get()->result_array();                    
+                    $pandol_report = $this->db->get()->result_array();  
+                    $this->db->cache_off();                  
                 ?>
                 <div class="content">
                     <?php

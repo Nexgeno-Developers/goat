@@ -16,6 +16,7 @@ class Superadmin extends CI_Controller {
 
     $this->load->database();
     $this->load->library('session');
+    $this->load->driver('cache', ['adapter' => 'file']);
 
     /*LOADING ALL THE MODELS HERE*/
     $this->load->model('Crud_model',     'crud_model');
@@ -447,7 +448,7 @@ class Superadmin extends CI_Controller {
     
 // ============== 2024 ==========================
 
-  public function dashboard(){
+  /*public function dashboard(){
       
     //ini_set('display_errors', 1);
     //ini_set('display_startup_errors', 1);
@@ -483,6 +484,99 @@ class Superadmin extends CI_Controller {
     $page_data['block'] = $this->db->select('status')->from('app_qrcode')->where('status', 'block')->get()->num_rows();
     $page_data['exit'] = $this->db->select('status')->from('app_qrcode')->where('status', 'exit')->get()->num_rows();    
     $this->load->view('backend/index', $page_data);
+  }*/
+
+  public function dashboard() {
+      //$this->load->driver('cache', ['adapter' => 'file']);
+
+      // Define cache duration in seconds (change this value to adjust all cache times)
+      $cache_duration = 0; // e.g., 60 seconds
+
+      $page_data['page_title'] = 'Dashboard';
+      $page_data['folder_name'] = 'dashboard';
+
+      $date  = "2024-06-05 00:00:00";
+      $date1 = "2024-06-05 00:00:00";
+      $date2 = "2024-06-05 00:00:00";
+      $date3 = "2024-06-20 00:00:00";
+
+      $page_data['startdate'] =  date('d', strtotime($date));
+      $page_data['month'] = date('m', strtotime($date));
+      $page_data['days'] = date('t', strtotime($date));
+
+      // vyapari count
+      $page_data['vyapari'] = $this->cache->get('dash_vyapari');
+      if ($page_data['vyapari'] === false) {
+          $page_data['vyapari'] = $this->db->count_all('app_vyapari');
+          $this->cache->save('dash_vyapari', $page_data['vyapari'], $cache_duration);
+      }
+
+      // unblock + exit count
+      $page_data['unblock'] = $this->cache->get('dash_unblock');
+      if ($page_data['unblock'] === false) {
+          $page_data['unblock'] = $this->db->where_in('status', ['unblock', 'exit'])->count_all_results('app_qrcode');
+          $this->cache->save('dash_unblock', $page_data['unblock'], $cache_duration);
+      }
+
+      // block count
+      $page_data['block'] = $this->cache->get('dash_block');
+      if ($page_data['block'] === false) {
+          $page_data['block'] = $this->db->where('status', 'block')->count_all_results('app_qrcode');
+          $this->cache->save('dash_block', $page_data['block'], $cache_duration);
+      }
+
+      // exit count
+      $page_data['exit'] = $this->cache->get('dash_exit');
+      if ($page_data['exit'] === false) {
+          $page_data['exit'] = $this->db->where('status', 'exit')->count_all_results('app_qrcode');
+          $this->cache->save('dash_exit', $page_data['exit'], $cache_duration);
+      }
+
+      // inward (aniamalin)
+      $page_data['aniamalin'] = $this->cache->get('dash_aniamalin');
+      if ($page_data['aniamalin'] === false) {
+          $this->db->query("SET @@sql_mode=''");
+          $query = $this->db->select('DAY(inward_date) AS DATE , COUNT("inward_date") AS count')
+              ->from('app_qrcode')
+              ->where_in('status', ['unblock', 'exit'])
+              ->where("inward_date BETWEEN '{$date2}' AND '{$date3}'")
+              ->group_by('DATE(inward_date)')
+              ->get()
+              ->result();
+          $page_data['aniamalin'] = json_encode($query);
+          $this->cache->save('dash_aniamalin', $page_data['aniamalin'], $cache_duration);
+      }
+
+      // outward (aniamalout)
+      $page_data['aniamalout'] = $this->cache->get('dash_aniamalout');
+      if ($page_data['aniamalout'] === false) {
+          $this->db->query("SET @@sql_mode=''");
+          $query1 = $this->db->select('DAY(exit_date) AS DATE , COUNT("exit_date") AS count')
+              ->from('app_qrcode')
+              ->where('status', 'exit')
+              ->where("exit_date BETWEEN '{$date1}' AND '{$date3}'")
+              ->group_by('DATE(exit_date)')
+              ->get()
+              ->result();
+          $page_data['aniamalout'] = json_encode($query1);
+          $this->cache->save('dash_aniamalout', $page_data['aniamalout'], $cache_duration);
+      }
+
+      //State-wise Vyapari Count
+      $page_data['state_wise_vyapari'] = $this->cache->get('dash_state_wise_vyapari');
+      if ($page_data['state_wise_vyapari'] === false) {
+          $this->db->select('CONCAT(UCASE(SUBSTRING(state, 1, 1)), LCASE(SUBSTRING(state, 2))) AS state, COUNT(vyapari_id) as total');
+          $this->db->from('app_vyapari'); // Use your actual users table
+          $this->db->group_by('state');
+          $this->db->order_by('total', 'DESC');  // Order by count descending
+          //$this->db->limit(10);                  // Limit to top 10                    
+          $query2 = $this->db->get();
+          $page_data['state_wise_vyapari'] = $query2->result_array();
+          
+          $this->cache->save('dash_state_wise_vyapari', $page_data['state_wise_vyapari'], $cache_duration);
+      }      
+
+      $this->load->view('backend/index', $page_data);
   }
 
   //START CLASS secion
