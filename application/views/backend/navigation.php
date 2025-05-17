@@ -138,8 +138,8 @@ if($user_type == 'parent'){
     <?php } ?> 
   
   <?php if(access('manage_cache')){ ?>
-  <li class="side-nav-item">
-    <a href="<?php echo site_url($controller.'/clear_cache'); ?>" class="side-nav-link" style="background: #f8d7da; border-radius: 10px;">
+  <li class="side-nav-item mt-1">
+    <a href="<?php echo site_url($controller.'/clear_cache'); ?>" class="side-nav-link" style="background: #f8d7da; border-radius: 10px;font-weight: 700;color: #842029">
       <i class="mdi mdi-refresh"></i>
       <span> <?php echo get_phrase('Clear Cache'); ?> </span>
     </a>
