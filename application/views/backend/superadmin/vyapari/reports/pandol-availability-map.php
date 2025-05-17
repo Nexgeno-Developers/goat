@@ -19,11 +19,21 @@
         <div class="card">
             <div class="card-body">
                 <?php 
-                    $this->db->select("p.name AS pandaal_no, COUNT(q.pandaal_no) AS balance_pass");
-                    $this->db->from("app_pandols p");
-                    $this->db->join("app_qrcode q", "p.name = q.pandaal_no AND q.status != 'exit'", "left");
-                    $this->db->group_by("p.name");
-                    $pandol_report = $this->db->get()->result_array();               
+                    // $this->db->select("p.name AS pandaal_no, COUNT(q.pandaal_no) AS balance_pass");
+                    // $this->db->from("app_pandols p");
+                    // $this->db->join("app_qrcode q USE INDEX (idx_status_pandaal_no)", "p.name = q.pandaal_no AND q.status != 'exit'", "left");
+                    // $this->db->group_by("p.name");
+                    // $pandol_report = $this->db->get()->result_array();      
+                    
+                    $pandol_report = cache_with_ttl('pandol_report', function() {
+                        $CI =& get_instance();
+                        $CI->db->select("p.name AS pandaal_no, COUNT(q.pandaal_no) AS balance_pass");
+                        $CI->db->from("app_pandols p");
+                        $CI->db->join("app_qrcode q USE INDEX (idx_status_pandaal_no)", "p.name = q.pandaal_no AND q.status != 'exit'", "left");
+                        $CI->db->group_by("p.name");
+                        $pandol_report = $this->db->get()->result_array();  
+                        return $pandol_report;
+                    }, cache_duration());                    
                 ?>
                 <div class="content">
                     <?php  

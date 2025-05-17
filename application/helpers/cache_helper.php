@@ -48,3 +48,10 @@ if (!function_exists('clear_all_cache')) {
         return true;
     }
 }
+
+if (!function_exists('duration')) {
+    function cache_duration()
+    {
+        return 120; //seconds
+    }
+}

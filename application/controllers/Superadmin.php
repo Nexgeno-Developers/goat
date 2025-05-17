@@ -580,75 +580,69 @@ class Superadmin extends CI_Controller {
   }*/
 
   public function dashboard() {
-    $cache_duration = 60; // cache for 60 seconds
+      $cache_duration = cache_duration();
+      $CI = &get_instance();  // Get CI instance once
 
-    $page_data['page_title'] = 'Dashboard';
-    $page_data['folder_name'] = 'dashboard';
+      $page_data['page_title'] = 'Dashboard';
+      $page_data['folder_name'] = 'dashboard';
 
-    $date  = "2024-06-05 00:00:00";
-    $date1 = "2024-06-05 00:00:00";
-    $date2 = "2024-06-05 00:00:00";
-    $date3 = "2024-06-20 00:00:00";
+      $date_start = "2024-06-05 00:00:00";
+      $date_end = "2024-06-20 00:00:00";
 
-    $page_data['startdate'] =  date('d', strtotime($date));
-    $page_data['month'] = date('m', strtotime($date));
-    $page_data['days'] = date('t', strtotime($date));
+      $page_data['startdate'] = date('d', strtotime($date_start));
+      $page_data['month'] = date('m', strtotime($date_start));
+      $page_data['days'] = date('t', strtotime($date_start));
 
-    //Total Vyapari Count
-    $page_data['vyapari'] = cache_with_ttl('dash_vyapari', function() {
-        $CI =& get_instance();
-        return $CI->db->count_all('app_vyapari');
-    }, $cache_duration);
-
-    //Total Unblock + Exit QR Codes
-    $page_data['unblock'] = cache_with_ttl('dash_unblock', function() {
-        $CI =& get_instance();
-        return $CI->db->where_in('status', ['unblock', 'exit'])->count_all_results('app_qrcode');
-    }, $cache_duration);
-
-    //Total Block QR Codes
-    $page_data['block'] = cache_with_ttl('dash_block', function() {
-        $CI =& get_instance();
-        return $CI->db->where('status', 'block')->count_all_results('app_qrcode');
-    }, $cache_duration);
-
-    //Total Exit QR Codes
-    $page_data['exit'] = cache_with_ttl('dash_exit', function() {
-        $CI =& get_instance();
-        return $CI->db->where('status', 'exit')->count_all_results('app_qrcode');
-    }, $cache_duration);
-
-    //Daily Inward Animal Count
-    $page_data['aniamalin'] = cache_with_ttl('dash_aniamalin', function() use ($date2, $date3) {
-        $CI =& get_instance();
-        $CI->db->query("SET @@sql_mode=''");
-        $query = $CI->db->select('DAY(inward_date) AS DATE , COUNT("inward_date") AS count')
-                        ->from('app_qrcode')
-                        ->where_in('status', ['unblock', 'exit'])
-                        ->where("inward_date BETWEEN '{$date2}' AND '{$date3}'")
-                        ->group_by('DATE(inward_date)')
-                        ->get()
-                        ->result();
-        return json_encode($query);
-    }, $cache_duration);
-
-    //Daily Exit Animal Count
-    $page_data['aniamalout'] = cache_with_ttl('dash_aniamalout', function() use ($date1, $date3) {
-        $CI =& get_instance();
-        $CI->db->query("SET @@sql_mode=''");
-        $query1 = $CI->db->select('DAY(exit_date) AS DATE , COUNT("exit_date") AS count')
-                        ->from('app_qrcode')
-                        ->where('status', 'exit')
-                        ->where("exit_date BETWEEN '{$date1}' AND '{$date3}'")
-                        ->group_by('DATE(exit_date)')
-                        ->get()
-                        ->result();
-        return json_encode($query1);
+      // Total Vyapari Count
+      $page_data['vyapari'] = cache_with_ttl('dash_vyapari', function() use ($CI) {
+          return $CI->db->count_all('app_vyapari');
       }, $cache_duration);
 
-      //State-wise Vyapari Count
-      $page_data['state_wise_vyapari'] = cache_with_ttl('dash_state_wise_vyapari', function() {
-          $CI =& get_instance();
+      // Total Unblock + Exit QR Codes
+      $page_data['unblock'] = cache_with_ttl('dash_unblock', function() use ($CI) {
+          return $CI->db->where_in('status', ['unblock', 'exit'])->count_all_results('app_qrcode');
+      }, $cache_duration);
+
+      // Total Block QR Codes
+      $page_data['block'] = cache_with_ttl('dash_block', function() use ($CI) {
+          return $CI->db->where('status', 'block')->count_all_results('app_qrcode');
+      }, $cache_duration);
+
+      // Total Exit QR Codes
+      $page_data['exit'] = cache_with_ttl('dash_exit', function() use ($CI) {
+          return $CI->db->where('status', 'exit')->count_all_results('app_qrcode');
+      }, $cache_duration);
+
+      // Daily Inward Animal Count
+      $page_data['aniamalin'] = cache_with_ttl('dash_aniamalin', function() use ($CI, $date_start, $date_end) {
+          //$CI->db->query("SET @@sql_mode=''"); // Remove if not needed
+          $query = $CI->db->select('DAY(inward_date) AS DATE, COUNT(inward_date) AS count')
+                          ->from('app_qrcode USE Index(idx_status_inwarddate)')
+                          ->where_in('status', ['unblock', 'exit'])
+                          ->where('inward_date >=', $date_start)
+                          ->where('inward_date <=', $date_end)
+                          ->group_by('DATE(inward_date)')
+                          ->get()
+                          ->result();
+          return json_encode($query);
+      }, $cache_duration);
+
+      // Daily Exit Animal Count
+      $page_data['aniamalout'] = cache_with_ttl('dash_aniamalout', function() use ($CI, $date_start, $date_end) {
+          //$CI->db->query("SET @@sql_mode=''"); // Remove if not needed
+          $query = $CI->db->select('DAY(exit_date) AS DATE, COUNT(exit_date) AS count')
+                          ->from('app_qrcode USE INDEX (idx_status_exitdate)')
+                          ->where('status', 'exit')
+                          ->where('exit_date >=', $date_start)
+                          ->where('exit_date <=', $date_end)
+                          ->group_by('DATE(exit_date)')
+                          ->get()
+                          ->result();
+          return json_encode($query);
+      }, $cache_duration);
+
+      // State-wise Vyapari Count
+      $page_data['state_wise_vyapari'] = cache_with_ttl('dash_state_wise_vyapari', function() use ($CI) {
           $CI->db->select('CONCAT(UCASE(SUBSTRING(state, 1, 1)), LCASE(SUBSTRING(state, 2))) AS state, COUNT(vyapari_id) as total');
           $CI->db->from('app_vyapari');
           $CI->db->group_by('state');
