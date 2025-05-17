@@ -25,15 +25,17 @@
         <div class="card">
             <div class="card-body">
                 <?php 
-            	    $this->db->select('pandaal_no,COUNT(pandaal_no) as balance_pass');
-            	    $this->db->from('app_qrcode');
-            	    $this->db->group_by('pandaal_no');
-            	    $this->db->where('status !=', 'exit');
-            	    $this->db->where('pandaal_no !=', '');
-            	    //$this->db->having(array('balance_pass < '=>50));
-            	    //$this->db->order_by('balance_pass', 'asc');
-            	    $pandol_report = $this->db->get()->result_array(); 
-            	    //var_dump($this->db->last_query());
+                    $pandol_report = cache_with_ttl('report.pandol_avalibility_table', function() {
+                        $CI =& get_instance();
+                        return $CI->db
+                            ->select('pandaal_no, COUNT(pandaal_no) AS balance_pass')
+                            ->from('app_qrcode USE INDEX (idx_status_pandaal_no)') // optional: add USE INDEX if needed
+                            ->where('status !=', 'exit')
+                            ->where('pandaal_no !=', '')
+                            ->group_by('pandaal_no')
+                            ->get()
+                            ->result_array();
+                    }, cache_duration());
                 ?>
                 <div class="content">
                     <table id="basic-datatable-0" class="table table-striped dt-responsive" data-page-length="100" width="100%">

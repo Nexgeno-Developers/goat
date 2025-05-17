@@ -62,20 +62,12 @@ class Raughwork extends CI_Controller {
         // Benchmark exit_date query
         $CI->benchmark->mark('exit_query_start');
 
-                    // $this->db->select("p.name AS pandaal_no, COUNT(q.pandaal_no) AS balance_pass");
-                    // $this->db->from("app_pandols p");
-                    // $this->db->join("app_qrcode q", "p.name = q.pandaal_no AND q.status != 'exit'", "left");
-                    // $this->db->group_by("p.name");
-                    // $pandol_report = $this->db->get()->result_array();      
-
-                    $this->db->select("p.name AS pandaal_no, COUNT(q.pandaal_no) AS balance_pass");
-                    $this->db->from("app_pandols p");
-
-                    // Use STRAIGHT_JOIN to force join order, if needed
-                    $this->db->join("app_qrcode q USE INDEX (idx_status_pandaal_no)", "p.name = q.pandaal_no AND q.status != 'exit'", "left");
-
-                    $this->db->group_by("p.name");
-                    $pandol_report = $this->db->get()->result_array();                    
+            $this->db->select('pandaal_no,COUNT(pandaal_no) as balance_pass');
+            $this->db->from('app_qrcode');
+            $this->db->group_by('pandaal_no');
+            $this->db->where('status !=', 'exit');
+            $this->db->where('pandaal_no !=', '');
+            $pandol_report = $this->db->get()->result_array();              
 
         $CI->benchmark->mark('exit_query_end');
 
