@@ -1,14 +1,52 @@
 <?php if(!access('pandol_info_report')){ redirect(route('dashboard')); } ?>
+<?php
 
+$pandol_prefixes = cache_with_ttl('pandol_prefixes_unique', function () {
+    $CI =& get_instance();
+    $CI->db->select("DISTINCT SUBSTRING_INDEX(name, '-', 1) AS name");
+    $CI->db->from("app_pandols");
+    return $CI->db->get()->result_array();
+}, cache_duration());
+?>
 <!--title-->
 <div class="row ">
   <div class="col-xl-12">
     <div class="card">
       <div class="card-body">
-        <h4 class="page-title">
+        <!-- <h4 class="page-title">
             <i class="mdi mdi-book-open-page-variant title_icon"></i> <?php echo get_phrase($page_title); ?>
             <button type="button" class="btn btn-outline-primary btn-rounded alignToTitle" onclick="window.location.href='<?php echo route('reports/pandol-availability'); ?>'"> <i class="mdi mdi-table"></i> <?php echo get_phrase('Table View'); ?></button>
+        </h4> -->
+
+        <h4 class="page-title d-flex align-items-center justify-content-between">
+            <div>
+                <i class="mdi mdi-book-open-page-variant title_icon"></i>
+                <?php echo get_phrase($page_title); ?>
+            </div>
+
+
+            <div class="d-flex align-items-center gap-2">
+                <form method="get" action="">
+                    <!-- Searchable Select Dropdown -->
+                    <select name="pandaal_no" id="pandolSelector" class="form-control select2" style="min-width: 200px;">
+                        <option value=""><?php echo get_phrase('Select Pandol'); ?></option>
+                        <!-- Add your options dynamically here -->
+                        <?php foreach ($pandol_prefixes as $pandol): ?>
+                            <option value="<?php echo $pandol['name']; ?>" <?php if($pandol['name'] == $this->input->get('pandaal_no')){ echo 'selected'; } ?>><?php echo $pandol['name']; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+
+                    <!-- Search Button -->
+                    <button type="submit" class="btn btn-primary" onclick="searchPandol()">
+                        <i class="mdi mdi-magnify"></i>
+                    </button>
+                </form>
+            </div>
+
+            <button type="button" class="btn btn-outline-primary btn-rounded alignToTitle" onclick="window.location.href='<?php echo route('reports/pandol-availability'); ?>'"> <i class="mdi mdi-table"></i> <?php echo get_phrase('Table View'); ?></button>
         </h4>
+
+
       </div> <!-- end card body-->
     </div> <!-- end card -->
   </div><!-- end col-->
@@ -25,15 +63,27 @@
                     // $this->db->group_by("p.name");
                     // $pandol_report = $this->db->get()->result_array();      
                     
-                    $pandol_report = cache_with_ttl('report.pandol_avalibility_map', function() {
-                        $CI =& get_instance();
-                        $CI->db->select("p.name AS pandaal_no, COUNT(q.pandaal_no) AS balance_pass");
-                        $CI->db->from("app_pandols p");
-                        $CI->db->join("app_qrcode q USE INDEX (idx_status_pandaal_no)", "p.name = q.pandaal_no AND q.status != 'exit'", "left");
-                        $CI->db->group_by("p.name");
-                        $pandol_report = $this->db->get()->result_array();  
-                        return $pandol_report;
-                    }, cache_duration());                    
+                    // $pandol_report = cache_with_ttl('report.pandol_avalibility_map', function() {
+                    //     $CI =& get_instance();
+                    //     $CI->db->select("p.name AS pandaal_no, COUNT(q.pandaal_no) AS balance_pass");
+                    //     $CI->db->from("app_pandols p");
+                    //     $CI->db->join("app_qrcode q USE INDEX (idx_status_pandaal_no)", "p.name = q.pandaal_no AND q.status != 'exit'", "left");
+                    //     //$CI->db->like("pandaal_no", $this->input->get('pandaal_no') ?? '');
+                    //     $CI->db->group_by("p.name");
+                    //     $pandol_report = $this->db->get()->result_array();  
+                    //     return $pandol_report;
+                    // }, cache_duration());  
+                    
+                    $pandol_no_prefix = $this->input->get('pandaal_no') ? $this->input->get('pandaal_no') : 'None';
+                    $CI =& get_instance();
+                    $CI->db->select("p.name AS pandaal_no, COUNT(q.pandaal_no) AS balance_pass");
+                    $CI->db->from("app_pandols p");
+                    $CI->db->join("app_qrcode q USE INDEX (idx_status_pandaal_no)", "p.name = q.pandaal_no AND q.status != 'exit'", "left");
+                    //$CI->db->where("pandaal_no", $this->input->get('pandaal_no') ?? '');
+                    $CI->db->like("SUBSTRING_INDEX(p.name, '-', 1)", $this->input->get('pandaal_no') ? $this->input->get('pandaal_no') : 'None');
+                    $CI->db->where("SUBSTRING_INDEX(p.name, '-', 1) = '$pandol_no_prefix'");
+                    $CI->db->group_by("p.name");
+                    $pandol_report = $CI->db->get()->result_array();                    
                 ?>
                 <div class="content">
                     <?php  
@@ -66,7 +116,7 @@
     
                     <div class="row">
                         <?php foreach ($grouped_data as $block => $rooms): ?>
-                            <div class="col-md-6 col-lg-4 pr-md-1 pl-md-1 mb-2">
+                            <div class="col-md-6 col-lg-12 pr-md-1 pl-md-1 mb-2">
                                 <div class="card mb-4 pendall_boxex">
                                     <?php 
                                         $total_balance = array_sum($rooms); 
@@ -103,23 +153,11 @@
 </div>
 
 <script>
-$(document).ready(function () {
-    $('#basic-datatable-0').DataTable({
-       order: [[2, 'asc']],
-		dom: 'lBfrtip',
-		buttons: [
-		    {
-                extend: 'csvHtml5',
-                filename: 'balance-goats', 
-                text: 'Export',
-                className: 'btn-sm btn-secondary btn-data-export',
-                exportOptions: {
-                    columns: [ 0, 1, 2]
-                }                    
-            }
-        ]
+    $(document).ready(function () {
+        initSelect2(['.select2']);
+
+        // Optional: any other initialization
     });
-});    
 </script>
 <style>
 
@@ -136,8 +174,8 @@ $(document).ready(function () {
     }
 
     .card-body.fixed-height {
-        height: 300px; /* adjust as needed */
-        overflow-y: auto;
+        /* height: 300px; adjust as needed */
+        /* overflow-y: auto; */
     }    
 
     /* Chrome, Edge, Safari */

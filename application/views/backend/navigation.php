@@ -114,7 +114,7 @@ if($user_type == 'parent'){
           
           <?php if(access('pandol_info_report')){ ?>
           <li>
-             <a href="<?php echo site_url($controller.'/reports/pandol-availability'); ?>">Pandol Info</a>
+             <a href="<?php echo site_url($controller.'/reports/pandol-availability-map'); ?>">Pandol Info</a>
           </li> 
           <?php } ?>
           
