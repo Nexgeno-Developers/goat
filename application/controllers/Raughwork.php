@@ -9,6 +9,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 *  http://support.creativeitem.com
 */
 
+use chillerlan\QRCode\QRCode;
+use chillerlan\QRCode\QROptions;
+
+require FCPATH . 'vendor/autoload.php';
 
 class Raughwork extends CI_Controller {
 
@@ -76,6 +80,116 @@ class Raughwork extends CI_Controller {
         //var_dump($results['exit_data']);
         echo "\nExecution Time: " . $CI->benchmark->elapsed_time('exit_query_start', 'exit_query_end') . " seconds";
         echo '</pre>';
-    }   
+    } 
+    
+public function test_custom_qrcode()
+{
+    $text = '123456789';
+    $logoPath = FCPATH . 'assets/logo.png'; // <-- Make sure this exists and is PNG format
+
+    $options = new \chillerlan\QRCode\QROptions([
+        'eccLevel' => \chillerlan\QRCode\QRCode::ECC_H, // High error correction
+        'outputType' => \chillerlan\QRCode\QRCode::OUTPUT_IMAGE_PNG,
+        'scale' => 10,
+        'imageBase64' => false,
+        'version' => 5,
+        'foregroundColor' => [30, 58, 138],       // Dark Blue
+        'backgroundColor' => [255, 255, 255],     // White
+    ]);
+
+    // Generate QR image and save temporarily
+    $qrcode = (new \chillerlan\QRCode\QRCode($options))->render($text);
+    $tempQRPath = FCPATH . 'uploads/temp_qr.png';
+    var_dump($tempQRPath);exit;
+    file_put_contents($tempQRPath, $qrcode);
+
+    // Load QR and logo
+    $qr = imagecreatefrompng($tempQRPath);
+    $logo = imagecreatefrompng($logoPath);
+
+    // Calculate sizes
+    $qr_width = imagesx($qr);
+    $qr_height = imagesy($qr);
+    $logo_width = imagesx($logo);
+    $logo_height = imagesy($logo);
+
+    // Resize logo to 1/3 of QR code
+    $logo_qr_width = $qr_width / 3;
+    $scale = $logo_width / $logo_qr_width;
+    $logo_qr_height = $logo_height / $scale;
+    $from_width = ($qr_width - $logo_qr_width) / 2;
+
+    // Merge logo to QR code
+    imagecopyresampled(
+        $qr,
+        $logo,
+        $from_width, $from_width, // Center
+        0, 0,
+        $logo_qr_width, $logo_qr_height,
+        $logo_width, $logo_height
+    );
+
+    // Output image
+    header('Content-Type: image/png');
+    imagepng($qr);
+    imagedestroy($qr);
+    exit;
+}
+
+public function generate_qr_with_logo()
+{
+    $text = '123456789'; // Your QR data
+    $logoPath = FCPATH . 'uploads/system/logo/header-logo.png'; // Must be a PNG file
+    $finalSavePath = FCPATH . 'uploads/final_qr.png'; // Output file path
+
+    $options = new \chillerlan\QRCode\QROptions([
+        'eccLevel' => \chillerlan\QRCode\QRCode::ECC_H,
+        'outputType' => \chillerlan\QRCode\QRCode::OUTPUT_IMAGE_PNG,
+        'scale' => 10,
+        'imageBase64' => false,
+        'version' => 5,
+        'foregroundColor' => [0, 0, 0],
+        'backgroundColor' => [255, 255, 255],
+    ]);
+
+    // Generate base QR code
+    $qrcode = (new \chillerlan\QRCode\QRCode($options))->render($text);
+    $tempQRPath = FCPATH . 'uploads/temp_qr.png';
+    file_put_contents($tempQRPath, $qrcode);
+
+    // Load QR and logo
+    $qr = imagecreatefrompng($tempQRPath);
+    $logo = imagecreatefrompng($logoPath);
+
+    // Sizes
+    $qr_width = imagesx($qr);
+    $qr_height = imagesy($qr);
+    $logo_width = imagesx($logo);
+    $logo_height = imagesy($logo);
+
+    // Resize logo to 1/3 size of QR code
+    $logo_qr_width = $qr_width / 3;
+    $scale = $logo_width / $logo_qr_width;
+    $logo_qr_height = $logo_height / $scale;
+    $from_width = ($qr_width - $logo_qr_width) / 2;
+
+    // Merge logo onto QR
+    imagecopyresampled(
+        $qr, $logo,
+        $from_width, $from_width, // Center position
+        0, 0,
+        $logo_qr_width, $logo_qr_height,
+        $logo_width, $logo_height
+    );
+
+    // Save the final QR code with logo
+    imagepng($qr, $finalSavePath);
+    imagedestroy($qr);
+    imagedestroy($logo);
+
+    echo 'QR Code with logo saved to <b>' . $finalSavePath . '</b>';
+}
+
+    
 	
 }

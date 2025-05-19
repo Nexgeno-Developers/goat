@@ -56,6 +56,65 @@ class Qrcodegenerator extends CI_Controller {
         
         echo '<img src="'.$qrcode.'" alt="QR Code" width="150px" height="150px"><p style="margin: 0;position: absolute;left: 23px;font-size: 16px;margin-top: -13px;"><b>'.$qr_digit.' - BN:'.$book_no.'</b></p><br>';
 	}
+
+	public function generate_qrcode_with_logo($qr_digit, $book_no) 
+	{
+		$logoPath = FCPATH . 'uploads/system/logo/header-logo.png'; // Logo file (PNG)
+
+		$options = new \chillerlan\QRCode\QROptions([
+			'eccLevel' => \chillerlan\QRCode\QRCode::ECC_H,
+			'outputType' => \chillerlan\QRCode\QRCode::OUTPUT_IMAGE_PNG,
+			'scale' => 10,
+			'imageBase64' => false,
+			'version' => 5,
+			'foregroundColor' => [0, 0, 0],
+			'backgroundColor' => [255, 255, 255],
+		]);
+
+		// Generate base QR and store temporarily
+		$qrcode = (new \chillerlan\QRCode\QRCode($options))->render($qr_digit);
+		$tempQRPath = FCPATH . 'uploads/temp_qr.png';
+		file_put_contents($tempQRPath, $qrcode);
+
+		// Load QR and logo
+		$qr = imagecreatefrompng($tempQRPath);
+		$logo = imagecreatefrompng($logoPath);
+
+		// Dimensions
+		$qr_width = imagesx($qr);
+		$qr_height = imagesy($qr);
+		$logo_width = imagesx($logo);
+		$logo_height = imagesy($logo);
+
+		// Resize logo to 1/3 of QR size
+		$logo_qr_width = $qr_width / 3;
+		$scale = $logo_width / $logo_qr_width;
+		$logo_qr_height = $logo_height / $scale;
+		$from_width = ($qr_width - $logo_qr_width) / 2;
+
+		// Merge logo into QR
+		imagecopyresampled(
+			$qr, $logo,
+			$from_width, $from_width,
+			0, 0,
+			$logo_qr_width, $logo_qr_height,
+			$logo_width, $logo_height
+		);
+
+		// Output directly in browser
+		ob_start();
+		imagepng($qr);
+		$qrImageData = ob_get_clean();
+		$base64QR = base64_encode($qrImageData);
+		$imgSrc = 'data:image/png;base64,' . $base64QR;
+
+		imagedestroy($qr);
+		imagedestroy($logo);
+
+		// Display inline
+		echo '<img src="'.$imgSrc.'" alt="QR Code" width="150px" height="150px">';
+		echo '<p style="margin: 0;position: absolute;left: 23px;font-size: 16px;margin-top: -13px;"><b>'.$qr_digit.' - BN:'.$book_no.'</b></p><br>';
+	}
 	
 	/*function save_qrcode($qrcode, $qr_digit)
 	{
@@ -104,6 +163,7 @@ class Qrcodegenerator extends CI_Controller {
             {
                 $qrdigit = str_pad($x, $qr_digit, '0', STR_PAD_LEFT); 
                 $this->generate_qrcode($qrdigit, $book_no);
+                //$this->generate_qrcode_with_logo($qrdigit, $book_no);
             }	        
 	    }
 	    else
