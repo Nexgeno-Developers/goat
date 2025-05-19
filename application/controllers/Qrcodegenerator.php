@@ -29,6 +29,8 @@ class Qrcodegenerator extends CI_Controller {
 		$this->load->database();
 		$this->load->library('session');
 
+		$this->load->model('Settings_model', 'settings_model');
+
 		/*cache control*/
 		$this->output->set_header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
 		$this->output->set_header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
@@ -37,6 +39,12 @@ class Qrcodegenerator extends CI_Controller {
 		$this->output->set_header("Pragma: no-cache");
 
 
+	}
+
+	public function create(){
+		$page_data['printing_qrcode_digit']    = get_common_settings('printing_qrcode_digit');
+		$page_data['printing_qrcode_version']  = get_common_settings('printing_qrcode_version');
+		$this->load->view('frontend/qrcode/create', $page_data);		
 	}
 
 	// INDEX FUNCTION
@@ -148,23 +156,48 @@ class Qrcodegenerator extends CI_Controller {
 	
 	function create_bulk_qrimage()
 	{
-	    $start   = trim(preg_replace('/\s+/', '', $this->input->get('start')));
-	    $end     = trim(preg_replace('/\s+/', '', $this->input->get('end')));
-	    $book_no = trim(preg_replace('/\s+/', '', $this->input->get('bookno')));
-	    $qr_digit= $this->input->get('qr_digit') ? trim(preg_replace('/\s+/', '', $this->input->get('qr_digit'))) : 0;
+	    $start    = trim(preg_replace('/\s+/', '', $this->input->get('start')));
+	    $end      = trim(preg_replace('/\s+/', '', $this->input->get('end')));
+	    $book_no  = trim(preg_replace('/\s+/', '', $this->input->get('bookno')));
+	    //$qr_digit= $this->input->get('qr_digit') ? trim(preg_replace('/\s+/', '', $this->input->get('qr_digit'))) : 0;
+	    $qr_digit = get_common_settings('printing_qrcode_digit');
+	    $qr_version = get_common_settings('printing_qrcode_version');
 	    
         if (strpos(strval($start), '0') === 0 || strpos(strval($end), '0') === 0) {
             echo "Number should not starts with zero";exit;
-        }	    
+        }
+		
+		// Check if start or end is not exactly 6 digits
+		if (strlen($start) > $qr_digit || strlen($end) > $qr_digit) {
+			echo "Start and End values must be exactly {$qr_digit} digits.";
+			exit;
+		}		
 
 	    if(!empty($start) && !empty($end) && !empty($book_no))
 	    {
-            for ($x = $start; $x <= $end; $x++)
-            {
-                $qrdigit = str_pad($x, $qr_digit, '0', STR_PAD_LEFT); 
-                $this->generate_qrcode($qrdigit, $book_no);
-                //$this->generate_qrcode_with_logo($qrdigit, $book_no);
-            }	        
+            // for ($x = $start; $x <= $end; $x++)
+            // {
+            //     $qrdigit = str_pad($x, $qr_digit, '0', STR_PAD_LEFT); 
+            //     $this->generate_qrcode($qr_version.$qrdigit, $book_no);
+            //     //$this->generate_qrcode_with_logo($qrdigit, $book_no);
+            // }	
+			
+			$chunkSize = 200; // adjust as per server capability
+			$total = $end - $start + 1;
+
+			for ($i = 0; $i < $total; $i += $chunkSize) {
+				$chunkStart = $start + $i;
+				$chunkEnd = min($chunkStart + $chunkSize - 1, $end);
+
+				for ($x = $chunkStart; $x <= $chunkEnd; $x++) {
+					$qrdigit = str_pad($x, $qr_digit, '0', STR_PAD_LEFT);
+					$this->generate_qrcode($qr_version . $qrdigit, $book_no);
+				}
+
+				// Optional: add a small sleep or log to track progress
+				// sleep(1); // avoid timeout in some shared hosts
+			}			
+
 	    }
 	    else
 	    {

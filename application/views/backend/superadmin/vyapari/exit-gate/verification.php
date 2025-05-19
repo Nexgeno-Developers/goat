@@ -95,7 +95,11 @@
                         <?php }elseif($vtype == 'manual'){ ?>
                         
                             <!--<div class="col-md-12">-->
-                                <input type="text" class="form-control" name="qrcode" required>
+                                <input type="number" class="form-control" name="qrcode"
+                                 onwheel="this.blur()"
+                                onkeydown="if(event.key === 'ArrowUp' || event.key === 'ArrowDown'){event.preventDefault();}"                               
+                                
+                                required>
                                 <br>
                                 <button type="button" class="btn btn-secondary" onclick='formSubmit();'>Submit</button>                            
                             <!--</div>-->
@@ -124,7 +128,14 @@
                         
                         <?php }elseif($vtype == 'hardware-scanner'){ ?>
                             <!--<div class="col-md-12">-->
-                                <input type="text" id="device" value ="" class="hidden1" autofocus>
+                                <input 
+                                type="number" 
+                                id="device" 
+                                value ="" 
+                                class="hidden1" 
+                                onwheel="this.blur()"
+                                onkeydown="if(event.key === 'ArrowUp' || event.key === 'ArrowDown'){event.preventDefault();}"
+                                autofocus>
                                 <h3 class="fonts_20">Start Your Scan Using External Device</h3>
                             <!--</div>-->
                             <script>
@@ -300,3 +311,17 @@
         font-weight: bold;
     }    
 </style>
+ <style>
+
+    /* Remove number input arrows for Chrome, Safari, Edge, Opera */
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* For Firefox */
+    input[type=number] {
+      -moz-appearance: textfield;
+    }    
+  </style>

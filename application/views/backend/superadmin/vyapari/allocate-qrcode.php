@@ -76,17 +76,17 @@
 
               <form method="POST" class="d-block ajaxForm" action="<?php echo route('manage_vyapari/bulk_insert_qrcode/'.$vyapari_id); ?>">
                  <div class="form-row">
-                    <div class="form-group mb-1 col-md-12" style="display:none;">
+                    <!-- <div class="form-group mb-1 col-md-12" style="display:none;">
                        <select name="qr_digit" class="form-control" required>
                            <option value="">Select Digit</option>
                            <option value="6">6</option>
                            <option value="7" selected>7</option>
                        </select>
-                    </div>  
+                    </div>   -->
                     
                     <div class="form-group col-md-6">
                         <label style="margin: 0;" for="receipt_no">Receipt No.</label>
-                        <input type="text" name="receipt_no" class="form-control" placeholder="Receipt No." required>
+                        <input type="text" name="receipt_no" class="form-control" placeholder="Receipt No." autocomplete="off" required>
                     </div>
                     
                     <div class="form-group col-md-6">
@@ -130,12 +130,64 @@
                        <div class="qrcode-block">
                           <div class="qrcode-fields">
                              <div class="row">
-                                <div class="col-md-4 form-group">
-                                   <input onkeyup="calculateSequencePass();" type="text" class="form-control" id="sq_from" placeholder="Sequence From" name="sequence_from[]" required>
+                                <!-- <div class="col-md-4 form-group">
+                                   <input step="1" onkeyup="calculateSequencePass();" type="number" class="form-control" id="sq_from" placeholder="Sequence From" name="sequence_from[]" required onwheel="this.blur()" onkeydown="if(event.key === 'ArrowUp' || event.key === 'ArrowDown'){event.preventDefault();}" autocomplete="off">
                                 </div>
                                 <div class="col-md-4 form-group">
-                                   <input onkeyup="calculateSequencePass();" type="text" class="form-control" id="sq_to" placeholder="Sequence To" name="sequence_to[]" required>
+                                   <input step="1" onkeyup="calculateSequencePass();" type="number" class="form-control" id="sq_to" placeholder="Sequence To" name="sequence_to[]" required onwheel="this.blur()" onkeydown="if(event.key === 'ArrowUp' || event.key === 'ArrowDown'){event.preventDefault();}" autocomplete="off">
+                                </div> -->
+
+                                <?php
+                                    $digitLength = get_common_settings('validate_qrcode_digit');
+                                    $pattern = '^\d{' . $digitLength . '}$';
+                                    $title = 'Please enter exactly ' . $digitLength . ' digits (e.g., ' . str_pad('1', $digitLength, '0', STR_PAD_LEFT) . ')';
+                                ?>
+
+                                <div class="col-md-4 form-group">
+                                <input
+                                    type="text"
+                                    inputmode="numeric"
+                                    class="form-control digit-only"
+                                    id="sq_from"
+                                    placeholder="Sequence From"
+                                    name="sequence_from[]"
+                                    required
+                                    inputmode="numeric"
+                                    pattern="<?= $pattern ?>"
+                                    title="<?= $title ?>"
+                                    minlength="<?= $digitLength ?>"
+                                    maxlength="<?= $digitLength ?>"
+                                    autocomplete="off"
+                                    onkeyup="calculateSequencePass();"
+                                    onwheel="this.blur()"
+                                    onkeydown="if(event.key === 'ArrowUp' || event.key === 'ArrowDown'){event.preventDefault();}"
+                                >
                                 </div>
+
+                                <div class="col-md-4 form-group">
+                                <input
+                                    type="text"
+                                    inputmode="numeric"
+                                    class="form-control digit-only"
+                                    id="sq_to"
+                                    placeholder="Sequence To"
+                                    name="sequence_to[]"
+                                    required
+                                    inputmode="numeric"
+                                    pattern="<?= $pattern ?>"
+                                    title="<?= $title ?>"
+                                    minlength="<?= $digitLength ?>"
+                                    maxlength="<?= $digitLength ?>"
+                                    autocomplete="off"
+                                    onkeyup="calculateSequencePass();"
+                                    onwheel="this.blur()"
+                                    onkeydown="if(event.key === 'ArrowUp' || event.key === 'ArrowDown'){event.preventDefault();}"
+                                >
+                                </div>
+
+
+
+
                                 <div class="col-md-2 form-group">
                                 Pass: <span class="pcount text-danger">0</span>      
                                 </div>
@@ -337,4 +389,27 @@
         }        
     }
 </script>
+
+<script>
+document.querySelectorAll('.digit-only').forEach(input => {
+   input.addEventListener('input', function () {
+      this.value = this.value.replace(/\D/g, ''); // removes non-digits
+   });
+});
+</script>
+
+ <style>
+
+    /* Remove number input arrows for Chrome, Safari, Edge, Opera */
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* For Firefox */
+    input[type=number] {
+      -moz-appearance: textfield;
+    }    
+  </style>
 
