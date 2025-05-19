@@ -57,33 +57,27 @@ $pandol_prefixes = cache_with_ttl('pandol_prefixes_unique', function () {
         <div class="card">
             <div class="card-body">
                 <?php 
-                    // $this->db->select("p.name AS pandaal_no, COUNT(q.pandaal_no) AS balance_pass");
-                    // $this->db->from("app_pandols p");
-                    // $this->db->join("app_qrcode q USE INDEX (idx_status_pandaal_no)", "p.name = q.pandaal_no AND q.status != 'exit'", "left");
-                    // $this->db->group_by("p.name");
-                    // $pandol_report = $this->db->get()->result_array();      
-                    
-                    // $pandol_report = cache_with_ttl('report.pandol_avalibility_map', function() {
-                    //     $CI =& get_instance();
-                    //     $CI->db->select("p.name AS pandaal_no, COUNT(q.pandaal_no) AS balance_pass");
-                    //     $CI->db->from("app_pandols p");
-                    //     $CI->db->join("app_qrcode q USE INDEX (idx_status_pandaal_no)", "p.name = q.pandaal_no AND q.status != 'exit'", "left");
-                    //     //$CI->db->like("pandaal_no", $this->input->get('pandaal_no') ?? '');
-                    //     $CI->db->group_by("p.name");
-                    //     $pandol_report = $this->db->get()->result_array();  
-                    //     return $pandol_report;
-                    // }, cache_duration());  
-                    
-                    $pandol_no_prefix = $this->input->get('pandaal_no') ? $this->input->get('pandaal_no') : 'None';
+                    $pandol_no_prefix = $this->input->get('pandaal_no') ?? '';
+
                     $CI =& get_instance();
                     $CI->db->select("p.name AS pandaal_no, COUNT(q.pandaal_no) AS balance_pass");
                     $CI->db->from("app_pandols p");
-                    $CI->db->join("app_qrcode q USE INDEX (idx_status_pandaal_no)", "p.name = q.pandaal_no AND q.status != 'exit'", "left");
-                    //$CI->db->where("pandaal_no", $this->input->get('pandaal_no') ?? '');
-                    $CI->db->like("SUBSTRING_INDEX(p.name, '-', 1)", $this->input->get('pandaal_no') ? $this->input->get('pandaal_no') : 'None');
-                    $CI->db->where("SUBSTRING_INDEX(p.name, '-', 1) = '$pandol_no_prefix'");
-                    $CI->db->group_by("p.name");
-                    $pandol_report = $CI->db->get()->result_array();                    
+                    $CI->db->join(
+                        "app_qrcode q USE INDEX (idx_status_pandaal_no)",
+                        "p.name = q.pandaal_no AND q.status != 'exit'",
+                        "left"
+                    );
+
+                    if ($pandol_no_prefix == 'In Between') {
+                        $CI->db->where("p.name", $pandol_no_prefix);
+                    } else {
+                        $CI->db->where("SUBSTRING_INDEX(p.name, '-', 1) =", $pandol_no_prefix);
+                    }
+
+                    $CI->db->group_by("p.name"); // ✅ Make sure this is exactly as shown
+
+                    $pandol_report = $CI->db->get()->result_array(); 
+                    // echo "<pre>" . var_dump($pandol_report) . "</pre>";                   
                 ?>
                 <div class="content">
                     <?php  
@@ -144,6 +138,19 @@ $pandol_prefixes = cache_with_ttl('pandol_prefixes_unique', function () {
                                 </div>
                             </div>
                         <?php endforeach; ?>
+                        <?php if ($in_between_count > 0): ?>
+                            <div class="col-md-6 col-lg-12 pr-md-1 pl-md-1 mb-2">
+                                <div class="card mb-4 pendall_boxex">
+                                    <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                                        <span>Pandol: In Between</span>
+                                        <span class="badge badge-light">Balance: <?php echo $in_between_count; ?></span>
+                                    </div>
+                                    <div class="card-body bg-white fixed-height text-center">
+                                        <span class="badge badge-info"><?php echo $in_between_count; ?></span>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endif; ?>                        
                     </div>                  
 
                 </div>              
