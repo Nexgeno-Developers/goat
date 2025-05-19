@@ -137,6 +137,29 @@
                         </a>
                     </div>
                 </div>
+
+                 <div class="col-lg-4 col-md-4 col-sm-4 col-6 pl-md-1 pddleft_0">
+                    <div class="card card-stats six">
+                         <a class="dashbox" href="manage_admins"> 
+                        <div class="card-header card-header-warning card-header-icon">
+                            <div class="card-icon">
+                                <img src="../assets/backend/images/arrow_icon9.svg" alt="">
+                            </div>
+                            <p class="card-category"><?php echo get_phrase('Admins with Active Status'); ?> </p>
+                            <h3 class="card-title"> 
+                            <?php
+                               echo $active_admins;
+                            ?>
+                           </h3>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                <i class="fa fa-clock-o"></i> Just Updated
+                            </div>
+                        </div>
+                        </a>
+                    </div>
+                </div>                
                 
 
 

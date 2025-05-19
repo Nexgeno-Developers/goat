@@ -650,6 +650,11 @@ class Superadmin extends CI_Controller {
           return $CI->db->get()->result_array();
       }, $cache_duration);
 
+      // Total Exit QR Codes
+      $page_data['active_admins'] = cache_with_ttl('dashboard.active_admins', function() use ($CI) {
+          return $CI->db->where('user_status', 'active')->count_all_results('users');
+      }, $cache_duration);      
+
       $this->load->view('backend/index', $page_data);
   }
 
