@@ -74,7 +74,7 @@ if($user_type == 'parent'){
               
               <?php if(access('manage_admins')){ ?>
               <li>
-                 <a href="<?php echo site_url($controller.'/manage_gwala'); ?>">Manage Gwala</a>
+                 <a href="<?php echo site_url($controller.'/manage_gwala'); ?>">Manage Gowala</a>
               </li>
               <?php } ?>
               
@@ -120,7 +120,7 @@ if($user_type == 'parent'){
           
           <?php if(access('pandol_info_report')){ ?>
           <li>
-             <a href="<?php echo site_url($controller.'/reports/gwala'); ?>">Agent (Gwala)</a>
+             <a href="<?php echo site_url($controller.'/reports/gwala'); ?>">Agent (Gowala)</a>
           </li> 
           <?php } ?>
 

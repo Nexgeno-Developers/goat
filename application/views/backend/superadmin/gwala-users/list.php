@@ -48,7 +48,7 @@ $users = $this->db->order_by('id', 'desc')->get('app_gwala')->result_array();
             <!--    <?php } ?>-->
                 */ ?>
                 
-                <a href="javascript:void(0);" class="btn-sm btn-success" onclick="rightModal('<?php echo site_url('modal/popup/gwala-users/edit/'.$user['id'])?>', '<?php echo get_phrase('edit_gwala'); ?>');"><?php echo get_phrase('edit'); ?></a>
+                <a href="javascript:void(0);" class="btn-sm btn-success" onclick="rightModal('<?php echo site_url('modal/popup/gwala-users/edit/'.$user['id'])?>', '<?php echo get_phrase('edit_gowala'); ?>');"><?php echo get_phrase('edit'); ?></a>
                 
                 <?php } ?>
                 
