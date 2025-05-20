@@ -243,6 +243,13 @@ class Deonar_model extends CI_Model {
 		
 		if(!empty($vyapari_id))
 		{
+			// Extract the current year
+			$currentYear = date('Y');
+			// Convert to uppercase
+			$vyapari_id = strtoupper($vyapari_id);
+			// Use regex to remove "V2025-" and get the remaining part
+			$vyapari_id = preg_replace("/^V$currentYear-/", '', $vyapari_id);
+
     		$this->db->where('AV.vyapari_id', $vyapari_id);
 		}
 		if(!empty($name))
@@ -1259,6 +1266,8 @@ class Deonar_model extends CI_Model {
 				'description' => '<b>'.vyapari_id($vyapari_id).'</b> updated successfully.',
 			 );
 			 app_log($log);
+
+			old_vyapari_check($this->input->post());
 	 
 			 $response = array(
 				 'status' => true,

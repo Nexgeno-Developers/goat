@@ -123,6 +123,18 @@ if($user_type == 'parent'){
              <a href="<?php echo site_url($controller.'/reports/gwala'); ?>">Agent (Gwala)</a>
           </li> 
           <?php } ?>
+
+          <?php if(access('statewise_vyapari_report')){ ?>
+          <li>
+             <a href="<?php echo site_url($controller.'/reports/vyapari-by-states'); ?>">Statewise Vyapari</a>
+          </li> 
+          <?php } ?>          
+
+          <?php if(access('statewise_goat_report')){ ?>
+          <li>
+             <a href="<?php echo site_url($controller.'/reports/goats-by-states'); ?>">Statewise Goats</a>
+          </li> 
+          <?php } ?>          
           
        </ul>
     </li>    
