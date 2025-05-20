@@ -556,7 +556,7 @@ class Deonar_model extends CI_Model {
 		$pandaal_no    = $this->input->post('pandaal_no');
 		$broker_id     = $this->input->post('broker_id');
 		$gwala_id      = $this->input->post('gwala_id');
-		$series        = 6;//$this->input->post('qr_digit');
+		$series        = get_common_settings('validate_qrcode_digit');//$this->input->post('qr_digit');
 		
 		$x = 0;
 		$qrcodes = array();
@@ -755,7 +755,7 @@ class Deonar_model extends CI_Model {
 	
 	function mark_complete_qrcode()
 	{
-	    //$qrcode = intval(trim($this->input->post('qrcode')));
+	    $validate_qrcode_digit = get_common_settings('validate_qrcode_digit');
 	    $qrcode = trim($this->input->post('qrcode'));
 	    
         if(empty($qrcode))
@@ -767,11 +767,11 @@ class Deonar_model extends CI_Model {
     		return json_encode($response);
         }
         
-        if(strlen($qrcode) != 6)
+        if(strlen($qrcode) != $validate_qrcode_digit)
         {
     		$response = array(
     			'status' => false,
-    			'notification' => '<b>Pass number must be a 6 digit!</b>'
+    			'notification' => "<b>Pass number must be a {$validate_qrcode_digit} digit!</b>"
     		);  
     		return json_encode($response);
         }

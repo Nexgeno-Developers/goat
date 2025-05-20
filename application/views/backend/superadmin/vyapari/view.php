@@ -158,7 +158,7 @@
                 </div>                 
                 
                 </div>
-                    <table id="basic-datatable-0" class="table-responsive-xl table-responsive-lg table-responsive-md table-responsive-sm table table-striped " data-page-length="2000" width="100%"> <!--nowrap-->
+                    <table id="basic-datatable-0" class="table-responsive-xl table-responsive-lg table-responsive-md table-responsive table table-striped " data-page-length="2000" width="100%"> <!--nowrap-->
                         <thead>
                             <tr style="background-color: #313a46; color: #ababab;">
                                 <th width="5%"><input type="checkbox" class="check_all" name="check_all" value="1"></th>

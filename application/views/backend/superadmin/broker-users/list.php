@@ -11,7 +11,7 @@
 $users = $this->db->order_by('id', 'desc')->get('app_broker')->result_array();
 ?>
 <?php if (count($users) > 0): ?>
-  <div class="table-responsive-sm">
+  <div class="table-responsive">
     <table id="basic-datatable-1" class="table table-striped dt-responsive nowrap" width="100%" data-page-length="100">
       <thead class="thead-dark">
         <tr>
@@ -38,7 +38,7 @@ $users = $this->db->order_by('id', 'desc')->get('app_broker')->result_array();
             
             <td>
                 <?php if(access('manage_user_button')){ ?>
-                <? /*
+                <?php /*
             <!--    <?php if($user['status'] == 'active'){ ?>-->
       		    <!-- item-->
       		    <!--<a href="javascript:void(0);" class="btn btn-sm btn-danger" onclick="confirmModal('<?php echo route('manage_admins/user_status/'.$user['id'].'/inactive'); ?>', showAllUsers )"><?php echo get_phrase('deactivate'); ?></a>-->

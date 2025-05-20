@@ -1,17 +1,59 @@
 <?php if(!access('pandol_info_report')){ redirect(route('dashboard')); } ?>
+<?php
 
+$pandol_prefixes = cache_with_ttl('pandol_prefixes_unique', function () {
+    $CI =& get_instance();
+    $CI->db->select("DISTINCT SUBSTRING_INDEX(name, '-', 1) AS name");
+    $CI->db->from("app_pandols");
+    return $CI->db->get()->result_array();
+}, cache_duration());
+?>
 <!--title-->
 <div class="row ">
   <div class="col-xl-12">
     <div class="card">
-      <div class="card-body">
-        <h4 class="page-title">
+      <div class="card-body title_heads1">
+        <!-- <h4 class="page-title">
             <i class="mdi mdi-book-open-page-variant title_icon"></i> <?php echo get_phrase($page_title); ?>
             <button type="button" class="btn btn-outline-primary btn-rounded alignToTitle" onclick="window.location.href='<?php echo route('reports/pandol-availability'); ?>'"> <i class="mdi mdi-table"></i> <?php echo get_phrase('Table View'); ?></button>
+        </h4> -->
+
+        <h4 class="page-title d-flex align-items-center justify-content-between">
+            <div>
+                <i class="mdi mdi-book-open-page-variant title_icon"></i>
+                <?php echo get_phrase($page_title); ?>
+            </div>
+
+
+            
+
+            <button type="button" class="btn btn-outline-primary btn-rounded alignToTitle" onclick="window.location.href='<?php echo route('reports/pandol-availability'); ?>'"> <i class="mdi mdi-table"></i> <?php echo get_phrase('Table View'); ?></button>
         </h4>
+
+
       </div> <!-- end card body-->
     </div> <!-- end card -->
   </div><!-- end col-->
+</div>
+
+<div class="col-md-12">
+<div class="d-flex align-items-center gap-2 justify-content-end">
+                <form method="get" action="" class="d-flex gap-5 padal_selecor">
+                    <!-- Searchable Select Dropdown -->
+                    <select name="pandaal_no" id="pandolSelector" class="form-control select2" style="min-width: 200px;">
+                        <option value=""><?php echo get_phrase('Select Pandol'); ?></option>
+                        <!-- Add your options dynamically here -->
+                        <?php foreach ($pandol_prefixes as $pandol): ?>
+                            <option value="<?php echo $pandol['name']; ?>" <?php if($pandol['name'] == $this->input->get('pandaal_no')){ echo 'selected'; } ?>><?php echo $pandol['name']; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+
+                    <!-- Search Button -->
+                    <button type="submit" class="btn btn-secondary" onclick="searchPandol()">
+                        <i class="mdi mdi-magnify"></i>
+                    </button>
+                </form>
+            </div>
 </div>
 
 <div class="row">
@@ -19,21 +61,27 @@
         <div class="card">
             <div class="card-body">
                 <?php 
-                    // $this->db->select("p.name AS pandaal_no, COUNT(q.pandaal_no) AS balance_pass");
-                    // $this->db->from("app_pandols p");
-                    // $this->db->join("app_qrcode q USE INDEX (idx_status_pandaal_no)", "p.name = q.pandaal_no AND q.status != 'exit'", "left");
-                    // $this->db->group_by("p.name");
-                    // $pandol_report = $this->db->get()->result_array();      
-                    
-                    $pandol_report = cache_with_ttl('pandol_report', function() {
-                        $CI =& get_instance();
-                        $CI->db->select("p.name AS pandaal_no, COUNT(q.pandaal_no) AS balance_pass");
-                        $CI->db->from("app_pandols p");
-                        $CI->db->join("app_qrcode q USE INDEX (idx_status_pandaal_no)", "p.name = q.pandaal_no AND q.status != 'exit'", "left");
-                        $CI->db->group_by("p.name");
-                        $pandol_report = $this->db->get()->result_array();  
-                        return $pandol_report;
-                    }, cache_duration());                    
+                    $pandol_no_prefix = $this->input->get('pandaal_no') ?? '';
+
+                    $CI =& get_instance();
+                    $CI->db->select("p.name AS pandaal_no, COUNT(q.pandaal_no) AS balance_pass");
+                    $CI->db->from("app_pandols p");
+                    $CI->db->join(
+                        "app_qrcode q USE INDEX (idx_status_pandaal_no)",
+                        "p.name = q.pandaal_no AND q.status != 'exit'",
+                        "left"
+                    );
+
+                    if ($pandol_no_prefix == 'In Between') {
+                        $CI->db->where("p.name", $pandol_no_prefix);
+                    } else {
+                        $CI->db->where("SUBSTRING_INDEX(p.name, '-', 1) =", $pandol_no_prefix);
+                    }
+
+                    $CI->db->group_by("p.name"); // ✅ Make sure this is exactly as shown
+
+                    $pandol_report = $CI->db->get()->result_array(); 
+                    // echo "<pre>" . var_dump($pandol_report) . "</pre>";                   
                 ?>
                 <div class="content">
                     <?php  
@@ -66,7 +114,7 @@
     
                     <div class="row">
                         <?php foreach ($grouped_data as $block => $rooms): ?>
-                            <div class="col-md-6 col-lg-4 pr-md-1 pl-md-1 mb-2">
+                            <div class="col-md-6 col-lg-12 pr-md-1 pl-md-1 mb-0">
                                 <div class="card mb-4 pendall_boxex">
                                     <?php 
                                         $total_balance = array_sum($rooms); 
@@ -94,6 +142,23 @@
                                 </div>
                             </div>
                         <?php endforeach; ?>
+                        <?php if ($in_between_count > 0): ?>
+                            <div class="col-md-6 col-lg-12 pr-md-1 pl-md-1 mb-0">
+                                <div class="card mb-4 pendall_boxex">
+                                    <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                                        <span>Pandol: In Between</span>
+                                        <span class="badge badge-light">Balance: <?php echo $in_between_count; ?></span>
+                                    </div>
+                                    <div class="card-body bg-white fixed-height text-center">
+                                        <span class="badge badge-info"><?php echo $in_between_count; ?></span>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endif; ?>  
+                        
+                        <?php if(empty($in_between_count) && empty($grouped_data)): ?>
+                            <div class="col-md-12 text-center">No data found</div>
+                        <?php endif; ?>
                     </div>                  
 
                 </div>              
@@ -103,23 +168,11 @@
 </div>
 
 <script>
-$(document).ready(function () {
-    $('#basic-datatable-0').DataTable({
-       order: [[2, 'asc']],
-		dom: 'lBfrtip',
-		buttons: [
-		    {
-                extend: 'csvHtml5',
-                filename: 'balance-goats', 
-                text: 'Export',
-                className: 'btn-sm btn-secondary btn-data-export',
-                exportOptions: {
-                    columns: [ 0, 1, 2]
-                }                    
-            }
-        ]
+    $(document).ready(function () {
+        initSelect2(['.select2']);
+
+        // Optional: any other initialization
     });
-});    
 </script>
 <style>
 
@@ -136,8 +189,8 @@ $(document).ready(function () {
     }
 
     .card-body.fixed-height {
-        height: 300px; /* adjust as needed */
-        overflow-y: auto;
+        /* height: 300px; adjust as needed */
+        /* overflow-y: auto; */
     }    
 
     /* Chrome, Edge, Safari */

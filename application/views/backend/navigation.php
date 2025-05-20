@@ -114,7 +114,7 @@ if($user_type == 'parent'){
           
           <?php if(access('pandol_info_report')){ ?>
           <li>
-             <a href="<?php echo site_url($controller.'/reports/pandol-availability'); ?>">Pandol Info</a>
+             <a href="<?php echo site_url($controller.'/reports/pandol-availability-map'); ?>">Pandol Info</a>
           </li> 
           <?php } ?>
           
@@ -123,6 +123,18 @@ if($user_type == 'parent'){
              <a href="<?php echo site_url($controller.'/reports/gwala'); ?>">Agent (Gwala)</a>
           </li> 
           <?php } ?>
+
+          <?php if(access('statewise_vyapari_report')){ ?>
+          <li>
+             <a href="<?php echo site_url($controller.'/reports/vyapari-by-states'); ?>">Statewise Vyapari</a>
+          </li> 
+          <?php } ?>          
+
+          <?php if(access('statewise_goat_report')){ ?>
+          <li>
+             <a href="<?php echo site_url($controller.'/reports/goats-by-states'); ?>">Statewise Goats</a>
+          </li> 
+          <?php } ?>          
           
        </ul>
     </li>    
@@ -135,7 +147,25 @@ if($user_type == 'parent'){
         <span> <?php echo get_phrase('Vyapari Prebooking'); ?> </span>
       </a>
     </li>  
-    <?php } ?>    
+    <?php } ?> 
+
+  <?php if(access('manage_settings')){ ?>
+  <li class="side-nav-item mt-1">
+    <a href="<?php echo site_url($controller.'/website_settings/other_settings'); ?>" class="side-nav-link">
+      <i class="mdi mdi-settings"></i>
+      <span> <?php echo get_phrase('Settings'); ?> </span>
+    </a>
+  </li> 
+  <?php } ?>     
+  
+  <?php if(access('manage_cache')){ ?>
+  <li class="side-nav-item mt-1">
+    <a href="<?php echo site_url($controller.'/clear_cache'); ?>" class="side-nav-link" style="background: #f8d7da; border-radius: 10px;font-weight: 700;color: #842029">
+      <i class="mdi mdi-refresh"></i>
+      <span> <?php echo get_phrase('Clear Cache'); ?> </span>
+    </a>
+  </li> 
+  <?php } ?>    
 
     <?php
     /*$this->db->order_by('sort_order', 'asc');

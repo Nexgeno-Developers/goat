@@ -295,7 +295,21 @@ class Superadmin extends CI_Controller {
             $page_data['page_name']  = 'vyapari/reports/pandol-availability-map';
             $page_data['page_title'] = 'Pandol Availability Map';
             $this->load->view('backend/index', $page_data);
-        }        
+        }   
+        
+        if($param1 == 'vyapari-by-states')
+        {
+            $page_data['page_name']  = 'vyapari/reports/vyapari-by-states';
+            $page_data['page_title'] = 'Vyapari Wise Goat Report';
+            $this->load->view('backend/index', $page_data);
+        }  
+        
+        if($param1 == 'goats-by-states')
+        {
+            $page_data['page_name']  = 'vyapari/reports/goats-by-states';
+            $page_data['page_title'] = 'State Wise Goat Report';
+            $this->load->view('backend/index', $page_data);
+        }         
         
         if($param1 == 'gwala')
         {
@@ -586,35 +600,38 @@ class Superadmin extends CI_Controller {
       $page_data['page_title'] = 'Dashboard';
       $page_data['folder_name'] = 'dashboard';
 
-      $date_start = "2024-06-05 00:00:00";
-      $date_end = "2024-06-20 00:00:00";
+      $date_start = get_common_settings('start_datetime');
+      $date_end = get_common_settings('end_datetime');  
+      
+      // $date_start = "2024-06-05 07:13:06";
+      // $date_end = "2025-05-19 16:03:32";      
 
       $page_data['startdate'] = date('d', strtotime($date_start));
       $page_data['month'] = date('m', strtotime($date_start));
       $page_data['days'] = date('t', strtotime($date_start));
 
       // Total Vyapari Count
-      $page_data['vyapari'] = cache_with_ttl('dash_vyapari', function() use ($CI) {
+      $page_data['vyapari'] = cache_with_ttl('dashboard.vyapari', function() use ($CI) {
           return $CI->db->count_all('app_vyapari');
       }, $cache_duration);
 
       // Total Unblock + Exit QR Codes
-      $page_data['unblock'] = cache_with_ttl('dash_unblock', function() use ($CI) {
+      $page_data['unblock'] = cache_with_ttl('dashboard.unblock', function() use ($CI) {
           return $CI->db->where_in('status', ['unblock', 'exit'])->count_all_results('app_qrcode');
       }, $cache_duration);
 
       // Total Block QR Codes
-      $page_data['block'] = cache_with_ttl('dash_block', function() use ($CI) {
+      $page_data['block'] = cache_with_ttl('dashboard.block', function() use ($CI) {
           return $CI->db->where('status', 'block')->count_all_results('app_qrcode');
       }, $cache_duration);
 
       // Total Exit QR Codes
-      $page_data['exit'] = cache_with_ttl('dash_exit', function() use ($CI) {
+      $page_data['exit'] = cache_with_ttl('dashboard.exit', function() use ($CI) {
           return $CI->db->where('status', 'exit')->count_all_results('app_qrcode');
       }, $cache_duration);
 
       // Daily Inward Animal Count
-      $page_data['aniamalin'] = cache_with_ttl('dash_aniamalin', function() use ($CI, $date_start, $date_end) {
+      $page_data['aniamalin'] = cache_with_ttl('dashboard.aniamalin', function() use ($CI, $date_start, $date_end) {
           //$CI->db->query("SET @@sql_mode=''"); // Remove if not needed
           $query = $CI->db->select('DAY(inward_date) AS DATE, COUNT(inward_date) AS count')
                           ->from('app_qrcode USE Index(idx_status_inwarddate)')
@@ -628,7 +645,7 @@ class Superadmin extends CI_Controller {
       }, $cache_duration);
 
       // Daily Exit Animal Count
-      $page_data['aniamalout'] = cache_with_ttl('dash_aniamalout', function() use ($CI, $date_start, $date_end) {
+      $page_data['aniamalout'] = cache_with_ttl('dashboard.aniamalout', function() use ($CI, $date_start, $date_end) {
           //$CI->db->query("SET @@sql_mode=''"); // Remove if not needed
           $query = $CI->db->select('DAY(exit_date) AS DATE, COUNT(exit_date) AS count')
                           ->from('app_qrcode USE INDEX (idx_status_exitdate)')
@@ -641,14 +658,10 @@ class Superadmin extends CI_Controller {
           return json_encode($query);
       }, $cache_duration);
 
-      // State-wise Vyapari Count
-      $page_data['state_wise_vyapari'] = cache_with_ttl('dash_state_wise_vyapari', function() use ($CI) {
-          $CI->db->select('CONCAT(UCASE(SUBSTRING(state, 1, 1)), LCASE(SUBSTRING(state, 2))) AS state, COUNT(vyapari_id) as total');
-          $CI->db->from('app_vyapari');
-          $CI->db->group_by('state');
-          $CI->db->order_by('total', 'DESC');
-          return $CI->db->get()->result_array();
-      }, $cache_duration);
+      // Total Exit QR Codes
+      $page_data['active_admins'] = cache_with_ttl('dashboard.active_admins', function() use ($CI) {
+          return $CI->db->where('user_status', 'active')->count_all_results('users');
+      }, $cache_duration);      
 
       $this->load->view('backend/index', $page_data);
   }
@@ -697,12 +710,12 @@ class Superadmin extends CI_Controller {
       $page_data['page_content']  = 'gallery_image';
       $page_data['gallery_id']  = $param2;
     }
-    if ($param1 == 'other_settings') {
+    if (empty($param1) || $param1 == 'other_settings') {
       $page_data['page_content']  = 'other_settings';
     }
-    if(empty($param1) || $param1 == 'general_settings'){
-      $page_data['page_content']  = 'general_settings';
-    }
+    // if(empty($param1) || $param1 == 'general_settings'){
+    //   $page_data['page_content']  = 'general_settings';
+    // }
 
     $page_data['folder_name']   = 'website_settings';
     $page_data['page_title']    = 'website_settings';
@@ -727,6 +740,26 @@ class Superadmin extends CI_Controller {
     $response = $this->frontend_model->update_recaptcha_settings();
     echo $response;
   }
+
+  public function update_digits_settings($param1 = "") {
+    $data1['description'] = $this->input->post('printing_qrcode_digit');
+    $data2['description'] = $this->input->post('printing_qrcode_version');
+    $data3['description'] = $this->input->post('validate_qrcode_digit');
+    $this->db->where('type', 'printing_qrcode_digit');
+    $this->db->update('common_settings', $data1);
+
+    $this->db->where('type', 'printing_qrcode_version');
+    $this->db->update('common_settings', $data2);
+
+    $this->db->where('type', 'validate_qrcode_digit');
+    $this->db->update('common_settings', $data3);
+
+    $response = array(
+      'status' => true,
+      'notification' => get_phrase('digits_settings_updated')
+    );
+    echo json_encode($response);
+  }  
 
   // SETTINGS MANAGER
   public function school_settings($param1 = "", $param2 = "") {
@@ -791,5 +824,20 @@ class Superadmin extends CI_Controller {
           echo json_encode(array("Status" => "False"));
       }
   }
+
+  public function clear_cache()
+  {
+      // Clear all cache (ensure you have a valid clear_all_cache() helper or method)
+      if (function_exists('clear_all_cache')) {
+          clear_all_cache();
+      }
+
+      // Set a flash message
+      $this->session->set_flashdata('flash_message', get_phrase('all_cache_cleared'));
+
+      // Redirect to previous page
+      $referrer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : base_url();
+      redirect($referrer);
+  } 
   
 }
