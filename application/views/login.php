@@ -144,7 +144,7 @@ img.download_img {
 }
 
 .login_content h4 {
-    font-size: 44px;
+    font-size: 34px;
     color: #fff;
     font-weight: 600;
 }
