@@ -4,7 +4,7 @@
     <div class="card">
       <div class="card-body">
         <h4 class="page-title">
-          <i class="mdi mdi-settings title_icon"></i><?php echo ucfirst(get_phrase('website_settings')); ?>
+          <i class="mdi mdi-settings title_icon"></i><?php echo ucfirst(get_phrase('application_settings')); ?>
         </h4>
       </div> <!-- end card body-->
     </div> <!-- end card -->
