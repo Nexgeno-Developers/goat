@@ -65,19 +65,19 @@ $chart_counts = array_column($state_data, 'total');
 
                 <!-- Chart -->
                 <div class="row">
-                    <div class="col-md-12 mt-3">
-                        <div style="width: 80%; max-width: 500px; margin: 0 auto;">
+                    <div class="col-md-7 mt-3">
+                        <div style="width: 100%; max-width: 500px; margin: 0 auto;">
                             <canvas id="stateWiseBarChart"></canvas>
                         </div>
                     </div>
 
                     <!-- Table -->
-                    <div class="col-md-12 mt-3">
+                    <div class="col-md-5 mt-3">
                         <div class="chart_box">
-                            <table id="" class="table table-striped dt-responsive">
+                            <table id="" class="table table-striped dt-responsive table-sm">
                                 <thead>
                                     <tr>
-                                        <th>Sr. No.</th>
+                                        <th>Sr.</th>
                                         <th>States</th>
                                         <th>Counts</th>
                                         <th>Percentage</th>
@@ -92,6 +92,11 @@ $chart_counts = array_column($state_data, 'total');
                                             <td><?= number_format($row['percentage'], 2) ?>%</td>
                                         </tr>
                                     <?php endforeach; ?>
+                                    <tr style="font-weight: bold; background-color: #f5f5f5;">
+                                        <td colspan="2" class="text-right">Total</td>
+                                        <td><?= $total_vyaparis ?></td>
+                                        <td>100%</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
