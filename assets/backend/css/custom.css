@@ -1452,9 +1452,7 @@ button.btn.btn-outline-success.btn-rounded.alignToTitle.pass {
     font-size: 12px;
   }
 
-  .button-menu-mobile span {
-    background-color: rgb(0 0 0 / 80%) !important;
-  }
+
 
   .content-page {
     padding: 0 0px 0px 0px !important;
@@ -1538,4 +1536,16 @@ button.btn.btn-outline-success.btn-rounded.alignToTitle.pass {
   justify-content: center;
   margin-bottom: 22px;
   align-items: center;
+}
+
+.padal_selecor {
+  gap: 11px;
+  width: 18%;
+  padding-right: 9px;
+  margin-bottom: 20px;
+  padding-top: 11px;
+}
+
+.title_heads1 {
+  padding: 10px 20px 15px 20px !important;
 }
