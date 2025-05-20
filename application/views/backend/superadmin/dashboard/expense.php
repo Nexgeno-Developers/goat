@@ -2,7 +2,7 @@
 $date_from = strtotime(date('Y-m-01')." 00:00:00"); // hard-coded '01' for first day
 $date_to   = strtotime(date('Y-m-t')." 23:59:59");
 $expenses = $this->crud_model->get_expense($date_from, $date_to)->result_array(); ?>
-<div class="table-responsive-sm">
+<div class="table-responsive">
     <table class="table table-striped table-centered table-bordered mb-0 table-responsive">
         <thead>
             <tr>

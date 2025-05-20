@@ -12,7 +12,7 @@ $pandol_prefixes = cache_with_ttl('pandol_prefixes_unique', function () {
 <div class="row ">
   <div class="col-xl-12">
     <div class="card">
-      <div class="card-body">
+      <div class="card-body title_heads1">
         <!-- <h4 class="page-title">
             <i class="mdi mdi-book-open-page-variant title_icon"></i> <?php echo get_phrase($page_title); ?>
             <button type="button" class="btn btn-outline-primary btn-rounded alignToTitle" onclick="window.location.href='<?php echo route('reports/pandol-availability'); ?>'"> <i class="mdi mdi-table"></i> <?php echo get_phrase('Table View'); ?></button>
@@ -25,8 +25,20 @@ $pandol_prefixes = cache_with_ttl('pandol_prefixes_unique', function () {
             </div>
 
 
-            <div class="d-flex align-items-center gap-2">
-                <form method="get" action="">
+            
+
+            <button type="button" class="btn btn-outline-primary btn-rounded alignToTitle" onclick="window.location.href='<?php echo route('reports/pandol-availability'); ?>'"> <i class="mdi mdi-table"></i> <?php echo get_phrase('Table View'); ?></button>
+        </h4>
+
+
+      </div> <!-- end card body-->
+    </div> <!-- end card -->
+  </div><!-- end col-->
+</div>
+
+<div class="col-md-12">
+<div class="d-flex align-items-center gap-2 justify-content-end">
+                <form method="get" action="" class="d-flex gap-5 padal_selecor">
                     <!-- Searchable Select Dropdown -->
                     <select name="pandaal_no" id="pandolSelector" class="form-control select2" style="min-width: 200px;">
                         <option value=""><?php echo get_phrase('Select Pandol'); ?></option>
@@ -37,19 +49,11 @@ $pandol_prefixes = cache_with_ttl('pandol_prefixes_unique', function () {
                     </select>
 
                     <!-- Search Button -->
-                    <button type="submit" class="btn btn-primary" onclick="searchPandol()">
+                    <button type="submit" class="btn btn-secondary" onclick="searchPandol()">
                         <i class="mdi mdi-magnify"></i>
                     </button>
                 </form>
             </div>
-
-            <button type="button" class="btn btn-outline-primary btn-rounded alignToTitle" onclick="window.location.href='<?php echo route('reports/pandol-availability'); ?>'"> <i class="mdi mdi-table"></i> <?php echo get_phrase('Table View'); ?></button>
-        </h4>
-
-
-      </div> <!-- end card body-->
-    </div> <!-- end card -->
-  </div><!-- end col-->
 </div>
 
 <div class="row">
@@ -110,7 +114,7 @@ $pandol_prefixes = cache_with_ttl('pandol_prefixes_unique', function () {
     
                     <div class="row">
                         <?php foreach ($grouped_data as $block => $rooms): ?>
-                            <div class="col-md-6 col-lg-12 pr-md-1 pl-md-1 mb-2">
+                            <div class="col-md-6 col-lg-12 pr-md-1 pl-md-1 mb-0">
                                 <div class="card mb-4 pendall_boxex">
                                     <?php 
                                         $total_balance = array_sum($rooms); 
@@ -139,7 +143,7 @@ $pandol_prefixes = cache_with_ttl('pandol_prefixes_unique', function () {
                             </div>
                         <?php endforeach; ?>
                         <?php if ($in_between_count > 0): ?>
-                            <div class="col-md-6 col-lg-12 pr-md-1 pl-md-1 mb-2">
+                            <div class="col-md-6 col-lg-12 pr-md-1 pl-md-1 mb-0">
                                 <div class="card mb-4 pendall_boxex">
                                     <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
                                         <span>Pandol: In Between</span>

@@ -11,7 +11,7 @@
 $users = $this->db->order_by('id', 'desc')->get('app_gwala')->result_array();
 ?>
 <?php if (count($users) > 0): ?>
-  <div class="table-responsive-sm">
+  <div class="table-responsive">
     <table id="basic-datatable-1" class="table table-striped dt-responsive nowrap" width="100%" data-page-length="100">
       <thead class="thead-dark">
         <tr>

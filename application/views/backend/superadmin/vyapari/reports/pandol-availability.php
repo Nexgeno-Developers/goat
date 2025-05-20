@@ -10,7 +10,7 @@
 <div class="row ">
   <div class="col-xl-12">
     <div class="card">
-      <div class="card-body">
+      <div class="card-body title_heads1">
         <h4 class="page-title">
             <i class="mdi mdi-book-open-page-variant title_icon"></i> <?php echo get_phrase($page_title); ?>
             <button type="button" class="btn btn-outline-primary btn-rounded alignToTitle" onclick="window.location.href='<?php echo route('reports/pandol-availability-map'); ?>'"> <i class="mdi mdi-map"></i> <?php echo get_phrase('Map View'); ?></button>
