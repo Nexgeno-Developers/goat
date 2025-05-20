@@ -1116,7 +1116,20 @@ function create_user()
 				'name' => 'user_creation',
 				'description' => '<b>'.$data['name'].'</b> Added successfully.',
 			 );
-			 app_log($log);			
+			 app_log($log);	
+			
+			$subject = "Deonar Goat, Your Account Has Been Created!";
+			$body = '
+					<p>Dear User,</p>
+					<p>Please find the relevant details below.</p>
+					<p><strong>Email:</strong> '.$data['email'].'</p>
+					<p><strong>Password:</strong> '.$this->input->post('password').'</p>
+					<p>You can log in here: <a href="' . base_url('login') . '" target="_blank">' . base_url('login') . '</a></p>
+					<br>
+					<p>Best regards,<br>Nexgeno Team</p>
+				';
+
+			sendEmail($data['email'], $subject, $body);
 
 			$response = array(
 				'status' => true,
@@ -1172,8 +1185,23 @@ function create_user()
 				'name' => 'user_update',
 				'description' => '<b>'.$data['name'].'</b> Updated successfully.',
 			 );
-			 app_log($log);	    
-	    
+			 app_log($log);
+		
+		if(!empty($this->input->post('password'))){
+			$subject = "Deonar Goat, Your Account Has Been Updated!";
+			$body = '
+					<p>Dear User,</p>
+					<p>Please find the relevant details below.</p>
+					<p><strong>Email:</strong> '.$data['email'].'</p>
+					<p><strong>Password:</strong> '.$this->input->post('password').'</p>
+					<p>You can log in here: <a href="' . base_url('login') . '" target="_blank">' . base_url('login') . '</a></p>
+					<br>
+					<p>Best regards,<br>Nexgeno Team</p>
+				';
+
+			sendEmail($data['email'], $subject, $body);
+		}
+
 		$response = array(
 			'status' => true,
 			'notification' => get_phrase('updated_successfully')

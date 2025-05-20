@@ -35,13 +35,15 @@
             </select>
         </div>        
         
-        <?/*<div class="form-group col-md-6">
+        <?php /*
+        <div class="form-group col-md-6">
             <label for="status"><?php echo get_phrase('status'); ?></label>
             <select name="status" class="form-control select2" data-toggle="select2" required>
                 <option value="1" <?php echo ($user['user_status'] == 1) ? 'selected' : ''; ?>>Active</option>
                 <option value="0" <?php echo ($user['user_status'] == 0) ? 'selected' : ''; ?>>Inactive</option>
             </select>
-        </div>*/?>
+        </div>
+        */ ?>
         
         <div class="form-group col-md-6">
             <label for="gate_no"><?php echo get_phrase('gate_no'); ?></label>

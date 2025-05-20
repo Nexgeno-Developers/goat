@@ -57,4 +57,107 @@ class Cronjob extends CI_Controller {
         echo "Old session and log files deleted.";
     }
 
+
+    public function daily_dashbaord_report_eamil(){
+        $CI = &get_instance();  // Get CI instance once
+        $CI->load->database();
+
+        // Total Vyapari Count
+        $vyapari = $CI->db->count_all('app_vyapari');
+
+        // Total Unblock + Exit QR Codes
+        $unblock = $CI->db
+            ->where_in('status', ['unblock', 'exit'])
+            ->count_all_results('app_qrcode');
+
+        // Total Block QR Codes
+        $block = $CI->db
+            ->where('status', 'block')
+            ->count_all_results('app_qrcode');
+
+        // Total Exit QR Codes
+        $exit = $CI->db
+            ->where('status', 'exit')
+            ->count_all_results('app_qrcode'); 
+
+        $emails = $CI->db
+                ->select('email')
+                ->from('users')
+                ->where('role_type', 'bmc')
+                ->get()
+                ->result();
+
+        $email_list = array_column($emails, 'email');
+
+        $subject = "Goat Movement Report";
+        $body = '
+                <html>
+                <head>
+                    <style>
+                        table {
+                            width: 100%;
+                            border-collapse: collapse;
+                            font-family: Arial, sans-serif;
+                        }
+                        th, td {
+                            border: 1px solid #dddddd;
+                            text-align: left;
+                            padding: 8px;
+                        }
+                        th {
+                            background-color: #f2f2f2;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <h2>Goat Movement Summary</h2>
+                    <table>
+                        <tr>
+                            <th>Item</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr>
+                            <td>Inward Total Goat</td>
+                            <td>' . $unblock . '</td>
+                        </tr>
+                        <tr>
+                            <td>Outward Total Goat</td>
+                            <td>' . $exit . '</td>
+                        </tr>
+                        <tr>
+                            <td>Balance Total Goat</td>
+                            <td>' . ($unblock - $exit) . '</td>
+                        </tr>
+                        <tr>
+                            <td>Pass Blocked</td>
+                            <td>' . $block . '</td>
+                        </tr>
+                        <tr>
+                            <td>Registered Total Vyapari</td>
+                            <td>' . $vyapari . '</td>
+                        </tr>
+                    </table>
+                    <br>
+                    <p>Regards,<br>Goat Management System</p>
+                </body>
+                </html>';
+
+        
+        $test = sendEmail('webdeveloper@nexgeno.in', $subject, $body);
+
+        var_dump($test);
+
+        // foreach ($email_list as $email) {
+        //     $result = sendEmail($email, $subject, $body);
+
+        //     // Optional: Log result
+        //     if ($result) {
+        //         echo "Email sent to: $email";
+        //     } else {
+        //         echo "Failed to send email to: $email";
+        //     }
+        // }
+
+    }
+
 }

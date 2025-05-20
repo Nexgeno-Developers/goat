@@ -286,3 +286,62 @@ function old_vyapari_check($param){
        $CI->db->where('aadhar_no', $old_vyapari['aadhar_no'])->update('vyapari_detail', $old_vyapari);
     }
 }
+
+
+if(!function_exists('sendEmail')){
+    function sendEmail($to, $subject, $body, $replyTo = null)
+    {
+
+        $CI =& get_instance();
+        // Load the config file
+        $CI->load->config('api_keys');
+        // Access the key
+        $apiKey = $CI->config->item('BRAVIO_API');
+
+        // API endpoint
+        $url = 'https://api.brevo.com/v3/smtp/email';
+        
+        // Data to be sent
+        $data = [
+            "sender" => [
+                "name" => "Nexgeno",
+                "email" => "mohammadzshaikh123@gmail.com"
+            ],
+            "to" => [
+                [
+                    "email" => $to,
+                ]
+            ],
+            "subject" => $subject,
+            "htmlContent" => $body
+        ];
+
+        $postData = json_encode($data);
+
+        $ch = curl_init($url);
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'accept: application/json',
+            'api-key: ' . $apiKey,
+            'content-type: application/json'
+        ]);
+
+        $response = curl_exec($ch);
+        $error = curl_error($ch);
+
+        curl_close($ch);
+
+        if ($error) {
+            log_message('error', 'Brevo Email Error: ' . $error);
+            return false;
+        } else {
+            $responseData = json_decode($response, true);
+            log_message('info', 'Brevo Email Response: ' . print_r($responseData, true));
+            return $responseData;
+        }
+    
+    }  
+}
