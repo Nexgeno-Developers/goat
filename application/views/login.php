@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Login</title>
+    <title>Login | Deonar - GOAT</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="MCGM Deonar Abattoir Software" name="description" />
     <!--<meta content="Coderthemes" name="author" />-->
@@ -163,7 +163,9 @@ html
     font-size: 20px;
     padding: 0px 0px;
 }
-
+.login-section .form-group {
+    margin-bottom: 1.1rem;
+}
 .clip-home {
     display: none;
 }
