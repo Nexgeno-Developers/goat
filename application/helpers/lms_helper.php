@@ -36,7 +36,8 @@ function get_locality_by_state($state_id)
 
 function vyapari_id($id = "")
 {
-   return 'V2024-'.$id;
+    //    return 'V2024-'.$id;
+    return 'V' . date('Y') . '-' . $id;
 }
 
 function compressImage($source, $destination, $quality) 
