@@ -150,7 +150,11 @@ $pandol_prefixes = cache_with_ttl('pandol_prefixes_unique', function () {
                                     </div>
                                 </div>
                             </div>
-                        <?php endif; ?>                        
+                        <?php endif; ?>  
+                        
+                        <?php if(empty($in_between_count) && empty($grouped_data)): ?>
+                            <div class="col-md-12 text-center">No data found</div>
+                        <?php endif; ?>
                     </div>                  
 
                 </div>              
