@@ -26,7 +26,7 @@
                         <div class="card-icon">
                             <img src="../assets/backend/images/arrow_icon1.svg" alt="">
                         </div>
-                        <p class="card-category"><?php echo get_phrase('Total Goat Inward'); ?></p>
+                        <p class="card-category"><?php echo get_phrase('Inward Total Goat'); ?></p>
                         <h3 class="card-title"> 
                         <?php
                           echo $unblock;
@@ -50,7 +50,7 @@
                         <div class="card-icon">
                             <img src="../assets/backend/images/arrow_icon3.svg" alt="">
                         </div>
-                        <p class="card-category"><?php echo get_phrase('Total Goat Outward'); ?></p>
+                        <p class="card-category"><?php echo get_phrase('Outward Total Goat'); ?></p>
                         <h3 class="card-title"> 
                         <?php
                           echo $exit
@@ -74,7 +74,7 @@
                             <div class="card-icon">
                                 <img src="../assets/backend/images/arrow_icon7.svg" alt="">
                             </div>
-                            <p class="card-category"><?php echo get_phrase('Total Balance Goat'); ?> </p>
+                            <p class="card-category"><?php echo get_phrase('Balance Total Goat'); ?> </p>
                             <h3 class="card-title"> 
                             <?php
                                echo $unblock - $exit;
@@ -122,7 +122,7 @@
                             <div class="card-icon">
                                 <img src="../assets/backend/images/arrow_icon9.svg" alt="">
                             </div>
-                            <p class="card-category"><?php echo get_phrase('Total Vyapari Registered'); ?> </p>
+                            <p class="card-category"><?php echo get_phrase('Registered Total Vyapari'); ?> </p>
                             <h3 class="card-title"> 
                             <?php
                                echo $vyapari;
@@ -176,6 +176,17 @@
         
     <div class="col-md-12 mt-1">
                 <div class="chart_box">
+                  <div class="color_represent">
+                    <div class="inward">
+                        <p class="">Inward </p>
+                        <div class="circle"></div>
+                    </div>
+
+                    <div class="outward ">
+                        <p class="">Outward  </p>
+                        <div class="circle1"></div>
+                    </div>
+                  </div>
             <canvas id="myChart"></canvas>
     </div>
     </div>
@@ -339,11 +350,11 @@ new Chart("myChart", {
     labels: xValues,
     datasets: [{ 
       data: yValuesIN,
-      borderColor: "#722bfb", 
+      borderColor: "#71357C", 
       fill: false
     }, { 
       data: yValuesOut,
-      borderColor: "#3fdd4f",
+      borderColor: "#95D0D5",
       fill: false
     }]
   },

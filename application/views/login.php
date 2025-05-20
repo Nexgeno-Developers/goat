@@ -18,26 +18,27 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
     
-    
+    <link href="https://fonts.cdnfonts.com/css/satoshi" rel="stylesheet">
     
     <style>
     
     
     body
-    {
-        font-family: 'Jost', sans-serif;
-    }
+{
+    font-family: 'Satoshi', sans-serif !important;
+}
     
     .login-section .card-body {
-    max-width: 450px;
+        max-width: 500px;
     width: 100%;
     margin-left: auto;
     margin-right: auto;
 }
         span.logtext {
-    color: #000;
-    font-size: 24px;
-    padding: 0px 30px;
+            color: #000;
+    font-size: 30px;
+    padding: 0px 5px;
+    font-weight: 600;
 }
 
 .loginimgdiv {
@@ -126,7 +127,36 @@ img.download_img {
     width: 100%;
     margin-top: 30px;
 }
+.login_img_desktop {
+    background-size: cover;
+    height: 97vh;
+    box-shadow: 1000px 1000px 1000px 1000px inset #9c27b0ba;
+    border-radius: 15px;
+    margin-top: 15px;
+}
 
+
+.login_content {
+    position: absolute;
+    bottom: 5%;
+    text-align: center;
+    width: 95.4%;
+}
+
+.login_content h4 {
+    font-size: 44px;
+    color: #fff;
+    font-weight: 600;
+}
+
+.login_content p {
+    color: #fff;
+    font-size: 20px;
+}
+html
+{
+    overflow-x: hidden;
+}
 @media(max-width:767px)
 {
     span.logtext {
@@ -145,6 +175,7 @@ img.download_img {
 img.lohimg {
        width: 100px;
     height: 100px;
+    padding:0px;
 }
 
 .left_login_img {
@@ -154,9 +185,28 @@ img.lohimg {
 }
 .login-section .card-body {
  padding-top:0px;
+ padding-left: 15px;
+ padding-right: 15px;
 }
 .login_main_box {
     min-height: auto;
+}
+.login_img_desktop {
+    background-size: contain;
+    height: 20vh;
+}
+.login_content {
+    width: 91%;
+}
+.login_content h4 {
+    font-size: 20px;
+}
+.login_content p {
+    font-size: 12px;
+}
+.loginimgdiv {
+    margin-bottom: 12px;
+    padding-top: 25px;
 }
 }
     </style>
@@ -173,8 +223,12 @@ img.lohimg {
         <div class="row">
 
         <div class="col-lg-5 h-100">
-            <img class="left_login_img d-lg-block d-none" src="<?php echo base_url('assets/backend/images/login_image_new.webp'); ?>" alt="Login Image">
-            <img class="left_login_img d-lg-none d-block" src="<?php echo base_url('assets/backend/images/mobileview_banner.webp'); ?>" alt="Login Image">
+            <div class="login_img_desktop" style="background-image: url(assets/backend/images/goat_bg_images.webp);">
+                <div class="login_content">
+                    <h4>Digital Bakra Eid 2025 (Goat)</h4>
+                    <p>Every Goat. Every Trade. Every Record.</p>
+                </div>
+            </div>
         </div>
 
 
@@ -183,13 +237,12 @@ img.lohimg {
             <div class="align-items-center h-100">
                 <div class="card-body">
                     <!-- Logo -->
-                    <div class="text-center mb-3">
+                    <div class="text-center mb-md-3 mb-2">
                         <div class="loginimgdiv"> <img src="<?php echo $this->settings_model->get_logo_dark(); ?>" alt="MCGM Deonar Abattoir Software" height="35" class="lohimg"> </div>
                         
-                        <a href="<?php echo site_url(); ?>">
-                            <span class="logtext">MCGM Deonar Abattoir Software</span>
-                        </a>
-                    </div>
+                        
+                            <span class="logtext">Digital Bakra Eid 2025 (Goat)</span>
+                                          </div>
                     <!-- title-->
                     <!-- <h4 class="lohhead mt-0 text-center"><?php //echo get_phrase('sign_in'); ?></h4>
                     <p class="logdec text-muted mb-4 text-center"><?php //echo get_phrase('enter_your_email_address_and_password_to_access_account'); ?>.</p> -->
