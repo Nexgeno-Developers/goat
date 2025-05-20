@@ -300,14 +300,14 @@ class Superadmin extends CI_Controller {
         if($param1 == 'vyapari-by-states')
         {
             $page_data['page_name']  = 'vyapari/reports/vyapari-by-states';
-            $page_data['page_title'] = 'Vyapari By States';
+            $page_data['page_title'] = 'Vyapari Wise Goat Report';
             $this->load->view('backend/index', $page_data);
         }  
         
         if($param1 == 'goats-by-states')
         {
             $page_data['page_name']  = 'vyapari/reports/goats-by-states';
-            $page_data['page_title'] = 'Goats By States';
+            $page_data['page_title'] = 'State Wise Goat Report';
             $this->load->view('backend/index', $page_data);
         }         
         
