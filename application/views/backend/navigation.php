@@ -136,6 +136,15 @@ if($user_type == 'parent'){
       </a>
     </li>  
     <?php } ?> 
+
+  <?php if(access('manage_settings')){ ?>
+  <li class="side-nav-item mt-1">
+    <a href="<?php echo site_url($controller.'/website_settings/other_settings'); ?>" class="side-nav-link">
+      <i class="mdi mdi-settings"></i>
+      <span> <?php echo get_phrase('Settings'); ?> </span>
+    </a>
+  </li> 
+  <?php } ?>     
   
   <?php if(access('manage_cache')){ ?>
   <li class="side-nav-item mt-1">
