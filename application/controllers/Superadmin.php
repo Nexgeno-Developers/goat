@@ -295,6 +295,13 @@ class Superadmin extends CI_Controller {
             $page_data['page_name']  = 'vyapari/reports/pandol-availability-map';
             $page_data['page_title'] = 'Pandol Availability Map';
             $this->load->view('backend/index', $page_data);
+        }   
+        
+        if($param1 == 'vyapari-by-states')
+        {
+            $page_data['page_name']  = 'vyapari/reports/vyapari-by-states';
+            $page_data['page_title'] = 'Vyapari By States';
+            $this->load->view('backend/index', $page_data);
         }        
         
         if($param1 == 'gwala')
@@ -586,8 +593,11 @@ class Superadmin extends CI_Controller {
       $page_data['page_title'] = 'Dashboard';
       $page_data['folder_name'] = 'dashboard';
 
-      $date_start = "2024-06-05 00:00:00";
-      $date_end = "2024-06-20 00:00:00";
+      $date_start = get_common_settings('start_datetime');
+      $date_end = get_common_settings('end_datetime');  
+      
+      // $date_start = "2024-06-05 07:13:06";
+      // $date_end = "2025-05-19 16:03:32";      
 
       $page_data['startdate'] = date('d', strtotime($date_start));
       $page_data['month'] = date('m', strtotime($date_start));
@@ -639,15 +649,6 @@ class Superadmin extends CI_Controller {
                           ->get()
                           ->result();
           return json_encode($query);
-      }, $cache_duration);
-
-      // State-wise Vyapari Count
-      $page_data['state_wise_vyapari'] = cache_with_ttl('dashboard.state_wise_vyapari', function() use ($CI) {
-          $CI->db->select('CONCAT(UCASE(SUBSTRING(state, 1, 1)), LCASE(SUBSTRING(state, 2))) AS state, COUNT(vyapari_id) as total');
-          $CI->db->from('app_vyapari');
-          $CI->db->group_by('state');
-          $CI->db->order_by('total', 'DESC');
-          return $CI->db->get()->result_array();
       }, $cache_duration);
 
       // Total Exit QR Codes

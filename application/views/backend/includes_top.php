@@ -38,6 +38,9 @@
 
 <script src="<?php echo base_url(); ?>assets/backend/js/custom/webcam.min.js"></script>
 
+<!--Graph-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
 
 <style>
     .enlarged .side-nav .side-nav-item .side-nav-link:active, .enlarged .side-nav .side-nav-item .side-nav-link:focus, .enlarged .side-nav .side-nav-item .side-nav-link:hover {
