@@ -138,7 +138,7 @@
                     </div>
                 </div>
 
-                 <div class="col-lg-4 col-md-4 col-sm-4 col-6 pl-md-1 pddleft_0">
+                 <div class="col-lg-4 col-md-4 col-sm-4 col-6 pl-md-1 pddright_0">
                     <div class="card card-stats six">
                          <a class="dashbox" href="manage_admins"> 
                         <div class="card-header card-header-warning card-header-icon">
