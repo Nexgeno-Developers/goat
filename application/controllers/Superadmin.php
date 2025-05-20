@@ -702,12 +702,12 @@ class Superadmin extends CI_Controller {
       $page_data['page_content']  = 'gallery_image';
       $page_data['gallery_id']  = $param2;
     }
-    if ($param1 == 'other_settings') {
+    if (empty($param1) || $param1 == 'other_settings') {
       $page_data['page_content']  = 'other_settings';
     }
-    if(empty($param1) || $param1 == 'general_settings'){
-      $page_data['page_content']  = 'general_settings';
-    }
+    // if(empty($param1) || $param1 == 'general_settings'){
+    //   $page_data['page_content']  = 'general_settings';
+    // }
 
     $page_data['folder_name']   = 'website_settings';
     $page_data['page_title']    = 'website_settings';
@@ -732,6 +732,26 @@ class Superadmin extends CI_Controller {
     $response = $this->frontend_model->update_recaptcha_settings();
     echo $response;
   }
+
+  public function update_digits_settings($param1 = "") {
+    $data1['description'] = $this->input->post('printing_qrcode_digit');
+    $data2['description'] = $this->input->post('printing_qrcode_version');
+    $data3['description'] = $this->input->post('validate_qrcode_digit');
+    $this->db->where('type', 'printing_qrcode_digit');
+    $this->db->update('common_settings', $data1);
+
+    $this->db->where('type', 'printing_qrcode_version');
+    $this->db->update('common_settings', $data2);
+
+    $this->db->where('type', 'validate_qrcode_digit');
+    $this->db->update('common_settings', $data3);
+
+    $response = array(
+      'status' => true,
+      'notification' => get_phrase('digits_settings_updated')
+    );
+    echo json_encode($response);
+  }  
 
   // SETTINGS MANAGER
   public function school_settings($param1 = "", $param2 = "") {

@@ -13,15 +13,6 @@
 <!-- end page title -->
 <div class="row">
   <div class="col-xl-2 col-lg-3 col-md-12 col-sm-12">
-    <a href="<?php echo route('noticeboard'); ?>" class="btn <?php if ($page_content == 'noticeboard'): ?> btn-dark <?php else: ?> btn-secondary <?php endif; ?> btn-rounded btn-block"><?php echo get_phrase('noticeboard'); ?></a>
-    <a href="<?php echo route('website_settings/events'); ?>" class="btn <?php if ($page_content == 'events'): ?> btn-dark <?php else: ?> btn-secondary <?php endif; ?> btn-rounded btn-block"><?php echo get_phrase('events'); ?></a>
-    <a href="<?php echo route('teacher'); ?>" class="btn <?php if ($page_content == 'teachers'): ?> btn-dark <?php else: ?> btn-secondary <?php endif; ?> btn-rounded btn-block"><?php echo get_phrase('teachers'); ?></a>
-    <a href="<?php echo route('website_settings/gallery'); ?>" class="btn <?php if ($page_content == 'gallery' || $page_content == 'gallery_image'): ?> btn-dark <?php else: ?> btn-secondary <?php endif; ?> btn-rounded btn-block"><?php echo get_phrase('gallery'); ?></a>
-    <a href="<?php echo route('website_settings/about_us'); ?>" class="btn <?php if ($page_content == 'about_us'): ?> btn-dark <?php else: ?> btn-secondary <?php endif; ?> btn-rounded btn-block"><?php echo get_phrase('about_us'); ?></a>
-    <a href="<?php echo route('website_settings/terms_and_conditions'); ?>" class="btn <?php if ($page_content == 'terms_and_conditions'): ?> btn-dark <?php else: ?> btn-secondary <?php endif; ?> btn-rounded btn-block"><?php echo get_phrase('terms_and_conditions'); ?></a>
-    <a href="<?php echo route('website_settings/privacy_policy'); ?>" class="btn <?php if ($page_content == 'privacy_policy'): ?> btn-dark <?php else: ?> btn-secondary <?php endif; ?> btn-rounded btn-block"><?php echo get_phrase('privacy_policy'); ?></a>
-    <a href="<?php echo route('website_settings/homepage_slider'); ?>" class="btn <?php if ($page_content == 'homepage_slider'): ?> btn-dark <?php else: ?> btn-secondary <?php endif; ?> btn-rounded btn-block"><?php echo get_phrase('homepage_slider'); ?></a>
-    <a href="<?php echo route('website_settings/general_settings'); ?>" class="btn <?php if ($page_content == 'general_settings'): ?> btn-dark <?php else: ?> btn-secondary <?php endif; ?> btn-rounded btn-block"><?php echo get_phrase('general_settings'); ?></a>
     <a href="<?php echo route('website_settings/other_settings'); ?>" class="btn <?php if ($page_content == 'other_settings'): ?> btn-dark <?php else: ?> btn-secondary <?php endif; ?> btn-rounded btn-block"><?php echo get_phrase('others'); ?></a>
   </div>
   <div class="col-xl-10 col-lg-9 col-md-12 col-sm-12 page_content">
