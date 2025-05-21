@@ -191,7 +191,8 @@ class Qrcodegenerator extends CI_Controller {
 
 				for ($x = $chunkStart; $x <= $chunkEnd; $x++) {
 					$qrdigit = str_pad($x, $qr_digit, '0', STR_PAD_LEFT);
-					$this->generate_qrcode($qr_version . $qrdigit, $book_no);
+					//$this->generate_qrcode($qr_version . $qrdigit, $book_no);
+					$this->generate_qrcode_with_logo($qr_version . $qrdigit, $book_no);
 				}
 
 				// Optional: add a small sleep or log to track progress
