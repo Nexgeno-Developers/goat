@@ -6,7 +6,7 @@
     <div class="card manvyap">
       <div class="card-body">
         <h4 class="page-title">
-            <i class="mdi mdi-book-open-page-variant title_icon"></i> <?php echo get_phrase($page_title); ?>
+        <i class="mdi mdi-book title_icon"></i> <?php echo get_phrase($page_title); ?>
         </h4>
       </div> <!-- end card body-->
     </div> <!-- end card -->

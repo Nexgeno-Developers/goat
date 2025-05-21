@@ -6,7 +6,7 @@
     <div class="card manvyap">
       <div class="card-body">
         <h4 class="page-title">
-            <i class="mdi mdi-book-open-page-variant title_icon"></i> <?php echo get_phrase($page_title); ?>
+           <i class="mdi mdi-book title_icon"></i> <?php echo get_phrase($page_title); ?>
             <?php if(access('registration_button')){ ?>
             <button type="button" class="btn btn-outline-primary btn-rounded alignToTitle" onclick="rightModal('<?php echo site_url('modal/popup/vyapari/create'); ?>', '<?php echo get_phrase('Registration'); ?>')"> <i class="mdi mdi-plus"></i> <?php echo get_phrase('Add Vyapari'); ?></button>
             <?php } ?>

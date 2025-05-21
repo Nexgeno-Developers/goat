@@ -35,7 +35,7 @@
         <div class="card">
         <div class="card-body">
         <h4 class="page-title">
-            <i class="mdi mdi-book-open-page-variant title_icon"></i> <?php echo get_phrase($page_title); ?>
+            <i class="mdi mdi-barcode-scan title_icon"></i> <?php echo get_phrase($page_title); ?>
         </h4>
         
         <div class="card-body exit_button backbutton_css">

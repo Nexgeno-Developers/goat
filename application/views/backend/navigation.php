@@ -61,7 +61,7 @@ if($user_type == 'parent'){
     <?php if(access('manage_admins')){ ?>
         <li class="side-nav-item sub_menu">
            <a href="javascript: void(0);" class="side-nav-link">
-           <i class="mdi mdi-book"></i>
+           <i class="mdi mdi-database"></i>
            <span><?php echo get_phrase('Master'); ?></span>
            </a>
            <ul class="side-nav-second-level collapse" aria-expanded="false">
