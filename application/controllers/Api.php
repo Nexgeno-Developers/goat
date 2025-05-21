@@ -36,6 +36,37 @@ class Api extends CI_Controller
         return true;
     }
 
+
+
+    /**
+     * API Endpoint: Location
+     */
+    private function is_within_range($userLat, $userLng)
+    {
+        // Your fixed location (e.g., event location)
+        $targetLat = 19.0738289;  // Example: Mumbai latitude
+        $targetLng = 72.8869815;  // Example: Mumbai longitude
+
+        // $targetLat = 26.8467;
+        // $targetLng = 80.9462;        
+
+        // Calculate distance using Haversine formula
+        $earthRadius = 6371; // Radius of Earth in km
+
+        $dLat = deg2rad($targetLat - $userLat);
+        $dLng = deg2rad($targetLng - $userLng);
+
+        $a = sin($dLat/2) * sin($dLat/2) +
+            cos(deg2rad($userLat)) * cos(deg2rad($targetLat)) *
+            sin($dLng/2) * sin($dLng/2);
+
+        $c = 2 * atan2(sqrt($a), sqrt(1-$a));
+        $distance = $earthRadius * $c;
+
+        // Check if within 1 km radius
+        return $distance <= 1;
+    }    
+
     /**
      * API Endpoint: Verify Pass by QR code
      */
@@ -60,6 +91,17 @@ class Api extends CI_Controller
             ]);
             return;
         }
+
+
+        $latitude = trim($this->db->escape_str($this->input->post('latitude', true)));
+        $longitude = trim($this->db->escape_str($this->input->post('longitude', true)));
+        if (!$this->is_within_range($latitude, $longitude)) {
+            echo json_encode([
+                'status' => false,
+                'notification' => 'You are not within the allowed location range.'
+            ]); 
+            return;       
+        }        
 
         $qrcode = trim($this->db->escape_str($this->input->post('qrcode', true)));
         $validate_qrcode_digit = get_common_settings('validate_qrcode_digit');
