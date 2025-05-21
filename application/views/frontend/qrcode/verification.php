@@ -72,9 +72,6 @@
 .results_box p {
     font-size: 14px;
     margin-bottom: 7px;
-    float: left;
-    width: 33%;
-    display: flex;
 }
 p.heads.mb-2 {
     font-size: 16px;
