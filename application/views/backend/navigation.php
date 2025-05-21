@@ -118,7 +118,7 @@ if($user_type == 'parent'){
           </li> 
           <?php } ?>
           
-          <?php if(access('pandol_info_report')){ ?>
+          <?php if(access('pass_inward_report')){ ?>
           <li>
              <a href="<?php echo site_url($controller.'/reports/gwala'); ?>">Agent (Gowala)</a>
           </li> 

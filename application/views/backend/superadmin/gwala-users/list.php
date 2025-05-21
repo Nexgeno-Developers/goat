@@ -38,7 +38,7 @@ $users = $this->db->order_by('id', 'desc')->get('app_gwala')->result_array();
             
             <td>
                 <?php if(access('manage_user_button')){ ?>
-                <? /*
+                <?php /*
             <!--    <?php if($user['status'] == 'active'){ ?>-->
       		    <!-- item-->
       		    <!--<a href="javascript:void(0);" class="btn btn-sm btn-danger" onclick="confirmModal('<?php echo route('manage_admins/user_status/'.$user['id'].'/inactive'); ?>', showAllUsers )"><?php echo get_phrase('deactivate'); ?></a>-->
