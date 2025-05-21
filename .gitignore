@@ -5,7 +5,9 @@
 # Ignore upload directories
 uploads/biometric_excel_files/*
 uploads/csv_file/*
+!uploads/vyapari_photo/
 uploads/vyapari_photo/*
+!uploads/emp_photo/
 uploads/certificates/*
 uploads/generated-qrcodes/*
 
@@ -17,6 +19,8 @@ mages/bg_image_dashboard.png
 
 # But do not ignore placeholder.jpg
 !uploads/users/placeholder.jpg
+
+!uploads/emp_photo/
 
 # Ignore CI session files
 ci_sessions/
