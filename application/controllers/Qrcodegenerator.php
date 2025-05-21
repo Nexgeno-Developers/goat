@@ -67,14 +67,14 @@ class Qrcodegenerator extends CI_Controller {
 
 	public function generate_qrcode_with_logo($qr_digit, $book_no) 
 	{
-		$logoPath = FCPATH . 'uploads/system/logo/header-logo.png'; // Logo file (PNG)
+		$logoPath = FCPATH . 'uploads/qr-thumb.png'; // Logo file (PNG)
 
 		$options = new \chillerlan\QRCode\QROptions([
 			'eccLevel' => \chillerlan\QRCode\QRCode::ECC_H,
 			'outputType' => \chillerlan\QRCode\QRCode::OUTPUT_IMAGE_PNG,
 			'scale' => 10,
 			'imageBase64' => false,
-			'version' => 5,
+			'version' => 4,
 			'foregroundColor' => [0, 0, 0],
 			'backgroundColor' => [255, 255, 255],
 		]);
@@ -95,7 +95,7 @@ class Qrcodegenerator extends CI_Controller {
 		$logo_height = imagesy($logo);
 
 		// Resize logo to 1/3 of QR size
-		$logo_qr_width = $qr_width / 3;
+		$logo_qr_width = $qr_width / 4;
 		$scale = $logo_width / $logo_qr_width;
 		$logo_qr_height = $logo_height / $scale;
 		$from_width = ($qr_width - $logo_qr_width) / 2;
