@@ -57,4 +57,107 @@ class Cronjob extends CI_Controller {
         echo "Old session and log files deleted.";
     }
 
+
+    public function daily_dashbaord_report_eamil(){
+        $CI = &get_instance();  // Get CI instance once
+        $CI->load->database();
+
+        // Total Vyapari Count
+        $vyapari = $CI->db->count_all('app_vyapari');
+
+        // Total Unblock + Exit QR Codes
+        $unblock = $CI->db
+            ->where_in('status', ['unblock', 'exit'])
+            ->count_all_results('app_qrcode');
+
+        // Total Block QR Codes
+        $block = $CI->db
+            ->where('status', 'block')
+            ->count_all_results('app_qrcode');
+
+        // Total Exit QR Codes
+        $exit = $CI->db
+            ->where('status', 'exit')
+            ->count_all_results('app_qrcode'); 
+
+        $emails = $CI->db
+                ->select('email')
+                ->from('users')
+                ->where('role_type', 'bmc')
+                ->where('user_status','active')
+                ->get()
+                ->result();
+
+        $email_bmc = array_column($emails, 'email');
+
+        $ccEmails = $CI->db
+            ->select('email')
+            ->from('users')
+            ->where('role_type', 'superadmin')
+            ->get()
+            ->result();
+
+        $ccList = array_column($ccEmails, 'email');
+
+        date_default_timezone_set('Asia/Kolkata');
+        $subject = "Goat Movement Report Till Now " . date('d-M-Y h:i:s A');
+        $body = '
+                <html>
+                <head>
+                    <style>
+                        table {
+                            width: 100%;
+                            border-collapse: collapse;
+                            font-family: Arial, sans-serif;
+                        }
+                        th, td {
+                            border: 1px solid #dddddd;
+                            text-align: left;
+                            padding: 8px;
+                        }
+                        th {
+                            background-color: #f2f2f2;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <h2>Goat Movement Summary Report</h2>
+                    <table>
+                        <tr>
+                            <th>Item</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr>
+                            <td>Inward Total Goat</td>
+                            <td><b>' . $unblock . '</b></td>
+                        </tr>
+                        <tr>
+                            <td>Outward Total Goat</td>
+                            <td><b>' . $exit . '</b></td>
+                        </tr>
+                        <tr>
+                            <td>Balance Total Goat</td>
+                            <td><b>' . ($unblock - $exit) . '</b></td>
+                        </tr>
+                        <tr>
+                            <td>Pass Blocked</td>
+                            <td><b>' . $block . '</b></td>
+                        </tr>
+                        <tr>
+                            <td>Registered Total Vyapari</td>
+                            <td><b>' . $vyapari . '</b></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <p><b>Regards,</b><br><b>Nexgeno Developer Team</b></p>
+                </body>
+                </html>';
+
+        
+        $test = sendEmail($email_bmc, $subject, $body, $ccList);
+
+        var_dump($test);
+
+    }
+
 }

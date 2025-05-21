@@ -8,7 +8,7 @@
                 <h4 class="page-title">
                     <i class="mdi mdi-database title_icon"></i> <?php echo get_phrase($page_title); ?>
                     <?php if(access('manage_user_button')){ ?>
-                    <button type="button" class="btn btn-outline-primary btn-rounded alignToTitle" onclick="rightModal('<?php echo site_url('modal/popup/gwala-users/create'); ?>', '<?php echo get_phrase('create_gwala'); ?>')"> <i class="mdi mdi-plus"></i> <?php echo get_phrase('add_gwala'); ?></button>
+                    <button type="button" class="btn btn-outline-primary btn-rounded alignToTitle" onclick="rightModal('<?php echo site_url('modal/popup/gwala-users/create'); ?>', '<?php echo get_phrase('create_gowala'); ?>')"> <i class="mdi mdi-plus"></i> <?php echo get_phrase('add_gowala'); ?></button>
                     <?php } ?>
                 </h4>
             </div> <!-- end card body-->

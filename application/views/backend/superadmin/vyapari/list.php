@@ -76,9 +76,9 @@
 			<th width="20%"><?php echo get_phrase('name'); ?></th>
 			<th width="10%"><?php echo get_phrase('receipt_no'); ?></th>
 			<th width="10%"><?php echo get_phrase('pandol_no'); ?></th>
-			<th width="10%"><?php echo get_phrase('total_inward'); ?></th>
-			<th width="10%"><?php echo get_phrase('total_outward'); ?></th>
-			<th width="10%"><?php echo get_phrase('total_balance'); ?></th>
+			<th width="10%"><?php echo get_phrase('Inward'); ?></th>
+			<th width="10%"><?php echo get_phrase('Outward'); ?></th>
+			<th width="10%"><?php echo get_phrase('Balance'); ?></th>
 			<th width="10%"><?php echo get_phrase('Aadhar_Number'); ?></th>
 			<th width="10%"><?php echo get_phrase('phone'); ?></th>
 			<th width="15%"><?php echo get_phrase('registered_at'); ?></th>

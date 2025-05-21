@@ -36,8 +36,13 @@ error_log
 /application/config/database.php
 /application/config/config.php
 /application/cache/*
+
+application/config/api_keys.php
+
 !/application/cache/.htaccess
 !/application/cache/index.html
+
+
 
 /index.php
 

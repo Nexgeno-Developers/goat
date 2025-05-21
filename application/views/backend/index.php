@@ -52,5 +52,13 @@ $school_id = school_id();
     <?php include 'includes_bottom.php'; ?>
     <?php include 'notify.php'; ?>
     <?php include 'modal.php'; ?>
+
+    <script>
+        $('#right-modal').on('hidden.bs.modal', function () {
+            if (Webcam.stream) {
+                Webcam.reset();
+            }
+        });
+    </script>
 </body>
 </html>

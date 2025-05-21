@@ -74,7 +74,7 @@ if($user_type == 'parent'){
               
               <?php if(access('manage_admins')){ ?>
               <li>
-                 <a href="<?php echo site_url($controller.'/manage_gwala'); ?>">Manage Gwala</a>
+                 <a href="<?php echo site_url($controller.'/manage_gwala'); ?>">Manage Gowala</a>
               </li>
               <?php } ?>
               
@@ -120,7 +120,7 @@ if($user_type == 'parent'){
           
           <?php if(access('pandol_info_report')){ ?>
           <li>
-             <a href="<?php echo site_url($controller.'/reports/gwala'); ?>">Agent (Gwala)</a>
+             <a href="<?php echo site_url($controller.'/reports/gwala'); ?>">Agent (Gowala)</a>
           </li> 
           <?php } ?>
 
@@ -140,14 +140,14 @@ if($user_type == 'parent'){
     </li>    
     <?php } ?>
     
-    <?php if(access('manage_vyapari')){ ?>
+    <?php /*if(access('manage_vyapari')){ ?>
     <li class="side-nav-item">
       <a href="<?php echo site_url($controller.'/manage_vyapari_prebooking'); ?>" class="side-nav-link">
         <i class="mdi mdi-book-open-page-variant"></i>
         <span> <?php echo get_phrase('Vyapari Prebooking'); ?> </span>
       </a>
     </li>  
-    <?php } ?> 
+    <?php }*/ ?> 
 
   <?php if(access('manage_settings')){ ?>
   <li class="side-nav-item mt-1">
@@ -262,4 +262,7 @@ $(".sub_menu").hover(
   }
 );
 </script>
+
+
+
 

@@ -36,7 +36,8 @@ function get_locality_by_state($state_id)
 
 function vyapari_id($id = "")
 {
-   return 'V2024-'.$id;
+    //    return 'V2024-'.$id;
+    return 'V' . date('Y') . '-' . $id;
 }
 
 function compressImage($source, $destination, $quality) 
@@ -284,4 +285,75 @@ function old_vyapari_check($param){
     } else {
        $CI->db->where('aadhar_no', $old_vyapari['aadhar_no'])->update('vyapari_detail', $old_vyapari);
     }
+}
+
+
+if(!function_exists('sendEmail')){
+    function sendEmail($to = [], $subject, $body, $cc = [], $replyTo = null)
+    {
+
+        $CI =& get_instance();
+        // Load the config file
+        $CI->load->config('api_keys');
+        // Access the key
+        $apiKey = $CI->config->item('BRAVIO_API');
+
+        // API endpoint
+        $url = 'https://api.brevo.com/v3/smtp/email';
+        
+        // Data to be sent
+        $toRecipients = array_map(function ($email) {
+            return ['email' => $email];
+        }, (array) $to);
+
+        // Convert "cc" emails to required format
+        $ccRecipients = array_map(function ($email) {
+            return ['email' => $email];
+        }, (array) $cc);
+
+        // Build the request payload
+        $data = [
+            "sender" => [
+                "name" => "Nexgeno",
+                "email" => "zaid.nexgeno@gmail.com"
+            ],
+            "to" => $toRecipients,
+            "subject" => $subject,
+            "htmlContent" => $body
+        ];
+
+        // Add CC if provided
+        if (!empty($ccRecipients)) {
+            $data['cc'] = $ccRecipients;
+        }
+
+        // Add replyTo if provided
+        if (!empty($replyTo)) {
+            $data['replyTo'] = ['email' => $replyTo];
+        }
+
+        // Send request
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'api-key: ' . $apiKey,
+            'Content-Type: application/json'
+        ]);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        curl_setopt($ch, CURLOPT_POST, true);
+
+        $response = curl_exec($ch);
+        $error = curl_error($ch);
+        curl_close($ch);
+
+        if ($error) {
+            log_message('error', 'Brevo Email Error: ' . $error);
+            return false;
+        } else {
+            $responseData = json_decode($response, true);
+            log_message('info', 'Brevo Email Response: ' . print_r($responseData, true));
+            return $responseData;
+        }
+    
+    }  
 }
