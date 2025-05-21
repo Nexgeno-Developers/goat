@@ -636,6 +636,7 @@ body[data-layout=detached] .content-page {
 h4.page-title {
   font-weight: 500;
   margin: 0px !important;
+  margin-bottom: 6px !important;
 }
 
 .card {
@@ -1265,7 +1266,7 @@ body {
   }
 
   .topnav-navbar-dark {
-    margin-bottom: 15px;
+    margin-bottom: 7px;
   }
 
   .dashboard_box .card.card-stats {
@@ -1512,9 +1513,9 @@ button.btn.btn-outline-success.btn-rounded.alignToTitle.pass {
     padding-right: 0px !important;
   }
 
-  body .title_heads1 {
+  /* body .title_heads1 {
     padding: 10px 5px 15px 5px !important;
-  }
+  } */
 
   .btn {
     border: 0;
@@ -1522,10 +1523,89 @@ button.btn.btn-outline-success.btn-rounded.alignToTitle.pass {
     border-radius: 10px;
     padding: 5px 10px !important;
     font-weight: 700;
+    width: auto;
+  }
+
+  .pendall_boxex .card-body.bg-white.fixed-height {
+    padding: 5px !important;
+  }
+
+  .compartment-box {
+    width: 68px;
+  }
+
+  .topnav-navbar-dark {
+    background: #fff;
+  }
+
+  .button-menu-mobile span {
+    background-color: rgb(0 0 0 / 100%);
+  }
+
+  .logo_align p {
+    color: #000;
+  }
+
+  .menu_bottom_fixed .metismenu {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .menu_bottom_fixed {
+    position: fixed;
+    bottom: 5px;
+    background: #fff;
+    z-index: 99;
+    border-radius: 50px;
+    box-shadow: 0px 0px 55px 0px #0000001f;
+    width: 95%;
+  }
+
+  .menu_bottom_fixed .side-nav-light .side-nav-link.active {
+    color: #71357c;
+    font-weight: 700;
+  }
+
+  .menu_bottom_fixed .side-nav .side-nav-link i {
+    margin: 0 3px 0 3px;
+    width: 20px;
+    font-size: 22px;
+    position: relative;
+    top: 0px;
+  }
+
+  .menu_bottom_fixed {
+    position: fixed;
+    bottom: -70px;
+    /* Start hidden below viewport */
+    left: 0;
+    width: 100%;
+    background: white;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    transition: bottom 0.3s ease;
+    z-index: 1000;
+  }
+
+  .menu_bottom_fixed.visible {
+    bottom: 5px;
+    /* Show when visible class is added */
+  }
+
+  .menu_bottom_fixed {
+    display: block !important;
+  }
+
+  .menu_bottom_fixed .side-nav .side-nav-link span {
+    vertical-align: middle;
+    font-size: 12px;
   }
 }
 
 
+.menu_bottom_fixed {
+  display: none;
+}
 
 .inward .circle {
   width: 15px;
@@ -1575,6 +1655,10 @@ button.btn.btn-outline-success.btn-rounded.alignToTitle.pass {
   padding-top: 11px;
 }
 
-.title_heads1 {
+/* .title_heads1 {
   padding: 10px 20px 15px 20px !important;
+} */
+
+label {
+  margin-bottom: 3px;
 }
