@@ -38,8 +38,8 @@
     border-radius: 10px;
     border-top: 4px solid #71357c;
     padding-top: 34px;
-    padding-bottom:34px;
-    width: 700px;
+    padding-bottom:25px;
+    width: 500px;
 }
 .customer_regis_class 
  button#btnFront {
@@ -72,11 +72,16 @@
 .results_box p {
     font-size: 14px;
     margin-bottom: 7px;
-    float: left;
-    width: 33%;
-    display: flex;
 }
-
+p.heads.mb-2 {
+    font-size: 16px;
+    padding-bottom: 5px;
+}
+.results_box th, .results_box td {
+    border: 1px solid #378eff14;
+    padding: 7px 15px;
+    font-size: 14px;
+}
 .results_box p b {padding-right: 7px;}
 
 
@@ -89,12 +94,13 @@
   </style>
 </head>
 <body>
-  <div class="container mt-5 customer_regis_class">
+  <div class="container mt-4 customer_regis_class">
     <!-- <h3 class="mb-4">QR Scanner with Instascan (Bootstrap 4)</h3> -->
 
 <div class="loginimgdiv"> <img src="<?php echo $this->settings_model->get_logo_dark(); ?>" alt="MCGM Deonar Abattoir Software" height="35" class="lohimg"> </div>
 
     <div class="mb-4 mt-4 text-center">
+      <p><b>Pass Verification Screen</b></p>
       <button id="btnBack" class="btn btn-primary mr-2"><i class="fa-solid fa-camera"></i> Back Camera</button>
       <button id="btnFront" class="btn btn-secondary"><i class="fa-solid fa-camera-rotate"></i> Front Camera</button>
     </div>
@@ -166,11 +172,29 @@
             if (response.status) {
               $('#result').html(`
                 <div class="alert alert-success">${response.notification}</div>
-                <div class="results_box">
-                <p><b>Vyapari ID : </b> ${response.data.vyapari_id}</p>
-                <p><b>Vyapari Name : </b> ${response.data.name}</p>
-                <p><b>Vyapari Photo: </b> <img src="${response.data.photo}" alt="Vyapari Photo" width="100" /></p>
-                </div>
+
+
+                <div class="results_box mt-1">
+                    <p class="heads mb-2"><strong>Visitor Information</strong></p>
+                    <div class="table-responsive">
+                      <table class="table table-bordered">
+                        <tbody>
+                          <tr>
+                            <th scope="row">Vyapari ID</th>
+                            <td>${response.data.vyapari_id}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Vyapari Name</th>
+                            <td>${response.data.name}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Vyapari Photo</th>
+                            <td><img src="${response.data.photo}" alt="Vyapari Photo" width="100" /></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
               `);
             } else {
               $('#result').html(`<div class="alert alert-danger">${response.notification}</div>`);
