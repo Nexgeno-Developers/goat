@@ -143,7 +143,7 @@
                          <a class="dashbox" href="manage_admins"> 
                         <div class="card-header card-header-warning card-header-icon">
                             <div class="card-icon">
-                                <img src="../assets/backend/images/arrow_icon9.svg" alt="">
+                                <img src="../assets/backend/images/arrow_icon10.svg" alt="">
                             </div>
                             <p class="card-category"><?php echo get_phrase('Admins with Active Status'); ?> </p>
                             <h3 class="card-title"> 
