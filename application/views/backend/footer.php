@@ -57,6 +57,18 @@
     </li>  
     <?php } ?>
        </div>
+
+
+       <div class="fiexd_width">
+       <?php if(access('manage_settings')){ ?>
+  <li class="side-nav-item">
+    <a href="<?php echo site_url($controller.'/website_settings/other_settings'); ?>" class="side-nav-link">
+      <i class="mdi mdi-settings"></i>
+      <span> <?php echo get_phrase('Settings'); ?> </span>
+    </a>
+  </li> 
+  <?php } ?> 
+       </div>
        </div>
    </div>
 </div>

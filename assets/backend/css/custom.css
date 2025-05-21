@@ -1550,6 +1550,18 @@ button.btn.btn-outline-success.btn-rounded.alignToTitle.pass {
     display: flex;
     justify-content: center;
     text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .side-nav .side-nav-link {
+    padding: 7px 2px;
+  }
+
+  .menu_bottom_fixed .side-nav-light .side-nav-link:active,
+  .menu_bottom_fixed .side-nav-light .side-nav-link:focus,
+  .menu_bottom_fixed .side-nav-light .side-nav-link:hover {
+    color: #6c757d;
   }
 
   .menu_bottom_fixed {
@@ -1563,7 +1575,7 @@ button.btn.btn-outline-success.btn-rounded.alignToTitle.pass {
   }
 
   .menu_bottom_fixed .side-nav-light .side-nav-link.active {
-    color: #71357c;
+    color: #71357c !important;
     font-weight: 700;
   }
 
