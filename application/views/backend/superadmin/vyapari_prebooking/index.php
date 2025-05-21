@@ -18,24 +18,24 @@
         <div class="card">
             <div class="card-body">
             <div class="row mb-1">
-                    <div class="col-md-2 mb-1 hidden">
+                    <div class="col-md-2 mb-2 hidden">
                         <input type="text" name="vyapari_id" class="form-control" placeholder="Vyapari ID">
                     </div>
-                    <div class="col-md-2 mb-1 hidden">
+                    <div class="col-md-2 mb-2 hidden">
                         <input type="text" name="name" class="form-control" placeholder="Vyapari Name">
                     </div> 
-                    <div class="col-md-2 mb-1 hidden">
+                    <div class="col-md-2 mb-2 hidden">
                         <input type="text" name="aadhar_no" class="form-control" placeholder="Vyapari Aadhar">
                     </div>      
                     <div class="col-md-4 col-6 mb-1">
                         <label>Search</label>
                         <input type="text" name="advanceSearch" class="form-control" placeholder="Search">
                     </div>    
-                    <div class="col-md-2 col-6 mb-1">
+                    <div class="col-md-2 col-6 mb-2">
                         <label>From Date</label>
                         <input type="date" name="from" class="form-control" placeholder="From Date">
                     </div>  
-                    <div class="col-md-2 col-6 mb-1">
+                    <div class="col-md-2 col-6 mb-2">
                         <label>To Date</label>
                         <input type="date" name="to" class="form-control" placeholder="To Date">
                     </div>                    

@@ -25,11 +25,11 @@
                         <label>Pass Number</label>
                         <input type="text" name="qrcode" class="form-control">
                     </div>
-                    <div class="col-md-2 col-6 mb-1">
+                    <div class="col-md-2 col-6 mb-2">
                         <label>From Date</label>
                         <input type="date" name="from" class="form-control" placeholder="From Date">
                     </div>  
-                    <div class="col-md-2 col-6 mb-1">
+                    <div class="col-md-2 col-6 mb-2">
                         <label>To Date</label>
                         <input type="date" name="to" class="form-control" placeholder="To Date">
                     </div>                    

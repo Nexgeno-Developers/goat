@@ -21,42 +21,42 @@
         <div class="card">
             <div class="card-body">
             <div class="row mb-1">
-                    <div class="col-md-2 mb-1">
+                    <div class="col-md-2 mb-2">
                         <label>Vyapari ID</label>
                         <input type="text" name="vyapari_id" class="form-control" placeholder="Vyapari ID">
                     </div>
-                    <div class="col-md-2 mb-1">
+                    <div class="col-md-2 mb-2">
                         <label>Vyapari Name</label>
                         <input type="text" name="name" class="form-control" placeholder="Vyapari Name">
                     </div>                    
-                    <div class="col-md-2 mb-1 hidden">
+                    <div class="col-md-2 mb-2 hidden">
                         <input type="text" name="name" class="form-control" placeholder="Vyapari Name">
                     </div> 
-                    <div class="col-md-2 mb-1">
+                    <div class="col-md-2 mb-2">
                         <label>Aadhar Number</label>
                         <input type="text" name="aadhar_no" class="form-control" placeholder="Vyapari Aadhar">
                     </div>
-                    <!-- <div class="col-md-2 mb-1">
+                    <!-- <div class="col-md-2 mb-2">
                         <label>Receipt Number</label>
                         <input type="text" name="receipt_no" class="form-control" placeholder="Receipt Number">
                     </div> --> 
-                    <div class="col-md-2 col-6 mb-1">
+                    <div class="col-md-2 col-6 mb-2">
                         <label>Phone Number</label>
                         <input type="text" name="phone" class="form-control" placeholder="Vyapari Phone">
                     </div>   
-                    <div class="col-md-2 col-6 mb-1">
+                    <div class="col-md-2 col-6 mb-2">
                         <label>Receipt Number</label>
                         <input type="text" name="receipt_no" class="form-control" placeholder="Receipt Number">
                     </div>                     
-                    <div class="col-md-2 col-6 mb-1">
+                    <div class="col-md-2 col-6 mb-2">
                         <label>Pandol Number</label>
                         <input type="text" name="pandaal_no" class="form-control" placeholder="Pandol Number">
                     </div>    
-                    <div class="col-md-2 col-6 mb-1">
+                    <div class="col-md-2 col-6 mb-2">
                         <label>From Date</label>
                         <input type="date" name="from" class="form-control" placeholder="From Date">
                     </div>  
-                    <div class="col-md-2 col-6 mb-1">
+                    <div class="col-md-2 col-6 mb-2">
                         <label>To Date</label>
                         <input type="date" name="to" class="form-control" placeholder="To Date">
                     </div>                    
