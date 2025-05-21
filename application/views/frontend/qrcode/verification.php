@@ -164,11 +164,29 @@
             if (response.status) {
               $('#result').html(`
                 <div class="alert alert-success">${response.notification}</div>
-                <div class="results_box">
-                <p><b>Vyapari ID : </b> ${response.data.vyapari_id}</p>
-                <p><b>Vyapari Name : </b> ${response.data.name}</p>
-                <p><b>Vyapari Photo: </b> <img src="${response.data.photo}" alt="Vyapari Photo" width="100" /></p>
-                </div>
+
+
+                <div class="results_box mt-3">
+  <p class="heads mb-2"><strong>Visitor Information</strong></p>
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <tbody>
+        <tr>
+          <th scope="row">Vyapari ID</th>
+          <td>${response.data.vyapari_id}</td>
+        </tr>
+        <tr>
+          <th scope="row">Vyapari Name</th>
+          <td>${response.data.name}</td>
+        </tr>
+        <tr>
+          <th scope="row">Vyapari Photo</th>
+          <td><img src="${response.data.photo}" alt="Vyapari Photo" width="100" /></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
               `);
             } else {
               $('#result').html(`<div class="alert alert-danger">${response.notification}</div>`);
