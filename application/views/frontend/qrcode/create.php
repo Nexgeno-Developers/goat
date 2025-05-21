@@ -55,7 +55,7 @@
             <em style="font-size:10px">E.g 000001</em>
         </div>
         <div class="col-6 mb-2">
-          <label for="qr_version" class="form-label">QR Version</label>
+          <label for="qr_version" class="form-label">QR Prefix</label>
           <input type="number" class="form-control" id="qr_version" name="qr_version"
                  value="<?php echo $printing_qrcode_version; ?>" readonly disabled>
             <em style="font-size:10px">E.g <?php echo $printing_qrcode_version; ?>000001</em>

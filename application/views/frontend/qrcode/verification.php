@@ -103,6 +103,7 @@ p.heads.mb-2 {
 <div class="loginimgdiv"> <img src="<?php echo $this->settings_model->get_logo_dark(); ?>" alt="MCGM Deonar Abattoir Software" height="35" class="lohimg"> </div>
 
     <div class="mb-4 mt-4 text-center">
+      <p><b>Pass Verification Screen</b></p>
       <button id="btnBack" class="btn btn-primary mr-2"><i class="fa-solid fa-camera"></i> Back Camera</button>
       <button id="btnFront" class="btn btn-secondary"><i class="fa-solid fa-camera-rotate"></i> Front Camera</button>
     </div>
