@@ -6,7 +6,7 @@
     <div class="card">
       <div class="card-body title_heads1">
         <h4 class="page-title mt-0">
-            <i class="mdi mdi-book-open-page-variant title_icon"></i> <?php echo get_phrase($page_title); ?>
+        <i class="mdi mdi-book title_icon"></i> <?php echo get_phrase($page_title); ?>
         </h4>
       </div> <!-- end card body-->
     </div> <!-- end card -->

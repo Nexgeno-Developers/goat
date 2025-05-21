@@ -14,13 +14,13 @@ $pandol_prefixes = cache_with_ttl('pandol_prefixes_unique', function () {
     <div class="card">
       <div class="card-body title_heads1">
         <!-- <h4 class="page-title">
-            <i class="mdi mdi-book-open-page-variant title_icon"></i> <?php echo get_phrase($page_title); ?>
+            <i class="mdi mdi-book title_icon"></i> <?php echo get_phrase($page_title); ?>
             <button type="button" class="btn btn-outline-primary btn-rounded alignToTitle" onclick="window.location.href='<?php echo route('reports/pandol-availability'); ?>'"> <i class="mdi mdi-table"></i> <?php echo get_phrase('Table View'); ?></button>
         </h4> -->
 
         <h4 class="page-title d-flex align-items-center justify-content-between">
             <div>
-                <i class="mdi mdi-book-open-page-variant title_icon"></i>
+            <i class="mdi mdi-book title_icon"></i>
                 <?php echo get_phrase($page_title); ?>
             </div>
 

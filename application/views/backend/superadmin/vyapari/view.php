@@ -14,7 +14,7 @@
           <div class="row">
         <div class="col-md-10 col-7">
         <h4 class="page-title vyapdet">
-            <i class="mdi mdi-book-open-page-variant title_icon"></i> <?php echo get_phrase($page_title); ?>
+        <i class="mdi mdi-book title_icon"></i> <?php echo get_phrase($page_title); ?>
             <!--Allocate QR-->
             <!--Allocate Pandaal-->
             </h4>
