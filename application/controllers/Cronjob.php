@@ -13,6 +13,7 @@ class Cronjob extends CI_Controller {
 	function __construct() //
 	{
 		parent::__construct();
+        $this->load->model('settings_model');
 	}
 
     public function clean_old_sessions_and_logs()
@@ -101,57 +102,68 @@ class Cronjob extends CI_Controller {
 
         date_default_timezone_set('Asia/Kolkata');
         $subject = "Goat Movement Report Till Now " . date('d-M-Y h:i:s A');
+        $logoUrl = $this->settings_model->get_logo_light();
         $body = '
-                <html>
-                <head>
-                    <style>
-                        table {
-                            width: 100%;
-                            border-collapse: collapse;
-                            font-family: Arial, sans-serif;
-                        }
-                        th, td {
-                            border: 1px solid #dddddd;
-                            text-align: left;
-                            padding: 8px;
-                        }
-                        th {
-                            background-color: #f2f2f2;
-                        }
-                    </style>
-                </head>
-                <body>
-                    <h2>Goat Movement Summary Report</h2>
-                    <table>
+<html>
+<head>
+    <style>
+        @media only screen and (max-width: 620px) {
+            .email-container {
+                width: 100% !important;
+                padding: 10px !important;
+            }
+        }
+    </style>
+</head>
+<body style="margin:0; padding:0; background-color:#f9f9f9; padding-bottom:20px;">
+    <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" class="email-container" style="width:600px; margin:auto; background-color:#ffffff; font-family: Arial, sans-serif; border:0px solid #e0e0e0;">
+        <tr>
+            <td align="center" style="padding:20px 0;">
+                <img src="' . $logoUrl . '" alt="Logo" width="110" style="display:block;">
+            </td>
+        </tr>
+        <tr>
+            <td style="padding:20px; padding-top:0px !important;">
+                <h2 style="color:#333333; margin-bottom:20px; text-align:center; margin-top:0px;">Goat Movement Summary Report</h2>
+                <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse: collapse; font-size:14px;">
+                    <thead>
                         <tr>
-                            <th>Item</th>
-                            <th>Total</th>
+                            <th style="background-color:#f2f2f2; border:1px solid #dddddd; text-align:left; padding:10px;">Item</th>
+                            <th style="background-color:#f2f2f2; border:1px solid #dddddd; text-align:left; padding:10px;">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="border:1px solid #dddddd; padding:10px;">Inward Total Goat</td>
+                            <td style="border:1px solid #dddddd; padding:10px;"><b>' . $unblock . '</b></td>
                         </tr>
                         <tr>
-                            <td>Inward Total Goat</td>
-                            <td><b>' . $unblock . '</b></td>
+                            <td style="border:1px solid #dddddd; padding:10px;">Outward Total Goat</td>
+                            <td style="border:1px solid #dddddd; padding:10px;"><b>' . $exit . '</b></td>
                         </tr>
                         <tr>
-                            <td>Outward Total Goat</td>
-                            <td><b>' . $exit . '</b></td>
+                            <td style="border:1px solid #dddddd; padding:10px;">Balance Total Goat</td>
+                            <td style="border:1px solid #dddddd; padding:10px;"><b>' . ($unblock - $exit) . '</b></td>
                         </tr>
                         <tr>
-                            <td>Balance Total Goat</td>
-                            <td><b>' . ($unblock - $exit) . '</b></td>
+                            <td style="border:1px solid #dddddd; padding:10px;">Pass Blocked</td>
+                            <td style="border:1px solid #dddddd; padding:10px;"><b>' . $block . '</b></td>
                         </tr>
                         <tr>
-                            <td>Pass Blocked</td>
-                            <td><b>' . $block . '</b></td>
+                            <td style="border:1px solid #dddddd; padding:10px;">Registered Total Vyapari</td>
+                            <td style="border:1px solid #dddddd; padding:10px;"><b>' . $vyapari . '</b></td>
                         </tr>
-                        <tr>
-                            <td>Registered Total Vyapari</td>
-                            <td><b>' . $vyapari . '</b></td>
-                        </tr>
-                    </table>
-                    <br>
-                    <p><b>Regards,</b><br><b>Nexgeno Developer Team</b></p>
-                </body>
-                </html>';
+                    </tbody>
+                </table>
+                <p style="margin-top:30px; font-size:14px; color:#555555;">
+                    <b>Regards,</b><br>
+                    Nexgeno Developer Team
+                </p>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>';
 
         
         $test = sendEmail($email_bmc, $subject, $body, $ccList);
