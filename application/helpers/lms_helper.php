@@ -289,7 +289,7 @@ function old_vyapari_check($param){
 
 
 if(!function_exists('sendEmail')){
-    function sendEmail($to, $subject, $body, $replyTo = null)
+    function sendEmail($to = [], $subject, $body, $cc = [], $replyTo = null)
     {
 
         $CI =& get_instance();
@@ -302,36 +302,48 @@ if(!function_exists('sendEmail')){
         $url = 'https://api.brevo.com/v3/smtp/email';
         
         // Data to be sent
+        $toRecipients = array_map(function ($email) {
+            return ['email' => $email];
+        }, (array) $to);
+
+        // Convert "cc" emails to required format
+        $ccRecipients = array_map(function ($email) {
+            return ['email' => $email];
+        }, (array) $cc);
+
+        // Build the request payload
         $data = [
             "sender" => [
                 "name" => "Nexgeno",
-                "email" => "mohammadzshaikh123@gmail.com"
+                "email" => "zaid.nexgeno@gmail.com"
             ],
-            "to" => [
-                [
-                    "email" => $to,
-                ]
-            ],
+            "to" => $toRecipients,
             "subject" => $subject,
             "htmlContent" => $body
         ];
 
-        $postData = json_encode($data);
+        // Add CC if provided
+        if (!empty($ccRecipients)) {
+            $data['cc'] = $ccRecipients;
+        }
 
+        // Add replyTo if provided
+        if (!empty($replyTo)) {
+            $data['replyTo'] = ['email' => $replyTo];
+        }
+
+        // Send request
         $ch = curl_init($url);
-
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            'accept: application/json',
             'api-key: ' . $apiKey,
-            'content-type: application/json'
+            'Content-Type: application/json'
         ]);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        curl_setopt($ch, CURLOPT_POST, true);
 
         $response = curl_exec($ch);
         $error = curl_error($ch);
-
         curl_close($ch);
 
         if ($error) {

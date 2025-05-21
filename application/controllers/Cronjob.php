@@ -84,12 +84,23 @@ class Cronjob extends CI_Controller {
                 ->select('email')
                 ->from('users')
                 ->where('role_type', 'bmc')
+                ->where('user_status','active')
                 ->get()
                 ->result();
 
-        $email_list = array_column($emails, 'email');
+        $email_bmc = array_column($emails, 'email');
 
-        $subject = "Goat Movement Report";
+        $ccEmails = $CI->db
+            ->select('email')
+            ->from('users')
+            ->where('role_type', 'superadmin')
+            ->get()
+            ->result();
+
+        $ccList = array_column($ccEmails, 'email');
+
+        date_default_timezone_set('Asia/Kolkata');
+        $subject = "Goat Movement Report Till Now " . date('d-M-Y h:i:s A');
         $body = '
                 <html>
                 <head>
@@ -110,7 +121,7 @@ class Cronjob extends CI_Controller {
                     </style>
                 </head>
                 <body>
-                    <h2>Goat Movement Summary</h2>
+                    <h2>Goat Movement Summary Report</h2>
                     <table>
                         <tr>
                             <th>Item</th>
@@ -118,45 +129,34 @@ class Cronjob extends CI_Controller {
                         </tr>
                         <tr>
                             <td>Inward Total Goat</td>
-                            <td>' . $unblock . '</td>
+                            <td><b>' . $unblock . '</b></td>
                         </tr>
                         <tr>
                             <td>Outward Total Goat</td>
-                            <td>' . $exit . '</td>
+                            <td><b>' . $exit . '</b></td>
                         </tr>
                         <tr>
                             <td>Balance Total Goat</td>
-                            <td>' . ($unblock - $exit) . '</td>
+                            <td><b>' . ($unblock - $exit) . '</b></td>
                         </tr>
                         <tr>
                             <td>Pass Blocked</td>
-                            <td>' . $block . '</td>
+                            <td><b>' . $block . '</b></td>
                         </tr>
                         <tr>
                             <td>Registered Total Vyapari</td>
-                            <td>' . $vyapari . '</td>
+                            <td><b>' . $vyapari . '</b></td>
                         </tr>
                     </table>
                     <br>
-                    <p>Regards,<br>Goat Management System</p>
+                    <p><b>Regards,</b><br><b>Nexgeno Developer Team</b></p>
                 </body>
                 </html>';
 
         
-        $test = sendEmail('webdeveloper@nexgeno.in', $subject, $body);
+        $test = sendEmail($email_bmc, $subject, $body, $ccList);
 
         var_dump($test);
-
-        // foreach ($email_list as $email) {
-        //     $result = sendEmail($email, $subject, $body);
-
-        //     // Optional: Log result
-        //     if ($result) {
-        //         echo "Email sent to: $email";
-        //     } else {
-        //         echo "Failed to send email to: $email";
-        //     }
-        // }
 
     }
 

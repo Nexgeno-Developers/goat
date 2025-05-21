@@ -1120,13 +1120,13 @@ function create_user()
 			
 			$subject = "Deonar Goat, Your Account Has Been Created!";
 			$body = '
-					<p>Dear User,</p>
+					<p>Dear User, <b>'.ucfirst($data['name']).'</b></p>
 					<p>Please find the relevant details below.</p>
 					<p><strong>Email:</strong> '.$data['email'].'</p>
 					<p><strong>Password:</strong> '.$this->input->post('password').'</p>
 					<p>You can log in here: <a href="' . base_url('login') . '" target="_blank">' . base_url('login') . '</a></p>
 					<br>
-					<p>Best regards,<br>Nexgeno Team</p>
+					<p><b>Best regards</b>,<br><b>Nexgeno Developer Team</b></p>
 				';
 
 			sendEmail($data['email'], $subject, $body);
@@ -1190,13 +1190,13 @@ function create_user()
 		if(!empty($this->input->post('password'))){
 			$subject = "Deonar Goat, Your Account Has Been Updated!";
 			$body = '
-					<p>Dear User,</p>
+					<p>Dear User, <b>'.ucfirst($data['name']).'</b></p>
 					<p>Please find the relevant details below.</p>
 					<p><strong>Email:</strong> '.$data['email'].'</p>
 					<p><strong>Password:</strong> '.$this->input->post('password').'</p>
 					<p>You can log in here: <a href="' . base_url('login') . '" target="_blank">' . base_url('login') . '</a></p>
 					<br>
-					<p>Best regards,<br>Nexgeno Team</p>
+					<p><b>Best regards</b>,<br><b>Nexgeno Developer Team</b></p>
 				';
 
 			sendEmail($data['email'], $subject, $body);
