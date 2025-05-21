@@ -98,6 +98,8 @@
       <button id="btnBack" class="btn btn-primary mr-2"><i class="fa-solid fa-camera"></i> Back Camera</button>
       <button id="btnFront" class="btn btn-secondary"><i class="fa-solid fa-camera-rotate"></i> Front Camera</button>
     </div>
+    <input type="hidden" name="latitude">
+    <input type="hidden" name="longitude">    
     <div id="result" class="mt-3"></div>
     <video id="preview"></video>
   </div>
@@ -147,7 +149,7 @@
       $.ajax({
         url: '<?php echo base_url("Api/pass_verify") ?>',
         method: 'POST',
-        data: { qrcode: content },
+         data: { qrcode: content, latitude : $('input[name="latitude"]').val(), longitude : $('input[name="longitude"]').val() },
         beforeSend: function () {
           $('#result').html(`
             <div class="alert alert-secondary">
@@ -218,20 +220,37 @@
       }, 1000);
 
       return interval; // Return interval in case you want to clear it manually
-    }    
+    }   
+    
+    let latitude = null;
+    let longitude = null;    
+    window.onload = function () {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          function (position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+
+            console.log("Latitude:", latitude);
+            console.log("Longitude:", longitude);
+
+            document.querySelector('input[name="latitude"]').value = latitude;
+            document.querySelector('input[name="longitude"]').value = longitude;            
+
+            // Show the protected content
+            document.style.display = 'block';
+          },
+          function (error) {
+            // Location access denied or an error occurred
+            alert("You must allow location access to view this page.");
+            document.body.innerHTML = "<h2>Access Denied. Location permission required. Please Allow Location From Browser</h2>";
+          }
+        );
+      } else {
+        alert("Geolocation is not supported by your browser.");
+        document.body.innerHTML = "<h2>Your browser does not support location access.</h2>";
+      }
+    };    
   </script>
-
-<script>
-  // Example: Dynamically setting content
-  const resultDiv = document.getElementById("result");
-  
-  // Simulate setting content (replace this with real logic)
-  const content = "<div class='alert alert-success'>Pass Verified</div>";
-
-  if (content.trim() !== "") {
-    resultDiv.innerHTML = content;
-    resultDiv.style.display = "block";
-  }
-</script>
 </body>
 </html>
