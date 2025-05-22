@@ -22,7 +22,7 @@
 
         <?php if(access('allocate_pass_button')){ ?>
         <div class="col-md-2 col-5">
-            <button type="button" class="btn btn-outline-success btn-rounded alignToTitle pass" onclick="rightModal('<?php echo site_url('modal/popup/vyapari/allocate-qrcode/'.$vyapari['vyapari_id']); ?>', '<?php echo get_phrase('pass_allocate'); ?>')"> <i class="mdi mdi-plus"></i> <?php echo get_phrase('add_pass'); ?></button>
+            <button type="button" class="btn btn-outline-success btn-rounded alignToTitle pass" onclick="rightModal('<?php echo site_url('modal/popup/vyapari/allocate-qrcode/'.$vyapari['vyapari_id']); ?>', '<?php echo get_phrase('pass_allocate'); ?>')"> <i class="mdi mdi-plus"></i> <?php echo get_phrase('add_passes'); ?></button>
         </div>
         <?php } ?>
 
@@ -121,7 +121,8 @@
                 <div class="vyapari_qrcodes">
                 
                 <div class="row totaldiv">
-                    <div class="col-md-3">
+                    <div class="col-md-7">
+                        <div class="flex_passes">
                         <h4 id="qrtotal">Total Pass: <?php echo count($vyapari_qrcodes); ?></h4>
                         <?php
                             $exit_pass_count = count(array_filter($vyapari_qrcodes, function($row) {
@@ -133,7 +134,9 @@
                             }));
                         ?>
                         <h6 id="qrexit">Exit Pass: <?php echo $exit_pass_count; ?> </h6>
-                        <h6 id="qrbalance">Balance Pass: <?php echo $balance_pass_count; ?> </h6>                        
+                        <h6 id="qrbalance">Balance Pass: <?php echo $balance_pass_count; ?> </h6>
+                        </div>
+                                               
                     </div>
                 <?php if(access('manage_bulk_pass_button')){ ?>  
                 <div class="col-md-3 col-6 serhbox">
@@ -158,7 +161,7 @@
                 </div>                 
                 
                 </div>
-                    <table id="basic-datatable-0" class="table-responsive-xl table-responsive-lg table-responsive-md table-responsive table table-striped " data-page-length="2000" width="100%"> <!--nowrap-->
+                    <table id="basic-datatable-0" class="vyapari_tables table-responsive-xl table-responsive-lg table-responsive-md table-responsive table table-striped " data-page-length="2000" width="100%"> <!--nowrap-->
                         <thead>
                             <tr style="background-color: #313a46; color: #ababab;">
                                 <th width="5%"><input type="checkbox" class="check_all" name="check_all" value="1"></th>
@@ -166,10 +169,10 @@
                                 <th width="20%"><?php echo get_phrase('pass_no'); ?></th>
                                 <th class="hidden" width="20%"><?php echo get_phrase('vyapari_name'); ?></th>
                                 <th class="hidden" width="20%"><?php echo get_phrase('vyapari_phone'); ?></th>
-                                <th width="10%"><?php echo get_phrase('current_status'); ?></th>
+                                <th width="10%"><?php echo get_phrase('status'); ?></th>
                                 <th width="25%"><?php echo get_phrase('notes'); ?></th>
                                 <th width="30%"><?php echo get_phrase('Other Details'); ?></th>
-                                <th width="10%"><?php echo get_phrase('created_at'); ?></th>
+                                <th width="10%"><?php echo get_phrase('IN'); ?></th>
                                 <th width="15%"><?php echo get_phrase('options'); ?></th>
                             </tr>
                         </thead>
@@ -215,13 +218,13 @@
                                         <br> <label>Gowala Name : <?php echo $gw_n; ?></label>
                                     </td>
                                     <td><?php echo $row['timestamp']; ?></td>
-                                    <td>
+                                    <td class="options_buttons">
                                         <?php if(access('manage_pass_button')){ ?>
                                         <?php if($row['status'] == 'unblock'){ ?>
-                                            <button type="button" class="btn btn-sm btn-danger" onclick="rightModal('<?php echo site_url('modal/popup/vyapari/complaint-qrcode/'.$row['qrcode_id'].'/block'); ?>', '<?php echo get_phrase('block_qrcode'); ?>')"><?php echo get_phrase('do_block'); ?></button>
+                                            <button type="button" class="btn btn-sm btn-danger" onclick="rightModal('<?php echo site_url('modal/popup/vyapari/complaint-qrcode/'.$row['qrcode_id'].'/block'); ?>', '<?php echo get_phrase('block_qrcode'); ?>')"><i class="mdi mdi-block-helper" style="font-size: 12px;"></i> <?php echo get_phrase('do_block'); ?></button>
                                         <?php }elseif($row['status'] == 'block'){ ?>
 
-                                            <button type="button" class="btn btn-sm btn-info" onclick="rightModal('<?php echo site_url('modal/popup/vyapari/complaint-qrcode/'.$row['qrcode_id'].'/unblock'); ?>', '<?php echo get_phrase('unblock_qrcode'); ?>')"><?php echo get_phrase('do_unblock'); ?></button>                                        <?php }elseif($row['status'] == 'exit'){ ?> 
+                                            <button type="button" class="btn btn-sm btn-info" onclick="rightModal('<?php echo site_url('modal/popup/vyapari/complaint-qrcode/'.$row['qrcode_id'].'/unblock'); ?>', '<?php echo get_phrase('unblock_qrcode'); ?>')"><i class="mdi mdi-check-circle" style="font-size: 15px;"></i>  <?php echo get_phrase('do_unblock'); ?></button>                                        <?php }elseif($row['status'] == 'exit'){ ?> 
                                              
                                              <b><span class="text-success">Scanned at <?= $row['exit_date'] ?></span></b>
                                              <b><span class="text-success">Exit Gate No: <?= $row['exit_gate'] ?></span></b>
@@ -266,7 +269,7 @@
     bottom: 30px;
 }
 .alignToTitle {
-    margin-left: 20px;
+    margin-left: 11px;
 }
 .one {
     max-width: 10%;
