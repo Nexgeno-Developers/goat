@@ -52,7 +52,7 @@ if($user_type == 'parent'){
     <li class="side-nav-item">
       <a href="<?php echo site_url($controller.'/manage_admins'); ?>" class="side-nav-link">
         <i class="mdi mdi-account-group"></i>
-        <span> <?php echo get_phrase('manage_admins'); ?> </span>
+        <span> <?php echo get_phrase('manage_users'); ?> </span>
       </a>
     </li>  
     <?php } ?>
@@ -126,13 +126,13 @@ if($user_type == 'parent'){
 
           <?php if(access('statewise_vyapari_report')){ ?>
           <li>
-             <a href="<?php echo site_url($controller.'/reports/vyapari-by-states'); ?>">Statewise Vyapari</a>
+             <a href="<?php echo site_url($controller.'/reports/vyapari-by-states'); ?>">State Vyapari</a>
           </li> 
           <?php } ?>          
 
           <?php if(access('statewise_goat_report')){ ?>
           <li>
-             <a href="<?php echo site_url($controller.'/reports/goats-by-states'); ?>">Statewise Goats</a>
+             <a href="<?php echo site_url($controller.'/reports/goats-by-states'); ?>">State Goats</a>
           </li> 
           <?php } ?>          
           

@@ -609,11 +609,52 @@ a.btn-sm {
   padding: 2px 6px;
 }
 
+button.close {
+  background: #9E9E9E !important;
+  opacity: 1;
+  padding: 0 !important;
+  color: #fff !important;
+  height: 30px;
+  width: 30px;
+  border-radius: 50px;
+  top: 30px !important;
+  right: 30px !important;
+}
+
+.options_buttons button {
+  font-size: 12px;
+  padding-right: 13px !important;
+  padding-left: 13px !important;
+  padding-top: 6px;
+  padding-bottom: 5px;
+}
+
+td.options_buttons {
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+  float: right;
+  width: 120px;
+}
+
+.vyapari_tables td,
+.vyapari_tables th {
+  padding: 5px !important;
+  font-size: 13px;
+}
+
+.flex_passes {
+  display: flex;
+  margin-bottom: 20px;
+  gap: 40px;
+  align-items: center;
+}
+
+
 .btn {
   border: 0;
   box-shadow: none;
   border-radius: 20px;
-  padding: 8px 20px;
+  padding: 8px 17px;
   font-weight: 700;
 }
 
@@ -1017,7 +1058,7 @@ div#my_camera {}
 }
 
 .dashboard_box .card-stats.six {
-  background: #4caf50e3;
+  background: #004803c2;
 }
 
 .card.card-stats.two {

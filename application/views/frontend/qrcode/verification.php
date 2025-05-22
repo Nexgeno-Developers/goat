@@ -37,13 +37,13 @@
     background: #fff;
     border-radius: 10px;
     border-top: 4px solid #71357c;
-    padding-top: 34px;
+    padding-top: 20px;
     padding-bottom:25px;
     width: 500px;
 }
 .customer_regis_class 
  button#btnFront {
-    background: #71357c;
+    background: #333;
 }
 
 
@@ -53,11 +53,13 @@
 }
 
 .customer_regis_class button {
-    border: 0;
+  border: 0;
     border-radius: 50px;
-    font-size: 14px;
-    padding-left: 20px;
-    padding-right: 20px;
+    font-size: 12px;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 4px;
+    padding-bottom: 4px;
 }
 
 .results_box {
@@ -74,7 +76,7 @@
     margin-bottom: 7px;
 }
 p.heads.mb-2 {
-    font-size: 16px;
+    font-size: 20px;
     padding-bottom: 5px;
 }
 .results_box th, .results_box td {
@@ -84,7 +86,64 @@ p.heads.mb-2 {
 }
 .results_box p b {padding-right: 7px;}
 
+.nav-tabs .nav-link.active {
+    background: #71357c;
+    color: #fff;
+    border-color: #71357c;
+}
+.nav-tabs .nav-link {
+    border: 1px solid #71357c;
+    color: #71357c;
+    margin-right: 5px;
+}
+.tabs_buttons button {
+  border: 0;
+    border-radius: 50px;
+    font-size: 14px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    font-weight: 500;
+    margin-right: 10px;
+}
+.submit_bttns
+{
+  border: 0;
+    border-radius: 50px;
+    font-size: 14px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 9px !important;
+    padding-bottom: 8px !important;
+    font-weight: 500;
+    margin-right: 10px;
+}
+.tabs_buttons button.active {
+    background: #71357c;
+    color: #fff;
+}
 
+button:focus {
+    outline: 0px dotted;
+    outline: 0px auto -webkit-focus-ring-color !important;
+}
+
+.position_sets {
+  position: absolute;
+  margin-top: 10px;
+  margin-left: 10px;
+  z-index:9999;
+}
+
+.table-profile p {
+    font-size: 18px;
+}
+.tabs_buttons {
+    border-bottom: 0 !important;
+    text-align: center;
+    justify-content: center;
+}
 @media(max-width:767px)
 {
   .customer_regis_class {
@@ -95,168 +154,231 @@ p.heads.mb-2 {
 </head>
 <body>
   <div class="container mt-4 customer_regis_class">
-    <!-- <h3 class="mb-4">QR Scanner with Instascan (Bootstrap 4)</h3> -->
-
-<div class="loginimgdiv"> <img src="<?php echo $this->settings_model->get_logo_dark(); ?>" alt="MCGM Deonar Abattoir Software" height="35" class="lohimg"> </div>
+    <div class="loginimgdiv"> <img src="<?php echo $this->settings_model->get_logo_dark(); ?>" alt="MCGM Deonar Abattoir Software" height="35" class="lohimg"> </div>
 
     <div class="mb-4 mt-4 text-center">
       <p><b>Pass Verification Screen</b></p>
-      <button id="btnBack" class="btn btn-primary mr-2"><i class="fa-solid fa-camera"></i> Back Camera</button>
-      <button id="btnFront" class="btn btn-secondary"><i class="fa-solid fa-camera-rotate"></i> Front Camera</button>
     </div>
+    
+    <ul class="nav nav-tabs mb-3 tabs_buttons" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class=" active" id="scan-tab" data-toggle="tab" data-target="#scan" type="button" role="tab" aria-controls="scan" aria-selected="true">
+          <i class="fa-solid fa-qrcode"></i> Scan QR
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="" id="manual-tab" data-toggle="tab" data-target="#manual" type="button" role="tab" aria-controls="manual" aria-selected="false">
+          <i class="fa-solid fa-keyboard"></i> Manual Entry
+        </button>
+      </li>
+    </ul>
+    
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="scan" role="tabpanel" aria-labelledby="scan-tab">
+        <div class="mb-4 text-center position_sets">
+          <button id="btnBack" class="btn btn-primary mr-1"><i class="fa-solid fa-camera"></i> Back Camera</button>
+          <button id="btnFront" class="btn btn-secondary"><i class="fa-solid fa-camera-rotate"></i> Front Camera</button>
+        </div>
+        <div class="camera_error"></div>
+        <video id="preview"></video>
+      </div>
+      
+      <div class="tab-pane fade" id="manual" role="tabpanel" aria-labelledby="manual-tab">
+        <?php
+            $digitLength = 7; //get_common_settings('validate_qrcode_digit');
+            $pattern = '^\d{' . $digitLength . '}$';
+            $title = 'Please enter exactly ' . $digitLength . ' digits pass number (e.g., ' . str_pad('1', $digitLength, '0', STR_PAD_LEFT) . ')';
+        ?>        
+        <form id="manualForm">
+          <div class="form-group">
+            <label for="manualCode">Pass Number</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              id="manualCode" 
+              placeholder="Enter pass number"
+              inputmode="numeric"
+              pattern="<?= $pattern ?>"
+              title="<?= $title ?>"
+              minlength="<?= $digitLength ?>"
+              maxlength="<?= $digitLength ?>"              
+              onwheel="this.blur()"
+              onkeydown="if(event.key === 'ArrowUp' || event.key === 'ArrowDown'){event.preventDefault();}"             
+            required>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block submit_bttns" style="background: #555;">
+            <i class="fa-solid fa-magnifying-glass"></i> Verify
+          </button>
+        </form>
+      </div>
+    </div>
+    
     <input type="hidden" name="latitude">
     <input type="hidden" name="longitude">    
     <div id="result" class="mt-3"></div>
-    <video id="preview"></video>
   </div>
 
-  <script>
-    let scanner = new Instascan.Scanner({ video: document.getElementById('preview'), mirror: false });
+  <!-- Add Bootstrap JS for tabs functionality -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+    // Initialize scanner
+    const scanner = new Instascan.Scanner({ 
+        video: $('#preview')[0], 
+        mirror: false 
+    });
     let currentCamera = null;
     let cameras = [];
 
+    // Camera functions
     function startScanner(camera) {
-      if (currentCamera) {
-        scanner.stop();
-      }
-      scanner.start(camera);
-      currentCamera = camera;
+        if (currentCamera) scanner.stop();
+        scanner.start(camera);
+        currentCamera = camera;
     }
 
-    Instascan.Camera.getCameras().then(function (availableCameras) {
-      cameras = availableCameras;
-      if (cameras.length > 0) {
-        // Default to back camera if available, else first camera
-        let backCamera = cameras.find(cam => cam.name.toLowerCase().includes('back')) || cameras[0];
-        startScanner(backCamera);
-      } else {
-        alert('No cameras found.');
-      }
-    }).catch(function (e) {
-      console.error(e);
-      alert('Error getting cameras: ' + e);
-    });
-
-    document.getElementById('btnBack').addEventListener('click', () => {
-      if (cameras.length > 0) {
-        let backCam = cameras.find(cam => cam.name.toLowerCase().includes('back')) || cameras[0];
-        startScanner(backCam);
-      }
-    });
-
-    document.getElementById('btnFront').addEventListener('click', () => {
-      if (cameras.length > 0) {
-        let frontCam = cameras.find(cam => cam.name.toLowerCase().includes('front')) || cameras[0];
-        startScanner(frontCam);
-      }
-    });
-
-    scanner.addListener('scan', function (content) {
-      $.ajax({
-        url: '<?php echo base_url("Api/pass_verify") ?>',
-        method: 'POST',
-         data: { qrcode: content, latitude : $('input[name="latitude"]').val(), longitude : $('input[name="longitude"]').val() },
-        beforeSend: function () {
-          $('#result').html(`
-            <div class="alert alert-secondary">
-              Processing... Please wait <span id="timer">15</span>s
-            </div>
-          `);
-          $('#preview').hide();
-
-          window.countdownInterval = startCountdown(15, '#timer');
-        },
-        success: function (response) {
-          setTimeout(function () {
-            clearInterval(window.countdownInterval);
-            if (response.status) {
-              $('#result').html(`
-                <div class="alert alert-success">${response.notification}</div>
-
-
-                <div class="results_box mt-1">
-                    <p class="heads mb-2"><strong>Visitor Information</strong></p>
-                    <div class="table-responsive">
-                      <table class="table table-bordered">
-                        <tbody>
-                          <tr>
-                            <th scope="row">Vyapari ID</th>
-                            <td>${response.data.vyapari_id}</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">Vyapari Name</th>
-                            <td>${response.data.name}</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">Vyapari Photo</th>
-                            <td><img src="${response.data.photo}" alt="Vyapari Photo" width="100" /></td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-              `);
+    // Initialize cameras
+    Instascan.Camera.getCameras()
+        .then(function(availableCameras) {
+            cameras = availableCameras;
+            if (cameras.length > 0) {
+                const backCamera = cameras.find(cam => cam.name.toLowerCase().includes('back')) || cameras[0];
+                startScanner(backCamera);
             } else {
-              $('#result').html(`<div class="alert alert-danger">${response.notification}</div>`);
+                //alert('No cameras found.');
+                $('.camera_error').html("No cameras found.");
             }
+        })
+        .catch(function(e) {
+            console.error(e);
+            //alert('Error getting cameras: ' + e);
+            $('.camera_error').html(e);
+            $('.camera_error').append("<br>Allow camera access from browser");
+            
+        });
 
-            $('#preview').show();
-          }, 15000); // Wait for 10 seconds
-        },
-        error: function () {
-          $('#result').html('<div class="alert alert-warning">Server error validating the pass.</div>');
-          $('#preview').show();
+    // Camera switch handlers
+    $('#btnBack').click(() => {
+        if (cameras.length > 0) {
+            const backCam = cameras.find(cam => cam.name.toLowerCase().includes('back')) || cameras[0];
+            startScanner(backCam);
         }
-      });
+    });
+
+    $('#btnFront').click(() => {
+        if (cameras.length > 0) {
+            const frontCam = cameras.find(cam => cam.name.toLowerCase().includes('front')) || cameras[0];
+            startScanner(frontCam);
+        }
+    });
+
+    // Common verification function
+    function verifyPass(content) {
+        const postData = {
+            qrcode: content,
+            latitude: $('input[name="latitude"]').val(),
+            longitude: $('input[name="longitude"]').val()
+        };
+
+        $.ajax({
+            url: '<?php echo base_url("Api/pass_verify") ?>',
+            method: 'POST',
+            data: postData,
+            beforeSend: function() {
+                $('#result').html(`
+                    <div class="alert alert-secondary">
+                        Processing... Please wait <span id="timer">10</span>s
+                    </div>
+                `);
+                $('#preview, #manualForm, #btnBack, #btnFront').hide();
+                window.countdownInterval = startCountdown(10, '#timer');
+            },
+            success: function(response) {
+                setTimeout(() => {
+                    clearInterval(window.countdownInterval);
+                    displayResult(response);
+                    $('#preview, #manualForm, #btnBack, #btnFront').show();
+                    window.scrollTo({
+                      top: document.body.scrollHeight,
+                      behavior: 'smooth'
+                    });
+                }, 10000);
+            },
+            error: function() {
+                $('#result').html('<div class="alert alert-warning">Server error validating the pass.</div>');
+                $('#preview, #manualForm, #btnBack, #btnFront').show();
+            }
+        });
+    }
+
+    // Display result function
+    function displayResult(response) {
+        if (response.status) {
+            $('#result').html(`
+                <div class="alert alert-success">${response.notification}</div>
+                <div class="results_box mt-1 text-center">
+                    <p class="heads mb-2 text-center"><strong>Vyapari Information</strong></p>
+                    <div class="table-profile">
+                      <div class="profile_imgs">
+                        <img src="${response.data.photo}" alt="Vyapari Photo" width="100" />
+                      </div>
+                      <p class="pt-2 pb-0 mb-1">${response.data.name}</p>
+                      <p><b>ID:</b> ${response.data.vyapari_id}</p>
+                        
+                    </div>
+                </div>
+            `);
+        } else {
+            $('#result').html(`<div class="alert alert-danger">${response.notification}</div>`);
+        }
+    }
+
+    // Event handlers
+    scanner.addListener('scan', content => verifyPass(content));
+    
+    $('#manualForm').submit(function(e) {
+        e.preventDefault();
+        const manualCode = $('#manualCode').val().trim();
+        manualCode ? verifyPass(manualCode) : alert('Please enter a valid code');
     });
 
     // Countdown function
     function startCountdown(duration, displaySelector, callback) {
-      let timeLeft = duration;
-      $(displaySelector).text(timeLeft);
-
-      const interval = setInterval(function () {
-        timeLeft--;
+        let timeLeft = duration;
         $(displaySelector).text(timeLeft);
 
-        if (timeLeft <= 0) {
-          clearInterval(interval);
-          if (typeof callback === "function") callback();
-        }
-      }, 1000);
+        const interval = setInterval(() => {
+            timeLeft--;
+            $(displaySelector).text(timeLeft);
+            if (timeLeft <= 0) {
+                clearInterval(interval);
+                if (typeof callback === "function") callback();
+            }
+        }, 1000);
 
-      return interval; // Return interval in case you want to clear it manually
-    }   
-    
-    let latitude = null;
-    let longitude = null;    
-    window.onload = function () {
-      if (navigator.geolocation) {
+        return interval;
+    }
+
+    // Geolocation
+    if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
-          function (position) {
-            const latitude = position.coords.latitude;
-            const longitude = position.coords.longitude;
-
-            console.log("Latitude:", latitude);
-            console.log("Longitude:", longitude);
-
-            document.querySelector('input[name="latitude"]').value = latitude;
-            document.querySelector('input[name="longitude"]').value = longitude;            
-
-            // Show the protected content
-            document.style.display = 'block';
-          },
-          function (error) {
-            // Location access denied or an error occurred
-            alert("You must allow location access to view this page.");
-            document.body.innerHTML = "<h2>Access Denied. Location permission required. Please Allow Location From Browser</h2>";
-          }
+            position => {
+                $('input[name="latitude"]').val(position.coords.latitude);
+                $('input[name="longitude"]').val(position.coords.longitude);
+                $('body').show();
+            },
+            error => {
+                alert("You must allow location access to view this page.");
+                $('body').html("<h5 style='display: flex;align-items: center;height: 100vh;justify-content: center;'>Access Denied. Location permission required. Please Allow Location From Browser</h5>");
+            }
         );
-      } else {
+    } else {
         alert("Geolocation is not supported by your browser.");
-        document.body.innerHTML = "<h2>Your browser does not support location access.</h2>";
-      }
-    };    
-  </script>
+        $('body').html("<h5 style='display: flex;align-items: center;height: 100vh;justify-content: center;'>Your browser does not support location access.</h5>");
+    }
+});
+</script>
 </body>
 </html>

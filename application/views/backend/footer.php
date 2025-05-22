@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12 mt-3 mb-2">
-                 <b style="color:#000">For any support</b> : <a style="color:#333;" href="tel:919029075525" class="txtfoo">+91 90290 75525</a> | <b style="color:#000">For any query</b> : <a href="tel:919773375525" class="txtfoo" style="color:#333;"> +91 97733 75525</a> | <a href="mailto:support@makent.in" class="txtfoo" style="color:#333;">support@nexgeno.in</a>
+                 <b style="color:#000">For support</b> : <a style="color:#333;" href="tel:919029075525" class="txtfoo">+91 90290 75525</a> | <b style="color:#000">For query</b> : <a href="tel:919773375525" class="txtfoo" style="color:#333;"> +91 97733 75525</a> | <a href="mailto:support@makent.in" class="txtfoo" style="color:#333;">support@nexgeno.in</a>
             </div>
         </div>
     </div>
@@ -52,7 +52,7 @@
     <li class="side-nav-item">
       <a href="<?php echo site_url($controller.'/manage_admins'); ?>" class="side-nav-link">
         <i class="mdi mdi-account-group"></i>
-        <span> <?php echo get_phrase('admins'); ?> </span>
+        <span> <?php echo get_phrase('Users'); ?> </span>
       </a>
     </li>  
     <?php } ?>

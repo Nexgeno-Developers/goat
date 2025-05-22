@@ -193,7 +193,7 @@
                                 </div>
                                 <div class="col-md-2 form-group change">
                                     
-                                   <div class="btn btn-block btn-secondary" onclick="addRow();"><i class="fa fa-plus" aria-hidden="true"></i> Add</div>
+                                   <div class="btn btn-block btn-secondary" onclick="addRow();"><i class="fa fa-plus" aria-hidden="true"></i></div>
                                 </div>
                              </div>
                           </div>
@@ -238,7 +238,7 @@
                 
                 function addRow()
                 {
-                    var html = '<div class="qrcode-fields"> <div class="row"> <div class="col-md-4 form-group"> <input onkeyup="calculateSequencePass();" type="text" class="form-control" placeholder="Sequence From" name="sequence_from[]" required> </div><div class="col-md-4 form-group"> <input onkeyup="calculateSequencePass();" type="text" class="form-control" name="sequence_to[]" placeholder="Sequence To" required> </div> <div class="col-md-2 form-group">Pass: <span class="pcount text-danger">0</span></div> <div class="col-md-2 form-group"><div class="btn btn-block btn-danger" onclick="removeRow(this);"><i class="fa fa-minus" aria-hidden="true"></i> Remove</div></div></div></div>';    
+                    var html = '<div class="qrcode-fields"> <div class="row"> <div class="col-md-4 form-group"> <input onkeyup="calculateSequencePass();" type="text" class="form-control" placeholder="Sequence From" name="sequence_from[]" required> </div><div class="col-md-4 form-group"> <input onkeyup="calculateSequencePass();" type="text" class="form-control" name="sequence_to[]" placeholder="Sequence To" required> </div> <div class="col-md-2 form-group">Pass: <span class="pcount text-danger">0</span></div> <div class="col-md-2 form-group"><div class="btn btn-block btn-danger" onclick="removeRow(this);"><i class="fa fa-minus" aria-hidden="true"></i></div></div></div></div>';    
                     $(".qrcode-block").append(html);
                 }
                 
