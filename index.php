@@ -17,6 +17,7 @@
         echo "<h3>Forbidden</h3>";
         echo "<h3>No Permission to Access</h3><br>";
         exit();
+		
     }
 
 
