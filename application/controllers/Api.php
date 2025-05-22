@@ -9,6 +9,29 @@ class Api extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+
+        // Set security headers globally
+        header('Content-Type: application/json');
+        header('X-Content-Type-Options: nosniff');
+        header('X-Frame-Options: SAMEORIGIN');
+        header('X-XSS-Protection: 1; mode=block');
+
+        // Allow only same-origin requests (Referer or Origin must match base_url)
+        $base_url = base_url();
+        $referer = $_SERVER['HTTP_REFERER'] ?? '';
+        $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
+
+        if (
+            (strpos($referer, $base_url) !== 0) &&
+            (strpos($origin, $base_url) !== 0)
+        ) {
+            echo json_encode([
+                'status' => false,
+                'notification' => 'Cross-origin requests are not allowed.'
+            ]);
+            exit; // Stop further execution
+        }
+
         $this->load->library('session');
         $this->load->database();
     }
