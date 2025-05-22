@@ -1,4 +1,4 @@
-<?php if(!access('pass_inward_report')){ redirect(route('dashboard')); } ?>
+<?php if(!access('menu_agent')){ redirect(route('dashboard')); } ?>
 
 <!--title-->
 <div class="row ">

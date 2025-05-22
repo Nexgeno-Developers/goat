@@ -89,7 +89,7 @@ function access($action)
         }
         elseif($action == 'printid_button') //print id of vyapari
         {
-            if($role == 'inward' || $role == 'gate_manager')
+            if($role == 'inward')
             {
                 return true;
             }
@@ -122,7 +122,7 @@ function access($action)
         }
         elseif($action == 'manage_pass_button') //block /unblock pass of vyapari
         {
-            if($role == 'inward' || $role == 'gate_manager')
+            if($role == 'inward' || $role == 'gate_manager' || $role == 'admin')
             {
                 return true;
             }
@@ -136,7 +136,7 @@ function access($action)
         {
             if($role == 'inward')
             {
-                return true;
+                return false;
             }
             else
             {
@@ -145,7 +145,7 @@ function access($action)
         }
         elseif($action == 'manage_user_button') //user activate
         {
-            if($role == 'admin1' || $role == 'gate_manager')
+            if($role == 'admin' || $role == 'gate_manager')
             {
                 return true;
             }
@@ -178,7 +178,7 @@ function access($action)
         }        
         elseif($action == 'manage_vyapari') //vyapari page
         {
-            if($role == 'admin' || $role == 'inward' || $role == 'outward' || $role == 'registration' || $role == 'bmc' || $role == 'gate_manager')
+            if($role == 'admin' || $role == 'inward' || $role == 'registration' || $role == 'gate_manager')
             {
                 return true;
             }
@@ -189,7 +189,7 @@ function access($action)
         } 
         elseif($action == 'exit_verification') //exit page
         {
-            if($role == 'outward' || $role == 'gate_manager')
+            if($role == 'outward' || $role == 'gate_manager' || $role == 'admin')
             {
                 return true;
             }
@@ -200,7 +200,7 @@ function access($action)
         }  
         elseif($action == 'manage_admins') //manage admin page
         {
-            if($role == 'admin' || $role == 'bmc' || $role == 'gate_manager')
+            if($role == 'admin' || $role == 'gate_manager')
             {
                 return true;
             }
@@ -209,9 +209,22 @@ function access($action)
                 return false;
             }         
         } 
+
+        elseif($action == 'master_list') //manage admin page
+        {
+            if($role == 'admin' || $role == 'bmc')
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }         
+        } 
+
         elseif($action == 'reports') //report page
         {
-            if($role == 'doctor' || $role == 'bmc' || $role == 'admin' || $role == 'outward' || $role == 'inward' || $role == 'gate_manager') //$role == 'admin'
+            if($role == 'doctor' || $role == 'bmc' || $role == 'admin' || $role == 'outward' || $role == 'inward' || $role == 'gate_manager' || $role == 'police') //$role == 'admin'
             {
                 return true;
             }
@@ -222,7 +235,7 @@ function access($action)
         } 
         elseif($action == 'pass_inward_report')
         {
-            if($role == 'bmc' || $role == 'admin' || $role == 'outward' || $role == 'inward' || $role == 'gate_manager')
+            if($role == 'admin' || $role == 'inward')
             {
                 return true;
             }
@@ -230,10 +243,23 @@ function access($action)
             {
                 return false;
             }         
-        }   
+        }
+        
+        elseif($action == 'menu_agent')
+        {
+            if($role == 'admin')
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }         
+        } 
+        
         elseif($action == 'pass_outward_report')
         {
-            if($role == 'bmc' || $role == 'admin' || $role == 'outward' || $role == 'inward' || $role == 'gate_manager')
+            if($role == 'admin' || $role == 'outward' || $role == 'gate_manager')
             {
                 return true;
             }
@@ -244,7 +270,7 @@ function access($action)
         } 
         elseif($action == 'pass_block_report')
         {
-            if($role == 'bmc' || $role == 'admin' || $role == 'outward' || $role == 'inward' || $role == 'gate_manager')
+            if($role == 'bmc' || $role == 'admin' || $role == 'outward' || $role == 'inward' || $role == 'gate_manager' ||  $role == 'police')
             {
                 return true;
             }
@@ -255,7 +281,7 @@ function access($action)
         }  
         elseif($action == 'pandol_info_report')
         {
-            if($role == 'doctor' || $role == 'bmc' || $role == 'admin' || $role == 'inward' || $role == 'gate_manager')
+            if($role == 'doctor' || $role == 'admin')
             {
                 return true;
             }
@@ -263,7 +289,31 @@ function access($action)
             {
                 return false;
             }         
-        }         
+        }  
+
+        elseif($action == 'statewise_vyapari_report')
+        {
+            if($role == 'bmc' || $role == 'police')
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }         
+        }  
+
+        elseif($action == 'statewise_goat_report')
+        {
+            if($role == 'bmc' || $role == 'police')
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }         
+        }
     }
 }
 

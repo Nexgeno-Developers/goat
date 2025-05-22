@@ -1,4 +1,4 @@
-<?php if(!access('manage_admins')){ redirect(route('dashboard')); } ?>
+<?php if(!access('master_list')){ redirect(route('dashboard')); } ?>
 
 <!-- start page title -->
 <div class="row ">

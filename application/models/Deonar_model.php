@@ -299,7 +299,7 @@ class Deonar_model extends CI_Model {
 			{
     			$btn_print = '<a target="_blank" href="'.site_url('superadmin/manage_vyapari/print/'.$record['vyapari_id']).'" class="btn-sm btn-link">Print ID</a>';
 			
-			if($this->session->userdata('user_id') == 1 || $this->session->userdata('role_type') == 'inward' || $this->session->userdata('role_type') == 'gate_manager')
+			if($this->session->userdata('user_id') == 1 || $this->session->userdata('role_type') == 'inward')
 			{
 			    $event = "rightModal('".site_url('modal/popup/vyapari/edit-vyapari/'.$record['vyapari_id'])."','Edit Vyapari')";
                 $btn_edit = '<a href="javascript:void(0);" class="btn-sm btn-link" onclick="'.$event.'">'.get_phrase('edit').'</a>';			    
@@ -919,7 +919,11 @@ class Deonar_model extends CI_Model {
         $sr = $start + 1;
 		foreach($records as $record)
 		{ 
-		    $btn_view = '<a href="'.route('manage_vyapari/view/').$record['vyapari_id'].'">Details</a>';
+			if($this->session->userdata('role_type') != 'police'){
+		    	$btn_view = '<a href="'.route('manage_vyapari/view/').$record['vyapari_id'].'">Details</a>';
+			} else {
+				$btn_view = null;
+			}
 			$data[] = array( 
 			    "sr_no"  => $sr,
 				"qrcode"  => $record['qrcode'],
