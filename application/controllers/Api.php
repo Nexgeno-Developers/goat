@@ -110,7 +110,7 @@ class Api extends CI_Controller
         if (strlen($qrcode) != $validate_qrcode_digit) {
             echo json_encode([
                 'status' => false,
-                'notification' => "The pass number {$qrcode} is invalid."
+                'notification' => "Invalid Pass Number : {$qrcode}"
             ]);
             return;
         }
@@ -134,13 +134,13 @@ class Api extends CI_Controller
             ];
             $response = [
                 'status' => true,
-                'notification' => "The pass number {$qrcode} is valid.",
+                'notification' => "Valid Pass Number : {$qrcode}",
                 'data' => $data
             ];
         } else {
             $response = [
                 'status' => false,
-                'notification' => "The pass number {$qrcode} is invalid."
+                'notification' => "Invalid Pass Number : {$qrcode}"
             ];
         }
         header('Content-Type: application/json');
