@@ -390,14 +390,14 @@ $(document).ready(function() {
                         Processing... Please wait <span id="timer">10</span>s
                     </div>
                 `);
-                $('#preview, #manualForm, #btnBack, #btnFront').hide();
+                $('#preview, #manualForm, #btnBack, #btnFront, .scan-box').hide();
                 window.countdownInterval = startCountdown(10, '#timer');
             },
             success: function(response) {
                 setTimeout(() => {
                     clearInterval(window.countdownInterval);
                     displayResult(response);
-                    $('#preview, #manualForm, #btnBack, #btnFront').show();
+                    $('#preview, #manualForm, #btnBack, #btnFront, .scan-box').show();
                     window.scrollTo({
                       top: document.body.scrollHeight,
                       behavior: 'smooth'
@@ -406,7 +406,7 @@ $(document).ready(function() {
             },
             error: function() {
                 $('#result').html('<div class="alert alert-warning">Server error validating the pass.</div>');
-                $('#preview, #manualForm, #btnBack, #btnFront').show();
+                $('#preview, #manualForm, #btnBack, #btnFront, .scan-box').show();
             }
         });
     }
