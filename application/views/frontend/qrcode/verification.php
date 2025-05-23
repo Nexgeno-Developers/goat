@@ -169,11 +169,11 @@ button:focus {
 
 .scan-box {
   position: absolute;
-  top: 20%;
+  top: 15%;
   left: 50%;
   transform: translateX(-50%);
-  width: 60%;
-  height: 80%;
+  width: 65%;
+  height: 65%;
   border: 2px solid rgba(0, 0, 0, 0.0); /* invisible border for layout */
   box-sizing: border-box;
   pointer-events: none;
