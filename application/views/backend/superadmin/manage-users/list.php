@@ -50,7 +50,7 @@ $users = $this->db->where('id !=', 1)->where('id !=', $this->session->userdata('
 
                       <?php if(access('print_user_button')){ /*?>
                           <a target="_blank" class="btn-sm btn-secondary" href="<?php echo base_url('superadmin/manage_admins/print/'.$user['id']); ?>">Print</a>
-                      <?php } */ ?>
+                      <?php  */ } ?>
 
                       <?php if($user['user_status'] == 'active'){ ?>
                         <!-- item-->
@@ -70,7 +70,7 @@ $users = $this->db->where('id !=', 1)->where('id !=', $this->session->userdata('
 
                     <?php if(access('print_user_button')){ /*?>
                         <a target="_blank" class="btn-sm btn-secondary" href="<?php echo base_url('superadmin/manage_admins/print/'.$user['id']); ?>">Print</a>
-                    <?php } */ ?>
+                    <?php */ }  ?>
 
                     <?php if($user['user_status'] == 'active'){ ?>
                       <!-- item-->
