@@ -81,16 +81,31 @@
 </form>
 
 <script>
-$(".ajaxForm").validate({}); // Jquery form validation initialization
-$(".ajaxForm").submit(function(e) {
-    e.preventDefault();
-    if ($('#results').has('img').length > 0) {
+// $(".ajaxForm").validate({}); // Jquery form validation initialization
+// $(".ajaxForm").submit(function(e) {
+//     e.preventDefault();
+//     if ($('#results').has('img').length > 0) {
+//         var form = $(this);
+//         ajaxSubmit(e, form, SubmitImage);        
+//     }else{
+//         toastr.error('Please take Vyapari photo!');
+//     }
+// });
+
+    $(".ajaxForm").validate({});
+
+    $(".ajaxForm").submit(function(e) {
+        e.preventDefault();
+
         var form = $(this);
-        ajaxSubmit(e, form, SubmitImage);        
-    }else{
-        toastr.error('Please take Vyapari photo!');
-    }
-});
+        var isMobile = window.innerWidth < 767;
+
+        if (isMobile || $('#results').has('img').length > 0) {
+            ajaxSubmit(e, form, SubmitImage);
+        } else {
+            toastr.error('Please take Vyapari photo!');
+        }
+    });
 
 
 function addRow()

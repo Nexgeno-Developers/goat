@@ -589,6 +589,15 @@ class Deonar_model extends CI_Model {
         }
         else
         {
+
+			if(count($qrcodes) > 500){
+				$response = array(
+					'status' => false,
+					'notification' => get_phrase("Passes Should Be Under 500 Counts")
+				);	
+				return json_encode($response);
+			}
+
     		foreach($qrcodes as $qr)
     		{
     			$insert['vyapari_id'] = $vyapari_id;
