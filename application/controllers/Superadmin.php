@@ -354,6 +354,8 @@ class Superadmin extends CI_Controller {
             
             if($param1 == 'print')
             {
+                ini_set('memory_limit', '-1'); 
+
                 set_time_limit(300);
                 $this->load->library('pdf');
                 $page_info['vyapari_id'] = $param2;
