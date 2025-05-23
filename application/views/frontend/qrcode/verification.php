@@ -420,7 +420,7 @@ $(document).ready(function() {
                     <p class="heads mb-2 text-center"><strong>Vyapari Information</strong></p>
                     <div class="table-profile">
                       <div class="profile_imgs">
-                        <img src="${response.data.photo}" alt="Vyapari Photo" width="100" />
+                        <img src="${response.data.photo}" alt="Vyapari Photo" width="170" />
                       </div>
                       <p class="pt-2 pb-0 mb-1">${response.data.name}</p>
                       <p><b>ID:</b> ${response.data.vyapari_id}</p>
