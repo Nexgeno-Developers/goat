@@ -122,7 +122,7 @@ class Qrcodegenerator extends CI_Controller {
 
 		// Display inline
 		echo '<img src="'.$imgSrc.'" alt="QR Code" width="150px" height="150px">';
-		echo '<p style="margin: 0;position: absolute;left: 23px;font-size: 16px;margin-top: -13px;"><b>'.$qr_digit.' - BN:'.$book_no.'</b></p><br>';
+		echo '<p style="margin: 0;position: absolute;left: 23px;font-size: 16px;margin-top: -13px;"><b>'.$qr_digit.' - BN'.$book_no.'</b></p><br>';
 	}
 	
 	/*function save_qrcode($qrcode, $qr_digit)
