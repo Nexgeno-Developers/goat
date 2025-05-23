@@ -26,12 +26,24 @@
             <label for="role_type"><?php echo get_phrase('role'); ?></label>
             <select name="role_type" class="form-control select2" data-toggle="select2" required>
                 <option value="">Select</option>
-                <option value="superadmin" <?php echo ($user['role_type'] == 'superadmin') ? 'selected' : ''; ?>>Superadmin</option>
-                <option value="inward" <?php echo ($user['role_type'] == 'inward') ? 'selected' : ''; ?>>Inward</option>
-                <option value="outward" <?php echo ($user['role_type'] == 'outward') ? 'selected' : ''; ?>>Outward</option>
-                <option value="doctor" <?php echo ($user['role_type'] == 'doctor') ? 'selected' : ''; ?>>Doctor</option>
-                <option value="bmc" <?php echo ($user['role_type'] == 'bmc') ? 'selected' : ''; ?>>BMC</option>
-                <option value="gate_manager" <?php echo ($user['role_type'] == 'gate_manager') ? 'selected' : ''; ?>>Gate Manage</option>
+
+                <?php if (in_array($this->session->userdata('role_type'), ['admin', 'gate_manager'])){ ?>
+
+                    <option value="inward" <?php echo ($user['role_type'] == 'inward') ? 'selected' : ''; ?>>Inward</option>
+                    <option value="outward" <?php echo ($user['role_type'] == 'outward') ? 'selected' : ''; ?>>Outward</option>
+
+                <?php } else { ?>
+
+                    <option value="superadmin" <?php echo ($user['role_type'] == 'superadmin') ? 'selected' : ''; ?>>Superadmin</option>
+                    <option value="admin" <?php echo ($user['role_type'] == 'admin') ? 'selected' : ''; ?>>Admin</option>
+                    <option value="inward" <?php echo ($user['role_type'] == 'inward') ? 'selected' : ''; ?>>Inward</option>
+                    <option value="outward" <?php echo ($user['role_type'] == 'outward') ? 'selected' : ''; ?>>Outward</option>
+                    <option value="doctor" <?php echo ($user['role_type'] == 'doctor') ? 'selected' : ''; ?>>Doctor</option>
+                    <option value="bmc" <?php echo ($user['role_type'] == 'bmc') ? 'selected' : ''; ?>>BMC</option>
+                    <option value="gate_manager" <?php echo ($user['role_type'] == 'gate_manager') ? 'selected' : ''; ?>>Gate Manage</option>
+                    <option value="police" <?php echo ($user['role_type'] == 'police') ? 'selected' : ''; ?>>Police</option>
+
+                <?php } ?>
             </select>
         </div>        
         

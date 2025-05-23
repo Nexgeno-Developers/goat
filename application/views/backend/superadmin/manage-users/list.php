@@ -41,20 +41,50 @@ $users = $this->db->where('id !=', 1)->where('id !=', $this->session->userdata('
             <td> <?php echo $user['gate_no']; ?> </td>
             <td>
                 
-                <?php if(access('print_user_button')){ ?>
-                    <a target="_blank" class="btn-sm btn-secondary" href="<?php echo base_url('superadmin/manage_admins/print/'.$user['id']); ?>">Print</a>
-                <?php } ?>
-                
                 <?php if(access('manage_user_button')){ ?>
-                <?php if($user['user_status'] == 'active'){ ?>
-      		    <!-- item-->
-      		    <a href="javascript:void(0);" class="btn-sm btn-danger" onclick="confirmModal('<?php echo route('manage_admins/user_status/'.$user['id'].'/inactive'); ?>', showAllUsers )"><?php echo get_phrase('deactivate'); ?></a>
-                <?php }else{ ?>
-                <!-- item-->
-      		    <a href="javascript:void(0);" class="btn-sm btn-info" onclick="confirmModal('<?php echo route('manage_admins/user_status/'.$user['id'].'/active'); ?>', showAllUsers )"><?php echo get_phrase('activate'); ?></a>                
-                <?php } ?>
+
                 
-                <a href="javascript:void(0);" class="btn-sm btn-success" onclick="rightModal('<?php echo site_url('modal/popup/manage-users/edit/'.$user['id'])?>', '<?php echo get_phrase('edit_user'); ?>');"><?php echo get_phrase('edit'); ?></a>
+                  <?php if (in_array($this->session->userdata('role_type'), ['admin', 'gate_manager'])){ ?>
+
+                    <?php if (in_array($user['role_type'], ['inward', 'outward'])){ ?>
+
+                      <?php if(access('print_user_button')){ ?>
+                          <a target="_blank" class="btn-sm btn-secondary" href="<?php echo base_url('superadmin/manage_admins/print/'.$user['id']); ?>">Print</a>
+                      <?php } ?>
+
+                      <?php if($user['user_status'] == 'active'){ ?>
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="btn-sm btn-danger" onclick="confirmModal('<?php echo route('manage_admins/user_status/'.$user['id'].'/inactive'); ?>', showAllUsers )"><?php echo get_phrase('deactivate'); ?></a>
+
+                      <?php }else{ ?>
+                          <!-- item-->
+                        <a href="javascript:void(0);" class="btn-sm btn-info" onclick="confirmModal('<?php echo route('manage_admins/user_status/'.$user['id'].'/active'); ?>', showAllUsers )"><?php echo get_phrase('activate'); ?></a> 
+
+                        <?php } ?>
+
+                      <a href="javascript:void(0);" class="btn-sm btn-success" onclick="rightModal('<?php echo site_url('modal/popup/manage-users/edit/'.$user['id'])?>', '<?php echo get_phrase('edit_user'); ?>');"><?php echo get_phrase('edit'); ?></a>
+                      
+                    <?php } ?>
+
+                  <?php } else { ?>
+
+                    <?php if(access('print_user_button')){ ?>
+                        <a target="_blank" class="btn-sm btn-secondary" href="<?php echo base_url('superadmin/manage_admins/print/'.$user['id']); ?>">Print</a>
+                    <?php } ?>
+
+                    <?php if($user['user_status'] == 'active'){ ?>
+                      <!-- item-->
+                      <a href="javascript:void(0);" class="btn-sm btn-danger" onclick="confirmModal('<?php echo route('manage_admins/user_status/'.$user['id'].'/inactive'); ?>', showAllUsers )"><?php echo get_phrase('deactivate'); ?></a>
+
+                    <?php }else{ ?>
+                        <!-- item-->
+                      <a href="javascript:void(0);" class="btn-sm btn-info" onclick="confirmModal('<?php echo route('manage_admins/user_status/'.$user['id'].'/active'); ?>', showAllUsers )"><?php echo get_phrase('activate'); ?></a> 
+                                      
+                    <?php } ?>
+
+                    <a href="javascript:void(0);" class="btn-sm btn-success" onclick="rightModal('<?php echo site_url('modal/popup/manage-users/edit/'.$user['id'])?>', '<?php echo get_phrase('edit_user'); ?>');"><?php echo get_phrase('edit'); ?></a>
+
+                  <?php } ?>
                 
                 <?php } ?>
                 

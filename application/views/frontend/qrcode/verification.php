@@ -37,13 +37,13 @@
     background: #fff;
     border-radius: 10px;
     border-top: 4px solid #71357c;
-    padding-top: 34px;
+    padding-top: 20px;
     padding-bottom:25px;
     width: 500px;
 }
 .customer_regis_class 
  button#btnFront {
-    background: #71357c;
+    background: #333;
 }
 
 
@@ -53,11 +53,13 @@
 }
 
 .customer_regis_class button {
-    border: 0;
+  border: 0;
     border-radius: 50px;
-    font-size: 14px;
-    padding-left: 20px;
-    padding-right: 20px;
+    font-size: 12px;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 4px;
+    padding-bottom: 4px;
 }
 
 .results_box {
@@ -74,7 +76,7 @@
     margin-bottom: 7px;
 }
 p.heads.mb-2 {
-    font-size: 16px;
+    font-size: 20px;
     padding-bottom: 5px;
 }
 .results_box th, .results_box td {
@@ -94,7 +96,54 @@ p.heads.mb-2 {
     color: #71357c;
     margin-right: 5px;
 }
+.tabs_buttons button {
+  border: 0;
+    border-radius: 50px;
+    font-size: 14px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    font-weight: 500;
+    margin-right: 10px;
+}
+.submit_bttns
+{
+  border: 0;
+    border-radius: 50px;
+    font-size: 14px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 9px !important;
+    padding-bottom: 8px !important;
+    font-weight: 500;
+    margin-right: 10px;
+}
+.tabs_buttons button.active {
+    background: #71357c;
+    color: #fff;
+}
 
+button:focus {
+    outline: 0px dotted;
+    outline: 0px auto -webkit-focus-ring-color !important;
+}
+
+.position_sets {
+  position: absolute;
+  margin-top: 10px;
+  margin-left: 10px;
+  z-index:9999;
+}
+
+.table-profile p {
+    font-size: 18px;
+}
+.tabs_buttons {
+    border-bottom: 0 !important;
+    text-align: center;
+    justify-content: center;
+}
 @media(max-width:767px)
 {
   .customer_regis_class {
@@ -111,14 +160,14 @@ p.heads.mb-2 {
       <p><b>Pass Verification Screen</b></p>
     </div>
     
-    <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
+    <ul class="nav nav-tabs mb-3 tabs_buttons" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="scan-tab" data-toggle="tab" data-target="#scan" type="button" role="tab" aria-controls="scan" aria-selected="true">
+        <button class=" active" id="scan-tab" data-toggle="tab" data-target="#scan" type="button" role="tab" aria-controls="scan" aria-selected="true">
           <i class="fa-solid fa-qrcode"></i> Scan QR
         </button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="nav-link" id="manual-tab" data-toggle="tab" data-target="#manual" type="button" role="tab" aria-controls="manual" aria-selected="false">
+        <button class="" id="manual-tab" data-toggle="tab" data-target="#manual" type="button" role="tab" aria-controls="manual" aria-selected="false">
           <i class="fa-solid fa-keyboard"></i> Manual Entry
         </button>
       </li>
@@ -126,8 +175,8 @@ p.heads.mb-2 {
     
     <div class="tab-content" id="myTabContent">
       <div class="tab-pane fade show active" id="scan" role="tabpanel" aria-labelledby="scan-tab">
-        <div class="mb-4 text-center">
-          <button id="btnBack" class="btn btn-primary mr-2"><i class="fa-solid fa-camera"></i> Back Camera</button>
+        <div class="mb-4 text-center position_sets">
+          <button id="btnBack" class="btn btn-primary mr-1"><i class="fa-solid fa-camera"></i> Back Camera</button>
           <button id="btnFront" class="btn btn-secondary"><i class="fa-solid fa-camera-rotate"></i> Front Camera</button>
         </div>
         <div class="camera_error"></div>
@@ -157,7 +206,7 @@ p.heads.mb-2 {
               onkeydown="if(event.key === 'ArrowUp' || event.key === 'ArrowDown'){event.preventDefault();}"             
             required>
           </div>
-          <button type="submit" class="btn btn-primary btn-block" style="background: #71357c;">
+          <button type="submit" class="btn btn-primary btn-block submit_bttns" style="background: #555;">
             <i class="fa-solid fa-magnifying-glass"></i> Verify
           </button>
         </form>
@@ -251,6 +300,10 @@ $(document).ready(function() {
                     clearInterval(window.countdownInterval);
                     displayResult(response);
                     $('#preview, #manualForm, #btnBack, #btnFront').show();
+                    window.scrollTo({
+                      top: document.body.scrollHeight,
+                      behavior: 'smooth'
+                    });
                 }, 10000);
             },
             error: function() {
@@ -265,25 +318,15 @@ $(document).ready(function() {
         if (response.status) {
             $('#result').html(`
                 <div class="alert alert-success">${response.notification}</div>
-                <div class="results_box mt-1">
-                    <p class="heads mb-2"><strong>Visitor Information</strong></p>
-                    <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <tbody>
-                                <tr>
-                                    <th scope="row">Vyapari ID</th>
-                                    <td>${response.data.vyapari_id}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Vyapari Name</th>
-                                    <td>${response.data.name}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Vyapari Photo</th>
-                                    <td><img src="${response.data.photo}" alt="Vyapari Photo" width="100" /></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                <div class="results_box mt-1 text-center">
+                    <p class="heads mb-2 text-center"><strong>Vyapari Information</strong></p>
+                    <div class="table-profile">
+                      <div class="profile_imgs">
+                        <img src="${response.data.photo}" alt="Vyapari Photo" width="100" />
+                      </div>
+                      <p class="pt-2 pb-0 mb-1">${response.data.name}</p>
+                      <p><b>ID:</b> ${response.data.vyapari_id}</p>
+                        
                     </div>
                 </div>
             `);

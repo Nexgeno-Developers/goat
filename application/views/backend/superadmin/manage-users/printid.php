@@ -61,7 +61,7 @@ td, th {
       <img width="220px" height="auto" src="uploads/top_image.png?<?php echo time(); ?>">
       </div>
        <div class="vyapari_coluom_one" style="text-align:center;">
-            <?= file_exists('uploads/users/'.$vyapari['id'].'.jpg') ? '<img src="uploads/users/'.$vyapari['id'].'.jpg?'.time().'">' : '<img src="uploads/emp_photo/logo.jpg?'.time().'">'?>
+            <?= file_exists('uploads/users/'.$vyapari['id'].'.jpg') ? '<img src="uploads/users/'.$vyapari['id'].'.jpg?'.time().'">' : '<img src="uploads/emp_photo/logo.png?'.time().'">'?>
        </div> 
        
        <div style="font-size:14px; margin-top:-5px; font-weight:700; text-align:center;"><?= $vyapari['name']; ?></div>

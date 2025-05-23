@@ -18,13 +18,24 @@
             <label for="role_type"><?php echo get_phrase('role'); ?></label>
             <select name="role_type" class="form-control select2" data-toggle="select2" required>
                 <option value="">Select</option>
-                <option value="superadmin">Superadmin</option>
-                <!--<option value="admin">Admin</option>-->
-                <option value="inward">Inward</option>
-                <option value="outward">Outward</option>
-                <option value="doctor">Doctor</option>
-                <option value="bmc">BMC</option>
-                <option value="gate_manager">Gate Manage</option>
+
+                <?php if (in_array($this->session->userdata('role_type'), ['admin', 'gate_manager'])){ ?>
+
+                    <option value="inward">Inward</option>
+                    <option value="outward">Outward</option>
+
+                <?php } else { ?>
+
+                    <option value="superadmin">Superadmin</option>
+                    <option value="admin">Admin</option>
+                    <option value="inward">Inward</option>
+                    <option value="outward">Outward</option>
+                    <option value="doctor">Doctor</option>
+                    <option value="bmc">BMC</option>
+                    <option value="gate_manager">Gate Manage</option>
+                    <option value="police">Police</option>
+                    
+                <?php } ?>
             </select>
         </div>        
         <div class="form-group col-md-6">

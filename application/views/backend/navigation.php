@@ -52,13 +52,13 @@ if($user_type == 'parent'){
     <li class="side-nav-item">
       <a href="<?php echo site_url($controller.'/manage_admins'); ?>" class="side-nav-link">
         <i class="mdi mdi-account-group"></i>
-        <span> <?php echo get_phrase('manage_user'); ?> </span>
+        <span> <?php echo get_phrase('manage_users'); ?> </span>
       </a>
     </li>  
     <?php } ?>
     
     
-    <?php if(access('manage_admins')){ ?>
+    <?php if(access('master_list')){ ?>
         <li class="side-nav-item sub_menu">
            <a href="javascript: void(0);" class="side-nav-link">
            <i class="mdi mdi-database"></i>
@@ -66,13 +66,13 @@ if($user_type == 'parent'){
            </a>
            <ul class="side-nav-second-level collapse" aria-expanded="false">
     
-              <?php if(access('manage_admins')){ ?>
+              <?php if(access('master_list')){ ?>
               <li>
                  <a href="<?php echo site_url($controller.'/manage_broker'); ?>">Manage Broker</a>
               </li>
               <?php } ?>
               
-              <?php if(access('manage_admins')){ ?>
+              <?php if(access('master_list')){ ?>
               <li>
                  <a href="<?php echo site_url($controller.'/manage_gwala'); ?>">Manage Gowala</a>
               </li>
@@ -118,7 +118,7 @@ if($user_type == 'parent'){
           </li> 
           <?php } ?>
           
-          <?php if(access('pass_inward_report')){ ?>
+          <?php if(access('menu_agent')){ ?>
           <li>
              <a href="<?php echo site_url($controller.'/reports/gwala'); ?>">Agent (Gowala)</a>
           </li> 

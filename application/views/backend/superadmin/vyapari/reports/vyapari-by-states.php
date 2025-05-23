@@ -1,4 +1,4 @@
-<?php if (!access('vyapari_by_states_report')) {
+<?php if (!access('statewise_vyapari_report')) {
     redirect(route('dashboard'));
 } ?>
 
