@@ -174,7 +174,7 @@ class Qrcodegenerator extends CI_Controller {
 		}
 		
 		if ($this->count_range($start, $end) === false) {
-            echo "Print upto 100 passes only.";
+            echo "Print upto 100 qrcodes only.";
 			exit;
 		}
 
