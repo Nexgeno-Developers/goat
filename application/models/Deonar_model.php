@@ -776,11 +776,12 @@ class Deonar_model extends CI_Model {
     		return json_encode($response);
         }
         
-        if(strlen($qrcode) != 6)
+		$validate_qrcode_digit = get_common_settings('validate_qrcode_digit');
+        if(strlen($qrcode) != $validate_qrcode_digit)
         {
     		$response = array(
     			'status' => false,
-    			'notification' => '<b>Pass number must be a 6 digit!</b>'
+    			'notification' => '<b>Pass number must be a ' . $validate_qrcode_digit . ' digit!</b>'
     		);  
     		return json_encode($response);
         }
