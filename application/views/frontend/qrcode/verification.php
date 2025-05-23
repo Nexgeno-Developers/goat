@@ -175,11 +175,12 @@ button:focus {
     
     <div class="tab-content" id="myTabContent">
       <div class="tab-pane fade show active" id="scan" role="tabpanel" aria-labelledby="scan-tab">
+        <div class="camera_error"></div>
         <div class="mb-4 text-center position_sets">
           <button id="btnBack" class="btn btn-primary mr-1"><i class="fa-solid fa-camera"></i> Back Camera</button>
           <button id="btnFront" class="btn btn-secondary"><i class="fa-solid fa-camera-rotate"></i> Front Camera</button>
         </div>
-        <div class="camera_error"></div>
+        
         <video id="preview"></video>
       </div>
       
