@@ -139,7 +139,8 @@
 
                                 <?php
                                     $digitLength = get_common_settings('validate_qrcode_digit');
-                                    $pattern = '^\d{' . $digitLength . '}$';
+                                    //$pattern = '^\d{' . $digitLength . '}$';
+                                    $pattern = '[0-9]{' . $digitLength . '}';
                                     $title = 'Please enter exactly ' . $digitLength . ' digits (e.g., ' . str_pad('1', $digitLength, '0', STR_PAD_LEFT) . ')';
                                 ?>
 
@@ -236,11 +237,17 @@
                 
                 var refreshPage = function(){ setTimeout(function () { location.reload(); }, 2000); }
                 
+                // function addRow()
+                // {
+                //     var html = '<div class="qrcode-fields"> <div class="row"> <div class="col-md-4 form-group"> <input onkeyup="calculateSequencePass();" type="text" class="form-control" placeholder="Sequence From" name="sequence_from[]" required> </div><div class="col-md-4 form-group"> <input onkeyup="calculateSequencePass();" type="text" class="form-control" name="sequence_to[]" placeholder="Sequence To" required> </div> <div class="col-md-2 form-group">Pass: <span class="pcount text-danger">0</span></div> <div class="col-md-2 form-group"><div class="btn btn-block btn-danger" onclick="removeRow(this);"><i class="fa fa-minus" aria-hidden="true"></i></div></div></div></div>';    
+                //     $(".qrcode-block").append(html);
+                // }
+
                 function addRow()
                 {
-                    var html = '<div class="qrcode-fields"> <div class="row"> <div class="col-md-4 form-group"> <input onkeyup="calculateSequencePass();" type="text" class="form-control" placeholder="Sequence From" name="sequence_from[]" required> </div><div class="col-md-4 form-group"> <input onkeyup="calculateSequencePass();" type="text" class="form-control" name="sequence_to[]" placeholder="Sequence To" required> </div> <div class="col-md-2 form-group">Pass: <span class="pcount text-danger">0</span></div> <div class="col-md-2 form-group"><div class="btn btn-block btn-danger" onclick="removeRow(this);"><i class="fa fa-minus" aria-hidden="true"></i></div></div></div></div>';    
+                    var html = `<div class="qrcode-fields"> <div class="row"> <div class="col-md-4 form-group"> <input inputmode="numeric" onwheel="this.blur()" onkeydown="if(event.key === 'ArrowUp' || event.key === 'ArrowDown'){event.preventDefault();}" pattern="<?= $pattern ?>" title="<?= $title ?>" minlength="<?= $digitLength ?>" maxlength="<?= $digitLength ?>" onkeyup="calculateSequencePass();" type="text" class="form-control digit-only" placeholder="Sequence From" name="sequence_from[]" required> </div><div class="col-md-4 form-group"> <input inputmode="numeric" onwheel="this.blur()" onkeydown="if(event.key === 'ArrowUp' || event.key === 'ArrowDown'){event.preventDefault();}" pattern="<?= $pattern ?>" title="<?= $title ?>" minlength="<?= $digitLength ?>" maxlength="<?= $digitLength ?>" onkeyup="calculateSequencePass();" type="text" class="form-control digit-only" name="sequence_to[]" placeholder="Sequence To" required> </div> <div class="col-md-2 form-group">Pass: <span class="pcount text-danger">0</span></div> <div class="col-md-2 form-group"><div class="btn btn-block btn-danger" onclick="removeRow(this);"><i class="fa fa-minus" aria-hidden="true"></i></div></div></div></div>`;    
                     $(".qrcode-block").append(html);
-                }
+                }                
                 
                 function removeRow(elem)
                 {

@@ -221,10 +221,10 @@
                                     <td class="options_buttons">
                                         <?php if(access('manage_pass_button')){ ?>
                                         <?php if($row['status'] == 'unblock'){ ?>
-                                            <button type="button" class="btn btn-sm btn-danger" onclick="rightModal('<?php echo site_url('modal/popup/vyapari/complaint-qrcode/'.$row['qrcode_id'].'/block'); ?>', '<?php echo get_phrase('block_qrcode'); ?>')"><i class="mdi mdi-block-helper" style="font-size: 12px;"></i> <?php echo get_phrase('do_block'); ?></button>
+                                            <button type="button" class="btn btn-sm btn-danger" onclick="rightModal('<?php echo site_url('modal/popup/vyapari/complaint-qrcode/'.$row['qrcode_id'].'/block'); ?>', '<?php echo get_phrase('block_qrcode'); ?>')"><i class="mdi mdi-block-helper" style="font-size: 12px;"></i> <?php echo get_phrase('block'); ?></button>
                                         <?php }elseif($row['status'] == 'block'){ ?>
 
-                                            <button type="button" class="btn btn-sm btn-info" onclick="rightModal('<?php echo site_url('modal/popup/vyapari/complaint-qrcode/'.$row['qrcode_id'].'/unblock'); ?>', '<?php echo get_phrase('unblock_qrcode'); ?>')"><i class="mdi mdi-check-circle" style="font-size: 15px;"></i>  <?php echo get_phrase('do_unblock'); ?></button>                                        <?php }elseif($row['status'] == 'exit'){ ?> 
+                                            <button type="button" class="btn btn-sm btn-info" onclick="rightModal('<?php echo site_url('modal/popup/vyapari/complaint-qrcode/'.$row['qrcode_id'].'/unblock'); ?>', '<?php echo get_phrase('unblock_qrcode'); ?>')"><i class="mdi mdi-check-circle" style="font-size: 15px;"></i>  <?php echo get_phrase('unblock'); ?></button>                                        <?php }elseif($row['status'] == 'exit'){ ?> 
                                              
                                              <b><span class="text-success">Scanned at <?= $row['exit_date'] ?></span></b>
                                              <b><span class="text-success">Exit Gate No: <?= $row['exit_gate'] ?></span></b>
