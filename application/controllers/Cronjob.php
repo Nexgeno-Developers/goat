@@ -20,7 +20,7 @@ class Cronjob extends CI_Controller {
     {
         //echo 1; exit;
         // Path to session files (update if using a custom path)
-        $session_path = APPPATH . 'ci_sessions/';
+        $session_path = 'ci_sessions/';
 
         // Path to CodeIgniter log files
         $log_path = APPPATH . 'logs/';

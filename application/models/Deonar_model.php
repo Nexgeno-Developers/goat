@@ -201,8 +201,19 @@ class Deonar_model extends CI_Model {
 		$this->db->select('AV.vyapari_id');
 		$this->db->from('app_vyapari as AV');
 		$this->db->join('app_qrcode as AQ', 'AQ.vyapari_id = AV.vyapari_id', 'left');
+		// if(!empty($vyapari_id))
+		// {
+    	// 	$this->db->where('AV.vyapari_id', $vyapari_id);
+		// }
 		if(!empty($vyapari_id))
 		{
+			// Extract the current year
+			$currentYear = date('Y');
+			// Convert to uppercase
+			$vyapari_id = strtoupper($vyapari_id);
+			// Use regex to remove "V2025-" and get the remaining part
+			$vyapari_id = preg_replace("/^V$currentYear-/", '', $vyapari_id);
+
     		$this->db->where('AV.vyapari_id', $vyapari_id);
 		}
 		if(!empty($name))
@@ -1093,11 +1104,21 @@ class Deonar_model extends CI_Model {
 		{
     		$this->db->where('AQ.gwala_id', $agent);
 		}
-        if(!empty($from) && !empty($to))
-        {
-            $this->db->where('AQ.inward_date >=', $from);
-            $this->db->where('AQ.inward_date <=', $to);
-        }		
+        // if(!empty($from) && !empty($to))
+        // {
+        //     $this->db->where('AQ.inward_date >=', $from);
+        //     $this->db->where('AQ.inward_date <=', $to);
+        // }
+		
+
+		if (!empty($from)) {
+			$this->db->where('AQ.inward_date >=', $from);
+		}
+
+		if (!empty($to)) {
+			$this->db->where('AQ.inward_date <=', $to);
+		}
+		
         //$this->db->where('AQ.status', 'unblock');
 
 		$records = $this->db->get()->num_rows();
@@ -1112,11 +1133,20 @@ class Deonar_model extends CI_Model {
 		{
     		$this->db->where('AQ.gwala_id', $agent);
 		}
-        if(!empty($from) && !empty($to))
-        {
-            $this->db->where('AQ.inward_date >=', $from);
-            $this->db->where('AQ.inward_date <=', $to);
-        }		
+        // if(!empty($from) && !empty($to))
+        // {
+        //     $this->db->where('AQ.inward_date >=', $from);
+        //     $this->db->where('AQ.inward_date <=', $to);
+        // }	
+		
+		if (!empty($from)) {
+			$this->db->where('AQ.inward_date >=', $from);
+		}
+
+		if (!empty($to)) {
+			$this->db->where('AQ.inward_date <=', $to);
+		}
+		
         //$this->db->where('AQ.status', 'unblock');
 		$this->db->order_by('AQ.qrcode_id', $columnSortOrder);
 		$this->db->limit($rowperpage, $start);
