@@ -172,8 +172,8 @@ button:focus {
   top: 15%;
   left: 50%;
   transform: translateX(-50%);
-  width: 70%;
-  height: 50%;
+  width: 75%;
+  height: 45%;
   border: 2px solid rgba(0, 0, 0, 0.0); /* invisible border for layout */
   box-sizing: border-box;
   pointer-events: none;
