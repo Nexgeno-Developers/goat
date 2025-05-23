@@ -67,7 +67,8 @@ class Qrcodegenerator extends CI_Controller {
 
 	public function generate_qrcode_with_logo($qr_digit, $book_no) 
 	{
-		$logoPath = FCPATH . 'uploads/qr-thumb.png'; // Logo file (PNG)
+		//$logoPath = FCPATH . 'uploads/qr-thumb.png'; // Logo file (PNG)
+		$logoPath = FCPATH . 'uploads/qr-thumb-2.png'; // Logo file (PNG)
 
 		$options = new \chillerlan\QRCode\QROptions([
 			'eccLevel' => \chillerlan\QRCode\QRCode::ECC_H,
