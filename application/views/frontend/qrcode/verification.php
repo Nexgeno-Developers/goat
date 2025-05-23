@@ -371,12 +371,12 @@ $(document).ready(function() {
             },
             error => {
                 alert("You must allow location access to view this page.");
-                $('body').html("<h5 style='display: flex;align-items: center;height: 100vh;justify-content: center;'>Access Denied. Location permission required. Please Allow Location From Browser</h5>");
+                $('body').html("<h5 style='display: flex;align-items: center;height: 100vh;justify-content: center;text-align:center;padding:10px;'>Access Denied. Location permission required. Please Allow Location From Browser</h5>");
             }
         );
     } else {
         alert("Geolocation is not supported by your browser.");
-        $('body').html("<h5 style='display: flex;align-items: center;height: 100vh;justify-content: center;'>Your browser does not support location access.</h5>");
+        $('body').html("<h5 style='display: flex;align-items: center;height: 100vh;justify-content: center;text-align:center;padding:10px;'>Your browser does not support location access.</h5>");
     }
 });
 </script>
