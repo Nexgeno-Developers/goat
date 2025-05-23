@@ -397,7 +397,7 @@ $(document).ready(function() {
                 setTimeout(() => {
                     clearInterval(window.countdownInterval);
                     displayResult(response);
-                    $('#preview, #manualForm, #btnBack, #btnFront, .scan-box').show();
+
                     window.scrollTo({
                       top: document.body.scrollHeight,
                       behavior: 'smooth'
@@ -431,6 +431,7 @@ $(document).ready(function() {
             $('#preview, #manualForm, #btnBack, #btnFront, .scan-box').hide();
         } else {
             $('#result').html(`<div class="alert alert-danger">${response.notification}</div>`);
+            $('#preview, #manualForm, #btnBack, #btnFront, .scan-box').show();
         }
     }
 
