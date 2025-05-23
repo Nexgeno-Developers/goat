@@ -171,7 +171,12 @@ class Qrcodegenerator extends CI_Controller {
 		if (strlen($start) > $qr_digit || strlen($end) > $qr_digit) {
 			echo "Start and End values must be exactly {$qr_digit} digits.";
 			exit;
-		}		
+		}
+		
+		if ($this->count_range($start, $end) === false) {
+            echo "Print upto 100 passes only.";
+			exit;
+		}
 
 	    if(!empty($start) && !empty($end) && !empty($book_no))
 	    {
@@ -227,7 +232,25 @@ class Qrcodegenerator extends CI_Controller {
 	}
 	
 	
-	
+	function count_range($start_input, $end_input, $max_limit = 100)
+	{
+		// Sanitize inputs
+		$start = (int) trim(preg_replace('/\s+/', '', $start_input));
+		$end   = (int) trim(preg_replace('/\s+/', '', $end_input));
+
+		// Validate range
+		if ($start > $end) {
+			return false;
+		}
+
+		$total = ($end - $start) + 1;
+
+		if ($total > $max_limit) {
+			return false;
+		}
+
+		return $total;
+	}	
 	
 	
 	function professional_courier_qrimage()
