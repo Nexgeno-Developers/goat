@@ -14,9 +14,9 @@
     $ip = $ip[0];
     
     if ($ip !== '103.175.61.38') {
-        // echo "<h3>Forbidden</h3>";
-        // echo "<h3>No Permission to Access</h3><br>";
-        // exit();
+        echo "<h3>Forbidden</h3>";
+        echo "<h3>No Permission to Access</h3><br>";
+        exit();
 		
     }
 
