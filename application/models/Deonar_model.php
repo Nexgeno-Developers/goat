@@ -556,7 +556,7 @@ class Deonar_model extends CI_Model {
 		$pandaal_no    = $this->input->post('pandaal_no');
 		$broker_id     = $this->input->post('broker_id');
 		$gwala_id      = $this->input->post('gwala_id');
-		$series        = 6;//$this->input->post('qr_digit');
+		$series        = get_common_settings('validate_qrcode_digit'); //6 //$this->input->post('qr_digit');
 		
 		$x = 0;
 		$qrcodes = array();
