@@ -150,6 +150,93 @@ button:focus {
     width: 95%;
 }
 }
+
+
+
+
+.scanner-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+#preview {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.scan-box {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 80%;
+  border: 2px solid rgba(0, 0, 0, 0.0); /* invisible border for layout */
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+.corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #00ff00;
+  box-sizing: border-box;
+}
+
+.top-left {
+  top: 0;
+  left: 0;
+  border-right: none;
+  border-bottom: none;
+}
+
+.top-right {
+  top: 0;
+  right: 0;
+  border-left: none;
+  border-bottom: none;
+}
+
+.bottom-left {
+  bottom: 0;
+  left: 0;
+  border-right: none;
+  border-top: none;
+}
+
+.bottom-right {
+  bottom: 0;
+  right: 0;
+  border-left: none;
+  border-top: none;
+}
+
+.scan-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: rgba(0, 255, 0, 0.75);
+  animation: scanAnim 3s linear infinite;
+}
+
+@keyframes scanAnim {
+  0% {
+    top: 0;
+  }
+  50% {
+    top: 100%;
+  }
+  100% {
+    top: 0;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -181,7 +268,17 @@ button:focus {
           <button id="btnFront" class="btn btn-secondary"><i class="fa-solid fa-camera-rotate"></i> Front Camera</button>
         </div>
         
+        <div class="scanner-wrapper position-relative">
         <video id="preview"></video>
+  <div class="scan-box">
+    <div class="corner top-left"></div>
+    <div class="corner top-right"></div>
+    <div class="corner bottom-left"></div>
+    <div class="corner bottom-right"></div>
+    <div class="scan-line"></div>
+  </div>
+        
+        </div>
       </div>
       
       <div class="tab-pane fade" id="manual" role="tabpanel" aria-labelledby="manual-tab">
