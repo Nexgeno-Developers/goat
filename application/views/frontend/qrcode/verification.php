@@ -150,6 +150,93 @@ button:focus {
     width: 95%;
 }
 }
+
+
+
+
+.scanner-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+#preview {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.scan-box {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 75%;
+  height: 45%;
+  border: 2px solid rgba(0, 0, 0, 0.0); /* invisible border for layout */
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+.corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #00ff00;
+  box-sizing: border-box;
+}
+
+.top-left {
+  top: 0;
+  left: 0;
+  border-right: none;
+  border-bottom: none;
+}
+
+.top-right {
+  top: 0;
+  right: 0;
+  border-left: none;
+  border-bottom: none;
+}
+
+.bottom-left {
+  bottom: 0;
+  left: 0;
+  border-right: none;
+  border-top: none;
+}
+
+.bottom-right {
+  bottom: 0;
+  right: 0;
+  border-left: none;
+  border-top: none;
+}
+
+.scan-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: rgba(0, 255, 0, 0.75);
+  animation: scanAnim 3s linear infinite;
+}
+
+@keyframes scanAnim {
+  0% {
+    top: 0;
+  }
+  50% {
+    top: 100%;
+  }
+  100% {
+    top: 0;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -168,19 +255,30 @@ button:focus {
       </li>
       <li class="nav-item" role="presentation">
         <button class="" id="manual-tab" data-toggle="tab" data-target="#manual" type="button" role="tab" aria-controls="manual" aria-selected="false">
-          <i class="fa-solid fa-keyboard"></i> Manual Entry
+          <i class="fa-solid fa-keyboard"></i> Manual Verification
         </button>
       </li>
     </ul>
     
     <div class="tab-content" id="myTabContent">
       <div class="tab-pane fade show active" id="scan" role="tabpanel" aria-labelledby="scan-tab">
+        <div class="camera_error"></div>
         <div class="mb-4 text-center position_sets">
           <button id="btnBack" class="btn btn-primary mr-1"><i class="fa-solid fa-camera"></i> Back Camera</button>
           <button id="btnFront" class="btn btn-secondary"><i class="fa-solid fa-camera-rotate"></i> Front Camera</button>
         </div>
-        <div class="camera_error"></div>
+        
+        <div class="scanner-wrapper position-relative">
         <video id="preview"></video>
+  <div class="scan-box">
+    <div class="corner top-left"></div>
+    <div class="corner top-right"></div>
+    <div class="corner bottom-left"></div>
+    <div class="corner bottom-right"></div>
+    <div class="scan-line"></div>
+  </div>
+        
+        </div>
       </div>
       
       <div class="tab-pane fade" id="manual" role="tabpanel" aria-labelledby="manual-tab">
@@ -292,14 +390,14 @@ $(document).ready(function() {
                         Processing... Please wait <span id="timer">10</span>s
                     </div>
                 `);
-                $('#preview, #manualForm, #btnBack, #btnFront').hide();
+                $('#preview, #manualForm, #btnBack, #btnFront, .scan-box').hide();
                 window.countdownInterval = startCountdown(10, '#timer');
             },
             success: function(response) {
                 setTimeout(() => {
                     clearInterval(window.countdownInterval);
                     displayResult(response);
-                    $('#preview, #manualForm, #btnBack, #btnFront').show();
+
                     window.scrollTo({
                       top: document.body.scrollHeight,
                       behavior: 'smooth'
@@ -308,7 +406,7 @@ $(document).ready(function() {
             },
             error: function() {
                 $('#result').html('<div class="alert alert-warning">Server error validating the pass.</div>');
-                $('#preview, #manualForm, #btnBack, #btnFront').show();
+                $('#preview, #manualForm, #btnBack, #btnFront, .scan-box').show();
             }
         });
     }
@@ -322,7 +420,7 @@ $(document).ready(function() {
                     <p class="heads mb-2 text-center"><strong>Vyapari Information</strong></p>
                     <div class="table-profile">
                       <div class="profile_imgs">
-                        <img src="${response.data.photo}" alt="Vyapari Photo" width="100" />
+                        <img src="${response.data.photo}" alt="Vyapari Photo" width="170" />
                       </div>
                       <p class="pt-2 pb-0 mb-1">${response.data.name}</p>
                       <p><b>ID:</b> ${response.data.vyapari_id}</p>
@@ -330,8 +428,10 @@ $(document).ready(function() {
                     </div>
                 </div>
             `);
+            $('#preview, #manualForm, #btnBack, #btnFront, .scan-box').hide();
         } else {
             $('#result').html(`<div class="alert alert-danger">${response.notification}</div>`);
+            $('#preview, #manualForm, #btnBack, #btnFront, .scan-box').show();
         }
     }
 
@@ -371,12 +471,12 @@ $(document).ready(function() {
             },
             error => {
                 alert("You must allow location access to view this page.");
-                $('body').html("<h5 style='display: flex;align-items: center;height: 100vh;justify-content: center;'>Access Denied. Location permission required. Please Allow Location From Browser</h5>");
+                $('body').html("<h5 style='display: flex;align-items: center;height: 100vh;justify-content: center;text-align: center;'>Access Denied. Location permission required. Please Allow Location From Browser</h5>");
             }
         );
     } else {
         alert("Geolocation is not supported by your browser.");
-        $('body').html("<h5 style='display: flex;align-items: center;height: 100vh;justify-content: center;'>Your browser does not support location access.</h5>");
+        $('body').html("<h5 style='display: flex;align-items: center;height: 100vh;justify-content: center;text-align: center;'>Your browser does not support location access.</h5>");
     }
 });
 </script>

@@ -67,7 +67,8 @@ class Qrcodegenerator extends CI_Controller {
 
 	public function generate_qrcode_with_logo($qr_digit, $book_no) 
 	{
-		$logoPath = FCPATH . 'uploads/qr-thumb.png'; // Logo file (PNG)
+		//$logoPath = FCPATH . 'uploads/qr-thumb.png'; // Logo file (PNG)
+		$logoPath = FCPATH . 'uploads/qr-thumb-2.png'; // Logo file (PNG)
 
 		$options = new \chillerlan\QRCode\QROptions([
 			'eccLevel' => \chillerlan\QRCode\QRCode::ECC_H,
@@ -121,7 +122,7 @@ class Qrcodegenerator extends CI_Controller {
 
 		// Display inline
 		echo '<img src="'.$imgSrc.'" alt="QR Code" width="150px" height="150px">';
-		echo '<p style="margin: 0;position: absolute;left: 23px;font-size: 16px;margin-top: -13px;"><b>'.$qr_digit.' - BN:'.$book_no.'</b></p><br>';
+		echo '<p style="margin: 0;position: absolute;left: 23px;font-size: 16px;margin-top: -13px;"><b>'.$qr_digit.' - BN'.$book_no.'</b></p><br>';
 	}
 	
 	/*function save_qrcode($qrcode, $qr_digit)
@@ -171,7 +172,12 @@ class Qrcodegenerator extends CI_Controller {
 		if (strlen($start) > $qr_digit || strlen($end) > $qr_digit) {
 			echo "Start and End values must be exactly {$qr_digit} digits.";
 			exit;
-		}		
+		}
+		
+		if ($this->count_range($start, $end) === false) {
+            echo "Print upto 100 qrcodes only.";
+			exit;
+		}
 
 	    if(!empty($start) && !empty($end) && !empty($book_no))
 	    {
@@ -227,7 +233,25 @@ class Qrcodegenerator extends CI_Controller {
 	}
 	
 	
-	
+	function count_range($start_input, $end_input, $max_limit = 100)
+	{
+		// Sanitize inputs
+		$start = (int) trim(preg_replace('/\s+/', '', $start_input));
+		$end   = (int) trim(preg_replace('/\s+/', '', $end_input));
+
+		// Validate range
+		if ($start > $end) {
+			return false;
+		}
+
+		$total = ($end - $start) + 1;
+
+		if ($total > $max_limit) {
+			return false;
+		}
+
+		return $total;
+	}	
 	
 	
 	function professional_courier_qrimage()

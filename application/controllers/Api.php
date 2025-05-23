@@ -95,6 +95,7 @@ class Api extends CI_Controller
      */
     public function pass_verify()
     {
+        //sleep(3);
         header('Content-Type: application/json');
 
         // Allow only POST method

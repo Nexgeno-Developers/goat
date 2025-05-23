@@ -52,6 +52,6 @@ if (!function_exists('clear_all_cache')) {
 if (!function_exists('duration')) {
     function cache_duration()
     {
-        return 60; //15 minutes
+        return 300; //5 minutes
     }
 }
