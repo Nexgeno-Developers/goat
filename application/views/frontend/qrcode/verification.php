@@ -428,6 +428,7 @@ $(document).ready(function() {
                     </div>
                 </div>
             `);
+            $('#preview, #manualForm, #btnBack, #btnFront, .scan-box').hide();
         } else {
             $('#result').html(`<div class="alert alert-danger">${response.notification}</div>`);
         }
