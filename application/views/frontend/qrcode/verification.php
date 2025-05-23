@@ -255,7 +255,7 @@ button:focus {
       </li>
       <li class="nav-item" role="presentation">
         <button class="" id="manual-tab" data-toggle="tab" data-target="#manual" type="button" role="tab" aria-controls="manual" aria-selected="false">
-          <i class="fa-solid fa-keyboard"></i> Manual Entry
+          <i class="fa-solid fa-keyboard"></i> Manual Verification
         </button>
       </li>
     </ul>
