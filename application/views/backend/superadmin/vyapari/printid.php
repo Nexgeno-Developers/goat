@@ -75,6 +75,7 @@ td, th {
            <p><b><span>Mob</span>:</b> <?= $vyapari['phone']; ?></p>
            <p><b><span>Loc</span>:</b> <?= $vyapari['locality']; ?></p>
            <p><b><span>State</span>:</b> <?= $vyapari['state']; ?></p>
+           <img width="100px" height="100px" src="uploads/vyapari_qrcode/<?php echo $vyapari['vyapari_id']; ?>.png">
        </div>
         
     </div>

@@ -190,6 +190,36 @@ public function generate_qr_with_logo()
     echo 'QR Code with logo saved to <b>' . $finalSavePath . '</b>';
 }
 
-    
+// public function save_qrcode(string $content, string $savePath, int $scale = 5): bool
+// {
+//     $options = new \chillerlan\QRCode\QROptions([
+//         'eccLevel'    => \chillerlan\QRCode\QRCode::ECC_H,
+//         'outputType'  => \chillerlan\QRCode\QRCode::OUTPUT_IMAGE_PNG,
+//         'imageBase64' => false,
+//         'scale'       => $scale,
+//     ]);
+
+//     $qrImage = (new \chillerlan\QRCode\QRCode($options))->render($content);
+
+//     // Ensure directory exists
+//     $dir = dirname($savePath);
+//     if (!is_dir($dir)) {
+//         mkdir($dir, 0755, true);
+//     }
+
+//     return file_put_contents($savePath, $qrImage) !== false;
+// }
+
+
+    public function test1($vyapari_id = 'v2025-10001') {
+        $content = base64_encode($vyapari_id);
+        $savePath = FCPATH . "uploads/vyapari_qrcode/{$vyapari_id}.png"; // ✅ use double quotes
+
+        if (save_qrcode($content, $savePath)) {
+            echo "QR code saved to: " . $savePath;
+        } else {
+            echo "Failed to save QR code.";
+        }
+    } 
 	
 }

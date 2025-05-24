@@ -88,6 +88,13 @@ class Deonar_model extends CI_Model {
 		
 		if($vyapari_id)
 		{
+            //generate qrcode for vyapari id
+			try {
+				$content = base64_encode($vyapari_id);
+				$savePath = FCPATH . "uploads/vyapari_qrcode/{$vyapari_id}.png";		
+				save_qrcode($content, $savePath);
+			} catch (\Exception $e) { }
+
 			$log = array(
 				'name' => 'vyapari_registration',
 				'description' => '<b>'.vyapari_id($vyapari_id).'</b> registered successfully.',

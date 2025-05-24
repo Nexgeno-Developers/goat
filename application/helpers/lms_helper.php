@@ -1,5 +1,8 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+use chillerlan\QRCode\QRCode;
+use chillerlan\QRCode\QROptions;
+require FCPATH . 'vendor/autoload.php';
 /*
 *  @author   : Creativeitem
 *  date      : November, 2019
@@ -406,4 +409,25 @@ if(!function_exists('sendEmail')){
         }
     
     }  
+}
+
+
+function save_qrcode(string $content, string $savePath, int $scale = 5): bool
+{
+    $options = new \chillerlan\QRCode\QROptions([
+        'eccLevel'    => \chillerlan\QRCode\QRCode::ECC_H,
+        'outputType'  => \chillerlan\QRCode\QRCode::OUTPUT_IMAGE_PNG,
+        'imageBase64' => false,
+        'scale'       => $scale,
+    ]);
+
+    $qrImage = (new \chillerlan\QRCode\QRCode($options))->render($content);
+
+    // Ensure directory exists
+    $dir = dirname($savePath);
+    if (!is_dir($dir)) {
+        mkdir($dir, 0755, true);
+    }
+
+    return file_put_contents($savePath, $qrImage) !== false;
 }
