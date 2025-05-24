@@ -188,7 +188,7 @@ class Qrcodegenerator extends CI_Controller {
             //     //$this->generate_qrcode_with_logo($qrdigit, $book_no);
             // }	
 			
-			$chunkSize = 200; // adjust as per server capability
+			$chunkSize = 10; // adjust as per server capability
 			$total = $end - $start + 1;
 
 			for ($i = 0; $i < $total; $i += $chunkSize) {
