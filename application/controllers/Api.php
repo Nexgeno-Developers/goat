@@ -221,7 +221,7 @@ class Api extends CI_Controller
             $data = [
                 'vyapari_id' => vyapari_id($result['vyapari_id']),
                 'name' => $result['name'],
-                'date' => date(strtotime($result['timestamp']), "Y-m-d H:iA"),
+                'date' => date('d M, Y H:iA', strtotime($result['timestamp'])),
                 'photo' => base_url('uploads/vyapari_photo/' . $result['photo']) . '?' . time()
             ];
             $response = [
