@@ -55,7 +55,17 @@
             <label for="address"><?php echo get_phrase('Location'); ?></label>
             <input type="text" class="form-control" id="address" name="address" maxlength="20" required placeholder="Enter your Location" aria-label="Location">
 
-        </div>    
+        </div>  
+        
+        <div class="form-group col-md-3" id="login_time_group">
+            <label for="login_in_time"><?php echo get_phrase('Login Time'); ?></label>
+            <input type="time" class="form-control" id="login_in_time" name="login_in_time" aria-label="Login Time">
+        </div>
+
+        <div class="form-group col-md-3" id="logout_time_group">
+            <label for="login_out_time"><?php echo get_phrase('Logout Time'); ?></label>
+            <input type="time" class="form-control" id="login_out_time" name="login_out_time" aria-label="Logout Time">
+        </div>
         
         <div class="form-group col-md-6">
             <label for="set_password"><?php echo get_phrase('set_password'); ?></label>

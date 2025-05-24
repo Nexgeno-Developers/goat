@@ -73,6 +73,33 @@ class Login extends CI_Controller {
     			$this->session->set_flashdata('error_message', get_phrase('you_ara_temperory_inactivated_by_superadmin'));
     			redirect(site_url('login'), 'refresh');			    
 			}
+
+
+			date_default_timezone_set('Asia/Kolkata');
+			$current_time = date('H:i:s');
+
+			$login_time  = $row->login_in_time;
+			$logout_time = $row->login_out_time;
+
+
+			if (!empty($login_time) && !empty($logout_time)) {
+				// Case 1: Normal shift (login_time < logout_time)
+				// Case 2: Overnight shift (e.g., 22:00:00 to 06:00:00)
+				if (
+					($login_time <= $logout_time && $current_time >= $login_time && $current_time <= $logout_time) ||
+					($login_time > $logout_time && ($current_time >= $login_time || $current_time <= $logout_time))
+				) {
+					// Time is within allowed range — continue
+				} else {
+					// Time not allowed — redirect with error
+					$this->session->set_flashdata(
+						'error_message',
+						'Login is only allowed between ' . date('h:i A', strtotime($login_time)) . ' and ' . date('h:i A', strtotime($logout_time))
+					);
+					redirect(site_url('login'), 'refresh');
+				}
+			}
+
 			
 			$this->session->set_userdata('user_login_type', true);
 			if($row->role == 'superadmin'){
