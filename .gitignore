@@ -10,9 +10,10 @@ uploads/vyapari_photo/*
 !uploads/emp_photo/
 uploads/certificates/*
 uploads/generated-qrcodes/*
-!uploads/vyapari_qrcode/
+uploads/vyapari_qrcode/
 uploads/vyapari_qrcode/*
 uploads/temp_qr.png
+
 
 
 # Ignore all files in uploads/users
