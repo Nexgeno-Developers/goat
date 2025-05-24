@@ -87,7 +87,7 @@ class Api extends CI_Controller
         $distance = $earthRadius * $c;
 
         // Check if within 1 km radius
-        return $distance <= 30;
+        return $distance <= 3;
     }    
 
     /**
