@@ -1359,6 +1359,25 @@ class Deonar_model extends CI_Model {
 		$update['locality'] = trim($this->input->post('locality'));
 		$update['address'] = trim($this->input->post('address'));
 		$update['phone'] = trim($this->input->post('phone'));
+
+		if (!empty($_FILES['photo']['name'])) {
+			$photoname = time();
+			$update['photo'] = $photoname . '_photo.jpg';
+			$path = 'uploads/vyapari_photo/' . $update['photo'];
+
+			if (move_uploaded_file($_FILES['photo']['tmp_name'], $path)) {
+				$update['photo'] = $update['photo'];
+			} else {
+				$response = array(
+					'status' => false,
+					'notification' => get_phrase('Photo could not be saved. Something went wrong!')
+				);
+
+				return json_encode($response);
+			}
+		}
+
+
 		
 		$this->db->where('vyapari_id', $vyapari_id);
 		$updated = $this->db->update('app_vyapari', $update);	
