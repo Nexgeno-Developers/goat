@@ -149,6 +149,24 @@ if($user_type == 'parent'){
     </li>  
     <?php }*/ ?> 
 
+  <?php //if(access('manage_settings')){ ?>
+  <li class="side-nav-item mt-1">
+    <a target="_blank" href="<?php echo base_url('home/pass_verification'); ?>" class="side-nav-link">
+      <i class="mdi mdi-credit-card-scan"></i>
+      <span> <?php echo get_phrase('Pass verification'); ?> </span>
+    </a>
+  </li> 
+  <?php //} ?>  
+  
+  <?php //if(access('manage_settings')){ ?>
+  <li class="side-nav-item mt-1">
+    <a target="_blank" href="<?php echo base_url('home/vyapari_verification'); ?>" class="side-nav-link">
+      <i class="mdi mdi-credit-card-scan"></i>
+      <span> <?php echo get_phrase('Vyapari verification'); ?> </span>
+    </a>
+  </li> 
+  <?php //} ?>  
+
   <?php if(access('manage_settings')){ ?>
   <li class="side-nav-item mt-1">
     <a href="<?php echo site_url($controller.'/website_settings/other_settings'); ?>" class="side-nav-link">
