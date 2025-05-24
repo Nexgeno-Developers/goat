@@ -316,17 +316,19 @@ class Deonar_model extends CI_Model {
 			if(access('printid_button'))
 			{
     			$btn_print = '<a target="_blank" href="'.site_url('superadmin/manage_vyapari/print/'.$record['vyapari_id']).'" class="btn-sm btn-link">Print ID</a>';
-			
-			if($this->session->userdata('user_id') == 1 || $this->session->userdata('role_type') == 'inward')
-			{
-			    $event = "rightModal('".site_url('modal/popup/vyapari/edit-vyapari/'.$record['vyapari_id'])."','Edit Vyapari')";
-                $btn_edit = '<a href="javascript:void(0);" class="btn-sm btn-link" onclick="'.$event.'">'.get_phrase('edit').'</a>';			    
-			}
 			    
 			}
 			else
 			{
 			    $btn_print = null;
+			}
+
+			$role = $this->session->userdata('role_type');
+			if ($this->session->userdata('user_id') == 1 || in_array($role, ['inward', 'admin']))
+			{
+			    $event = "rightModal('".site_url('modal/popup/vyapari/edit-vyapari/'.$record['vyapari_id'])."','Edit Vyapari')";
+                $btn_edit = '<a href="javascript:void(0);" class="btn-sm btn-link" onclick="'.$event.'">'.get_phrase('edit').'</a>';			    
+			} else {
 			    $btn_edit  = null;
 			}
 			
