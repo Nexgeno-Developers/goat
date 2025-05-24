@@ -227,7 +227,7 @@ function access($action)
 
         elseif($action == 'reports') //report page
         {
-            if($role == 'doctor' || $role == 'bmc' || $role == 'admin' || $role == 'outward' || $role == 'inward' || $role == 'gate_manager' || $role == 'police') //$role == 'admin'
+            if($role == 'doctor' || $role == 'bmc' || $role == 'admin' || $role == 'inward' || $role == 'gate_manager' || $role == 'police') //$role == 'admin'
             {
                 return true;
             }
@@ -262,7 +262,7 @@ function access($action)
         
         elseif($action == 'pass_outward_report')
         {
-            if($role == 'admin' || $role == 'outward' || $role == 'gate_manager')
+            if($role == 'admin' || $role == 'gate_manager')
             {
                 return true;
             }
@@ -273,7 +273,7 @@ function access($action)
         } 
         elseif($action == 'pass_block_report')
         {
-            if($role == 'bmc' || $role == 'admin' || $role == 'outward' || $role == 'inward' || $role == 'gate_manager' ||  $role == 'police')
+            if($role == 'bmc' || $role == 'admin' || $role == 'inward' || $role == 'gate_manager' ||  $role == 'police')
             {
                 return true;
             }
