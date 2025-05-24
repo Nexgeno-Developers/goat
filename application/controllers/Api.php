@@ -67,8 +67,8 @@ class Api extends CI_Controller
     private function is_within_range($userLat, $userLng)
     {
         // Your fixed location (e.g., event location)
-        $targetLat = 19.0738289;  // Example: Mumbai latitude
-        $targetLng = 72.8869815;  // Example: Mumbai longitude
+        $targetLat = 19.0587491;  // Deonar latitude
+        $targetLng = 72.9145986;  // Deonar longitude
 
         // $targetLat = 26.8467;
         // $targetLng = 80.9462;        
@@ -87,7 +87,7 @@ class Api extends CI_Controller
         $distance = $earthRadius * $c;
 
         // Check if within 1 km radius
-        return $distance <= 1;
+        return $distance <= 30;
     }    
 
     /**
@@ -170,4 +170,72 @@ class Api extends CI_Controller
         header('Content-Type: application/json');
         echo json_encode($response);
     }
+
+    /**
+     * API Endpoint: Verify Pass by QR code
+     */
+    public function vyapari_verify()
+    {
+        //sleep(3);
+        header('Content-Type: application/json');
+
+        // Allow only POST method
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            echo json_encode([
+                'status' => false,
+                'notification' => 'Requests not allowed.'
+            ]);
+            return;
+        }
+
+        // Apply rate limit
+        if (!$this->rate_limit_check('verification_requests')) {
+            echo json_encode([
+                'status' => false,
+                'notification' => 'Too many attempts. please try again after sometime.'
+            ]);
+            return;
+        }
+
+
+        $latitude = trim($this->db->escape_str($this->input->post('latitude', true)));
+        $longitude = trim($this->db->escape_str($this->input->post('longitude', true)));
+        if (!$this->is_within_range($latitude, $longitude)) {
+            echo json_encode([
+                'status' => false,
+                'notification' => 'You are not within the allowed location range.'
+            ]); 
+            return;       
+        }        
+
+        $qrcode = trim($this->db->escape_str($this->input->post('qrcode', true)));
+
+        // Fetch data
+        $this->db->select('vyapari_id, name, photo, timestamp');
+        $this->db->from('app_vyapari');
+        $this->db->where('vyapari_id', base64_decode($qrcode));
+        $result = $this->db->get()->row_array();
+
+        // Format response
+        if ($result) {
+            $data = [
+                'vyapari_id' => vyapari_id($result['vyapari_id']),
+                'name' => $result['name'],
+                'date' => date(strtotime($result['timestamp']), "Y-m-d H:iA"),
+                'photo' => base_url('uploads/vyapari_photo/' . $result['photo']) . '?' . time()
+            ];
+            $response = [
+                'status' => true,
+                'notification' => "Vyapari ID is Valid",
+                'data' => $data
+            ];
+        } else {
+            $response = [
+                'status' => false,
+                'notification' => "Invalid Vyapari ID"
+            ];
+        }
+        header('Content-Type: application/json');
+        echo json_encode($response);
+    }    
 }

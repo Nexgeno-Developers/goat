@@ -8,9 +8,15 @@ class Home extends CI_Controller {
         $this->load->model('Settings_model', 'settings_model');
     }
 
-    function verification()
+    function qrcode_verification()
     {
         $page_data['data'] = null;
-		$this->load->view('frontend/qrcode/verification', $page_data);
+		$this->load->view('frontend/qrcode/qrcode_verification', $page_data);
     }
+
+    function vyapari_verification()
+    {
+        $page_data['data'] = null;
+		$this->load->view('frontend/qrcode/vyapari_verification', $page_data);
+    }    
 }
