@@ -851,5 +851,91 @@ class Superadmin extends CI_Controller {
       $referrer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : base_url();
       redirect($referrer);
   } 
+
+  public function excel_import_user(){
+
+
+    // $googleDriveUrl = 'https://drive.google.com/open?id=1s8YlGBfZkLZ0A0cWcqR_jlMc3S4M_DBG';
+
+    // // Target directory and file name
+    // $targetDir = FCPATH . 'uploads/users/';
+    // $filename = 'user_photo_' . time() . '.jpeg'; // or .png if applicable
+    // $targetPath = $targetDir . $filename;
+
+    // // Ensure uploads/users directory exists
+    // if (!is_dir($targetDir)) {
+    //     mkdir($targetDir, 0777, true);
+    // }
+
+    // // Use file_get_contents or cURL
+    // $fileData = file_get_contents($googleDriveUrl);
+
+    // if ($fileData !== false) {
+    //     file_put_contents($targetPath, $fileData);
+    //     echo "✅ File downloaded and saved as: uploads/users/$filename";
+    // } else {
+    //     echo "❌ Failed to download the file.";
+    // }
+
+    // ini_set('auto_detect_line_endings', TRUE);
+
+    // $csvPath = FCPATH . 'uploads/user_data.csv';
+
+    // if (!file_exists($csvPath)) {
+    //     echo "CSV file not found.";
+    //     exit;
+    // }
+
+    // $handle = fopen($csvPath, 'r');
+    // $rowCount = 0;
+    // $inserted = 0;
+    // $duplicates = 0;
+
+    // $this->load->database(); // If using CodeIgniter
+
+    // // Skip header if it exists
+    // fgetcsv($handle);
+
+    // while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+    //     $rowCount++;
+
+    //     // Get data from columns B, C, D, E, H, I (index 1,2,3,4,7,8)
+    //     $userData = [
+    //         'name' => $data[1],
+    //         'email'  => $data[2],
+    //         'password' => sha1(trim($data[8])),
+    //         'role'        => 'superadmin', 
+    //         'role_type'  => $data[4],
+    //         'mobile'    =>  $data[3],
+    //         'address'   =>  $data[7],
+    //         'photo'     =>  $data[9],
+    //         'user_status'     => 'active',
+    //     ];
+
+    //     // Check if email already exists
+    //     $this->db->where('email', $userData['email']);
+    //     $query = $this->db->get('users');
+
+    //     if ($query->num_rows() == 0) {
+    //         $this->db->insert('users', $userData);
+    //         $inserted++;
+    //     } else {
+    //         echo "⚠️ Duplicate email skipped: " . $userData['email'] . "<br>";
+
+    //         $this->db->where('email', $userData['email']);
+    //         $this->db->update('users', $userData);
+    //         echo "🔁 Updated existing user: " . $userData['email'] . "<br>";
+
+    //         $duplicates++;
+    //     }
+    // }
+
+    // fclose($handle);
+
+    // echo "✅ Total records read: $rowCount<br>";
+    // echo "✅ Successfully inserted: $inserted<br>";
+    // echo "⚠️ Duplicate entries skipped: $duplicates<br>";
+
+  }
   
 }
