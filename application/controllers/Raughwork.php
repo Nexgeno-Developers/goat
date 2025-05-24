@@ -220,6 +220,6 @@ public function generate_qr_with_logo()
         } else {
             echo "Failed to save QR code.";
         }
-    } 
+    } //
 	
 }
