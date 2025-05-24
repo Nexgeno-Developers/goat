@@ -596,6 +596,16 @@ class Superadmin extends CI_Controller {
   }*/
 
   public function dashboard() {
+
+      if($this->session->userdata('role_type') == 'inward' || $this->session->userdata('role_type') == 'outward'){
+        if($this->session->userdata('role_type') == 'inward'){
+          redirect(route('manage_vyapari'));
+        } else {
+          redirect(route('exit_verification'));
+        }
+      }
+
+
       $cache_duration = cache_duration();
       $CI = &get_instance();  // Get CI instance once
 
