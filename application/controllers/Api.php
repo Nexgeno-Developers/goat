@@ -67,8 +67,8 @@ class Api extends CI_Controller
     private function is_within_range($userLat, $userLng)
     {
         // Your fixed location (e.g., event location)
-        $targetLat = 19.0587491;  // Deonar latitude
-        $targetLng = 72.9145986;  // Deonar longitude
+        $targetLat = 19.0565457;  // Deonar latitude
+        $targetLng = 72.917362;  // Deonar longitude 19.0565457,72.917362
 
         // $targetLat = 26.8467;
         // $targetLng = 80.9462;        
@@ -86,8 +86,8 @@ class Api extends CI_Controller
         $c = 2 * atan2(sqrt($a), sqrt(1-$a));
         $distance = $earthRadius * $c;
 
-        // Check if within 1 km radius
-        return $distance <= 3;
+        // Check if within 5 km radius
+        return $distance <= 5;
     }    
 
     /**
