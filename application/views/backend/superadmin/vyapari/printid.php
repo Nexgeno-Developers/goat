@@ -13,7 +13,7 @@
 
 .vyapari_coluom_one
 {
-    width:20%;
+    width:23%;
     float:left;
 }
 
@@ -21,12 +21,12 @@
 {
     
     float:right;
-    margin-top:10px;
+    margin-top:5px;
 }
 .vyapari_coluom_two
 {
-    width:80%;
-    padding-left:20px;
+    width:77%;
+    padding-left:10px;
     float:left;
 }
 
@@ -40,6 +40,11 @@
     width:380px;
     text-align:center;
     padding-bottom:5px;
+}
+.font16
+{
+    font-size:12px;
+    line-height:17px;
 }
 td, th {
         padding:0px 8px 8px 8px;
@@ -61,8 +66,9 @@ td, th {
         <div>
       <img width="350px" height="30px" src="uploads/heading_images_bg.png?<?php echo time(); ?>" style="position:absolute; left:-25px; bottom:130px; top:-35px;">
       </div>
-       <div class="vyapari_coluom_one">
+       <div class="vyapari_coluom_one" style="margin-left:-30px;">
            <?= $vyapari['photo'] ? '<img width="146px" height="116px" src="uploads/vyapari_photo/'.$vyapari['photo']. '?' . time() . '">' : null; ?>
+           <p style=" font-size:12px; padding-top:125px; margin-left:10px;"><b><span>Vyapari No</span>:</b> <?= vyapari_id($vyapari['vyapari_id']); ?></p>
        </div> 
        
        <div class="vyapari_coluom_two">
@@ -70,12 +76,12 @@ td, th {
            
                 
                 
-           <p><b><span>Vyapari ID</span>: <?= vyapari_id($vyapari['vyapari_id']); ?></b></p>
-           <p style="width:200px"><b><span>Name</span>:</b> <?= $vyapari['name']; ?></p>
-           <p><b><span>Mob</span>:</b> <?= $vyapari['phone']; ?></p>
-           <p><b><span>Loc</span>:</b> <?= $vyapari['locality']; ?></p>
-           <p><b><span>State</span>:</b> <?= $vyapari['state']; ?></p>
-           <img width="100px" height="100px" src="uploads/vyapari_qrcode/<?php echo $vyapari['vyapari_id']; ?>.png">
+           
+           <p class="font16" style="width:200px"><b><span>Name</span>:</b> <?= $vyapari['name']; ?></p>
+           <p class="font16" ><b><span>Mob</span>:</b> <?= $vyapari['phone']; ?></p>
+           <p class="font16" ><b><span>Loc</span>:</b> <?= $vyapari['locality']; ?></p>
+           <p class="font16" ><b><span>State</span>:</b> <?= $vyapari['state']; ?></p>
+           <img style="margin-top:5px; margin-left:-7px;" width="75px" height="75px" src="uploads/vyapari_qrcode/<?php echo $vyapari['vyapari_id']; ?>.png">
        </div>
         
     </div>
