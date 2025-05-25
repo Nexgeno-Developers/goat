@@ -21,8 +21,9 @@ p
 
 .vyapari_coluom_one img
 {
-    width:70px;
-    margin-top:0px;
+    width:90px;
+    margin-top:10px;
+    margin-bottom:10px;
 }
 .vyapari_coluom_two
 {
@@ -69,7 +70,7 @@ td, th {
        
        
        
-       <div class="vyapari_coluom_two" style="margin-top:0px; padding-left:20px; padding-bottom:5px; padding-right:20px; text-align:left">
+       <div class="vyapari_coluom_two" style="margin-top:10px; padding-left:20px; padding-bottom:5px; padding-right:20px; text-align:left">
            
            
                 
@@ -81,11 +82,13 @@ td, th {
                    <td style="font-size:10px; padding:0px"><b> <?= $vyapari['id']; ?></b></td>
                </tr>
                
-               <tr style="padding:0px;">
+               <?php /*<tr style="padding:0px;">
                    <td style="font-size:10px; width:32px; padding:0px">Email</td>
                    <td style="font-size:10px; padding:0px">: </td>
                    <td style="font-size:10px; padding:0px"> <?= $vyapari['email']; ?></td>
                </tr >
+               
+               */?>
                
                <tr style="padding:0px;">
                    <td style="font-size:10px; width:32px; padding:0px">Place</td>
@@ -99,9 +102,9 @@ td, th {
                    <td style="font-size:10px; padding:0px"> <?= !empty($vyapari['mobile']) ? $vyapari['mobile'] : '-' ?></td>
                </tr>
            </table>
-           <p style="padding-top:10px;"><b><span>Emerg No &nbsp;</span>:</b> +91 9773375525 <br> &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp;  &nbsp; &nbsp;  &nbsp; &nbsp;+91 9029075525</p>
+           <!--<p style="padding-top:10px;"><b><span>Emerg No &nbsp;</span>:</b> ‪+91 9773375525‬ <br> &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp;  &nbsp; &nbsp;  &nbsp; &nbsp;‪+91 9029075525‬</p>-->
            
-           <p style="padding-top:5px; text-align:left;">Signature or Stamp -------</p>
+           <p style="padding-top:40px;padding-bottom:5px; text-align:left;">Signature or Stamp -------</p>
            
            
        </div>
@@ -114,5 +117,5 @@ td, th {
 <div class="position:absolute; left:80px; top:150px"></div>
 
         
-         </body>
-</html>           
+         </body>
+</html>
