@@ -1107,8 +1107,11 @@ function create_user()
 		//$data['modified'] = date('Y-m-d H:i:s');
 		$data['watch_history'] = '[]';	
 		
-		$data['login_in_time'] = html_escape($this->input->post('login_in_time'));
-		$data['login_out_time'] = html_escape($this->input->post('login_out_time'));
+		$login_in_time_raw = $this->input->post('login_in_time');
+		$login_out_time_raw = $this->input->post('login_out_time');
+
+		$data['login_in_time'] = ($login_in_time_raw !== '') ? html_escape($login_in_time_raw) : null;
+		$data['login_out_time'] = ($login_out_time_raw !== '') ? html_escape($login_out_time_raw) : null;
 
 		// check email duplication
 		$duplication_status = $this->check_duplication('on_create', $data['email']);
@@ -1167,8 +1170,11 @@ function create_user()
 	    $data['address'] = html_escape($this->input->post('address'));
 	    $data['email'] = html_escape($this->input->post('email'));
 
-		$data['login_in_time'] = html_escape($this->input->post('login_in_time'));
-		$data['login_out_time'] = html_escape($this->input->post('login_out_time'));
+		$login_in_time_raw = $this->input->post('login_in_time');
+		$login_out_time_raw = $this->input->post('login_out_time');
+
+		$data['login_in_time'] = ($login_in_time_raw !== '') ? html_escape($login_in_time_raw) : null;
+		$data['login_out_time'] = ($login_out_time_raw !== '') ? html_escape($login_out_time_raw) : null;
 	    
 	   if($this->input->post('change_email')) {
             // Check email duplication
