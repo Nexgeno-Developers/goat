@@ -64,31 +64,65 @@ class Api extends CI_Controller
     /**
      * API Endpoint: Location
      */
+    // private function is_within_range($userLat, $userLng)
+    // {
+    //     //return true;
+    //     // Your fixed location (e.g., event location)
+    //     $targetLat = 19.0565457;  // Deonar latitude
+    //     $targetLng = 72.917362;  // Deonar longitude 19.0565457,72.917362
+
+    //     // $targetLat = 26.8467;
+    //     // $targetLng = 80.9462;        
+
+    //     // Calculate distance using Haversine formula
+    //     $earthRadius = 6371; // Radius of Earth in km
+
+    //     $dLat = deg2rad($targetLat - $userLat);
+    //     $dLng = deg2rad($targetLng - $userLng);
+
+    //     $a = sin($dLat/2) * sin($dLat/2) +
+    //         cos(deg2rad($userLat)) * cos(deg2rad($targetLat)) *
+    //         sin($dLng/2) * sin($dLng/2);
+
+    //     $c = 2 * atan2(sqrt($a), sqrt(1-$a));
+    //     $distance = $earthRadius * $c;
+
+    //     // Check if within 5 km radius
+    //     return $distance <= 3;
+    // }  
+    
     private function is_within_range($userLat, $userLng)
     {
-        return true;
-        // Your fixed location (e.g., event location)
-        $targetLat = 19.0565457;  // Deonar latitude
-        $targetLng = 72.917362;  // Deonar longitude 19.0565457,72.917362
+        // Fixed location (Deonar)
+        $targetLat = 19.0565457;
+        $targetLng = 72.917362;
 
-        // $targetLat = 26.8467;
-        // $targetLng = 80.9462;        
+        // Earth’s radius in KM
+        $earthRadius = 6371;
 
-        // Calculate distance using Haversine formula
-        $earthRadius = 6371; // Radius of Earth in km
+        // Convert all to radians
+        $userLatRad = deg2rad($userLat);
+        $userLngRad = deg2rad($userLng);
+        $targetLatRad = deg2rad($targetLat);
+        $targetLngRad = deg2rad($targetLng);
 
-        $dLat = deg2rad($targetLat - $userLat);
-        $dLng = deg2rad($targetLng - $userLng);
+        // Differences
+        $latDelta = $targetLatRad - $userLatRad;
+        $lngDelta = $targetLngRad - $userLngRad;
 
-        $a = sin($dLat/2) * sin($dLat/2) +
-            cos(deg2rad($userLat)) * cos(deg2rad($targetLat)) *
-            sin($dLng/2) * sin($dLng/2);
+        // Haversine formula
+        $a = sin($latDelta / 2) * sin($latDelta / 2) +
+            cos($userLatRad) * cos($targetLatRad) *
+            sin($lngDelta / 2) * sin($lngDelta / 2);
 
-        $c = 2 * atan2(sqrt($a), sqrt(1-$a));
+        $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
         $distance = $earthRadius * $c;
 
-        // Check if within 5 km radius
-        return $distance <= 50;
+        // Optional: log for debug
+        // error_log("Distance from Deonar: " . $distance . " km");
+
+        // Check if within 2 km
+        return $distance <= 2;
     }    
 
     /**
