@@ -877,64 +877,135 @@ class Superadmin extends CI_Controller {
     //     echo "❌ Failed to download the file.";
     // }
 
-    // ini_set('auto_detect_line_endings', TRUE);
+    ini_set('auto_detect_line_endings', TRUE);
 
-    // $csvPath = FCPATH . 'uploads/user_data.csv';
+    $csvPath = FCPATH . 'uploads/user_data.csv';
 
-    // if (!file_exists($csvPath)) {
-    //     echo "CSV file not found.";
-    //     exit;
-    // }
+    if (!file_exists($csvPath)) {
+        echo "CSV file not found.";
+        exit;
+    }
 
-    // $handle = fopen($csvPath, 'r');
-    // $rowCount = 0;
-    // $inserted = 0;
-    // $duplicates = 0;
+    $handle = fopen($csvPath, 'r');
+    $rowCount = 0;
+    $inserted = 0;
+    $duplicates = 0;
+    $allProcessedEmails = [];
 
-    // $this->load->database(); // If using CodeIgniter
+    $this->load->database(); // If using CodeIgniter
 
-    // // Skip header if it exists
-    // fgetcsv($handle);
+    // Skip header if it exists
+    fgetcsv($handle);
 
-    // while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-    //     $rowCount++;
+    while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+        $rowCount++;
 
-    //     // Get data from columns B, C, D, E, H, I (index 1,2,3,4,7,8)
-    //     $userData = [
-    //         'name' => $data[1],
-    //         'email'  => $data[2],
-    //         'password' => sha1(trim($data[8])),
-    //         'role'        => 'superadmin', 
-    //         'role_type'  => $data[4],
-    //         'mobile'    =>  $data[3],
-    //         'address'   =>  $data[7],
-    //         'photo'     =>  $data[9],
-    //         'user_status'     => 'active',
-    //     ];
+        // Get data from columns B, C, D, E, H, I (index 1,2,3,4,7,8)
+        $userData = [
+            'name' => $data[1],
+            'email'  => $data[2],
+            'password' => sha1(trim($data[8])),
+            'role'        => 'superadmin', 
+            'role_type'  => $data[4],
+            'mobile'    =>  $data[3],
+            'address'   =>  $data[7],
+            'photo'     =>  $data[9],
+            'user_status'     => 'active',
+        ];
 
-    //     // Check if email already exists
-    //     $this->db->where('email', $userData['email']);
-    //     $query = $this->db->get('users');
+        // Check if email already exists
+        // $this->db->where('email', $userData['email']);
+        // $query = $this->db->get('users');
 
-    //     if ($query->num_rows() == 0) {
-    //         $this->db->insert('users', $userData);
-    //         $inserted++;
-    //     } else {
-    //         echo "⚠️ Duplicate email skipped: " . $userData['email'] . "<br>";
+        // if ($query->num_rows() == 0) {
+            // $this->db->insert('users', $userData);
 
-    //         $this->db->where('email', $userData['email']);
-    //         $this->db->update('users', $userData);
-    //         echo "🔁 Updated existing user: " . $userData['email'] . "<br>";
+            $subject = "Deonar Goat, Your Account Has Been Created!";
+            $body = '
+                <p>Dear User, <b>'.ucfirst($userData['name']).'</b></p>
+                <p>Please find the relevant details below.</p>
+                <p><strong>Email:</strong> '.$userData['email'].'</p>
+                <p><strong>Password:</strong> '.trim($data[8]).'</p>
+                <p>You can log in here: <a href="' . base_url('login') . '" target="_blank">' . base_url('login') . '</a></p>
+                <br>
+                <p><b>Best regards</b>,<br><b>Nexgeno Developer Team</b></p>
+              ';
 
-    //         $duplicates++;
-    //     }
-    // }
+            sendEmail($userData['email'], $subject, $body);
+            $allProcessedEmails[] = $userData['email'];
+            $inserted++;
+        // } else {
+        //     // echo "⚠️ Duplicate email skipped: " . $userData['email'] . "<br>";
 
-    // fclose($handle);
+        //     // $this->db->where('email', $userData['email']);
+        //     // $this->db->update('users', $userData);
+        //     // echo "🔁 Updated existing user: " . $userData['email'] . "<br>";
 
-    // echo "✅ Total records read: $rowCount<br>";
-    // echo "✅ Successfully inserted: $inserted<br>";
-    // echo "⚠️ Duplicate entries skipped: $duplicates<br>";
+			  //     $subject = "Deonar Goat, Your Account Has Been Updated!";
+        //     $body = '
+        //         <p>Dear User, <b>'.ucfirst($userData['name']).'</b></p>
+        //         <p>Please find the relevant details below.</p>
+        //         <p><strong>Email:</strong> '.$userData['email'].'</p>
+        //         <p><strong>Password:</strong> '.trim($data[8]).'</p>
+        //         <p>You can log in here: <a href="' . base_url('login') . '" target="_blank">' . base_url('login') . '</a></p>
+        //         <br>
+        //         <p><b>Best regards</b>,<br><b>Nexgeno Developer Team</b></p>
+        //       ';
+
+        //     sendEmail($userData['email'], $subject, $body);
+        //     $allProcessedEmails[] = $userData['email'];
+        //     $duplicates++;
+        // }
+    }
+
+    fclose($handle);
+
+    echo "✅ Total records read From Excel: $rowCount<br>";
+    echo "✅ Email Send To the User by Excel Data: $inserted<br>";
+    // echo "⚠️ Existing User Updated: $duplicates<br>";
+
+
+    $allProcessedEmails = array_unique($allProcessedEmails);
+
+    // Now fetch active users not in this email list
+    $this->db->where('user_status', 'active');
+    $this->db->where('id !=', 1);
+    $this->db->where_not_in('email', $allProcessedEmails);
+    $query = $this->db->get('users');
+
+    $remainingUsers = $query->result();
+
+    foreach ($remainingUsers as $user) {
+        // $newPassword = substr(str_shuffle('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'), 0, 8);
+        // $hashedPassword = sha1($newPassword); // Use bcrypt if possible
+
+        $name = preg_replace('/\s+/', '', $user->name); // Remove all spaces
+        $prefix = substr($name, 0, 4); // Take the first 4 characters
+        $newPassword = $prefix . '@123';
+        $hashedPassword = sha1($newPassword);
+
+        // Update password
+        $this->db->where('id', $user->id);
+        $this->db->update('users', ['password' => $hashedPassword]);
+
+        echo "<br>🔄 <b>Email :</b> " . $user->email . " / <b>Passwords :</b> " . $newPassword . "<br>";
+
+        // Send updated password email
+        $subject = "Deonar Goat, Your Password Has Been Reset!";
+        $body = '
+            <p>Dear User, <b>'.ucfirst($user->name).'</b></p>
+            <p>Your password has been reset as part of a system update.</p>
+            <p><strong>Email:</strong> '.$user->email.'</p>
+            <p><strong>New Password:</strong> '.$newPassword.'</p>
+            <p>You can log in here: <a href="' . base_url('login') . '" target="_blank">' . base_url('login') . '</a></p>
+            <br>
+            <p><b>Best regards</b>,<br><b>Nexgeno Developer Team</b></p>
+        ';
+
+        sendEmail($user->email, $subject, $body);
+    }
+
+    echo "<br>🔄 Passwords reset for remaining active users: " . count($remainingUsers) . "<br>";
 
   }
   
