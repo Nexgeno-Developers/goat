@@ -125,7 +125,7 @@ function access($action)
         }
         elseif($action == 'manage_pass_button') //block /unblock pass of vyapari
         {
-            if($role == 'inward' || $role == 'gate_manager' || $role == 'admin')
+            if($role == 'inward' || $role == 'gate_manager' || $role == 'admin' || $role == 'doctor')
             {
                 return true;
             }
@@ -137,9 +137,9 @@ function access($action)
         
          elseif($action == 'manage_bulk_pass_button') //block /unblock pass of vyapari
         {
-            if($role == 'inward')
+            if($role == 'doctor')
             {
-                return false;
+                return true;
             }
             else
             {
@@ -273,7 +273,7 @@ function access($action)
         } 
         elseif($action == 'pass_block_report')
         {
-            if($role == 'bmc' || $role == 'admin' || $role == 'inward' || $role == 'gate_manager' ||  $role == 'police')
+            if($role == 'bmc' || $role == 'admin' || $role == 'inward' || $role == 'gate_manager' ||  $role == 'police' || $role == 'doctor')
             {
                 return true;
             }
@@ -284,7 +284,7 @@ function access($action)
         }  
         elseif($action == 'pandol_info_report')
         {
-            if($role == 'doctor' || $role == 'admin')
+            if($role == 'doctor' || $role == 'admin' || $role == 'bmc')
             {
                 return true;
             }
