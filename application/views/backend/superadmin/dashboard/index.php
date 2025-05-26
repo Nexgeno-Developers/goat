@@ -145,7 +145,7 @@
                             <div class="card-icon">
                                 <img src="../assets/backend/images/arrow_icon10.svg" alt="">
                             </div>
-                            <p class="card-category"><?php echo get_phrase('Admins with Active Status'); ?> </p>
+                            <p class="card-category"><?php echo get_phrase('Staff and Members'); ?> </p>
                             <h3 class="card-title"> 
                             <?php
                                echo $active_admins;
