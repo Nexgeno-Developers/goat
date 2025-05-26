@@ -277,9 +277,9 @@ img.lohimg {
                         </div>
                     </form>*/ ?>
 
-<div class="">
+                 <!-- <div class="">
                     <a href="uploads/goatdeonar.apk" download> <img class="download_img" src="<?php echo base_url('assets/backend/images/download_banner.webp'); ?>" alt="Login Image"></a>
-                </div>
+                </div> -->
              
                 </div> 
             </div> 
