@@ -93,6 +93,7 @@ class Api extends CI_Controller
     
     private function is_within_range($userLat, $userLng)
     {
+        return true;
         // Fixed location (Deonar)
         $targetLat = 19.0565457;
         $targetLng = 72.917362;
