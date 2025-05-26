@@ -189,7 +189,7 @@ class Api extends CI_Controller
         if ($result) {
             $data = [
                 'vyapari_id' => vyapari_id($result['vyapari_id']),
-                'name' => $result['name'],
+                'name' => ucfirst($result['name']),
                 'photo' => base_url('uploads/vyapari_photo/' . $result['photo']) . '?' . time()
             ];
             $response = [
@@ -256,7 +256,7 @@ class Api extends CI_Controller
         if ($result) {
             $data = [
                 'vyapari_id' => vyapari_id($result['vyapari_id']),
-                'name' => $result['name'],
+                'name' => ucfirst($result['name']),
                 'date' => date('d M, Y H:iA', strtotime($result['timestamp'])),
                 'photo' => base_url('uploads/vyapari_photo/' . $result['photo']) . '?' . time()
             ];
