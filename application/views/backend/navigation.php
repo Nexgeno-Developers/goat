@@ -60,7 +60,7 @@ if($user_type == 'parent'){
     
     <?php if(access('master_list')){ ?>
         <li class="side-nav-item sub_menu">
-           <a href="javascript: void(0);" class="side-nav-link">
+           <a href="javascript: void(0);" class="side-nav-link" style="pointer-events: none;">
            <i class="mdi mdi-database"></i>
            <span><?php echo get_phrase('Master'); ?></span>
            </a>
@@ -85,7 +85,7 @@ if($user_type == 'parent'){
 
     <?php if(access('reports')){ ?>
     <li class="side-nav-item sub_menu">
-       <a href="javascript: void(0);" class="side-nav-link">
+       <a href="javascript: void(0);" class="side-nav-link" style="pointer-events: none;">
        <i class="mdi mdi-book"></i>
        <span><?php echo get_phrase('reports'); ?></span>
        </a>
