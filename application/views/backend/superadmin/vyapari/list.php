@@ -24,6 +24,7 @@
 			 "order": [[ 1, "desc" ]],
     		dom: 'lBfrtip',
     		buttons: [
+				<?php if($this->session->userdata('role_type') != 'inward'){ ?>
     		    {
                     extend: 'csvHtml5',
                     filename: 'registered-vyapari-report', 
@@ -33,7 +34,8 @@
                         columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
                     }                    
                 }
-            ],			 
+				<?php } ?>		
+            ],
 			 'columns': [
 			        { data: 'sr_no' },
 					{ data: 'vyapari_id' },

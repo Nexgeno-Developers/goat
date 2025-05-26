@@ -101,6 +101,7 @@
     			 "order": [[ 1, "desc" ]],
         		dom: 'lBfrtip',
         		buttons: [
+                    <?php if($this->session->userdata('role_type') != 'inward'){ ?>
         		    {
                         extend: 'csvHtml5',
                         filename: 'inward-passes', 
@@ -110,6 +111,7 @@
                             columns: [ 0, 1, 2, 3, 4 ]
                         }                    
                     }
+                    <?php } ?>		
                 ],			 
     			 'columns': [
     			        { data: 'sr_no' },
