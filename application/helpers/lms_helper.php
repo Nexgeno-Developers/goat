@@ -159,7 +159,7 @@ function access($action)
         }
         elseif($action == 'print_user_button') //user activate
         {
-            if($role == 'gate_manager')
+            if($role == 'gate_manager' || $role == 'admin')
             {
                 return true;
             }
@@ -296,7 +296,7 @@ function access($action)
 
         elseif($action == 'statewise_vyapari_report')
         {
-            if($role == 'bmc' || $role == 'police')
+            if($role == 'bmc' || $role == 'police' || $role == 'doctor')
             {
                 return true;
             }
@@ -308,7 +308,7 @@ function access($action)
 
         elseif($action == 'statewise_goat_report')
         {
-            if($role == 'bmc' || $role == 'police')
+            if($role == 'bmc' || $role == 'police' || $role == 'doctor')
             {
                 return true;
             }
