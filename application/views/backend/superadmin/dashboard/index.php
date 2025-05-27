@@ -217,7 +217,7 @@
 <script>
 var currentDate = new Date();
 
-var day = 20;
+var day = new Date().getDate(); //20;
 var current_month = currentDate.getMonth() + 1;
 
 var start_date =  <?php echo $startdate ?>;
