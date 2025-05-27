@@ -170,14 +170,14 @@ class Cronjob extends CI_Controller {
             $email_bmc = ['rashid.makent@gmail.com'];
             $ccList = ['webdeveloper@nexgeno.in'];
         }
-        echo '<pre>';
-        print_r($email_bmc);
-        print_r($ccList);
-        print_r($logoUrl);
-        echo '</pre>';
+        // echo '<pre>';
+        // print_r($email_bmc);
+        // print_r($ccList);
+        // print_r($logoUrl);
+        // echo '</pre>';
         
         $test = sendEmail($email_bmc, $subject, $body, $ccList);
-        var_dump($test);
+        //var_dump($test);
 
     }
 
