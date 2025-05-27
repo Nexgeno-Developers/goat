@@ -9,7 +9,13 @@
     <div class="form-row">
 
         <div class="form-group col-md-4">
-            <label for="photo"><?php echo get_phrase('photo'); ?></label>
+            <label for="photo"><?php echo get_phrase('photo'); ?>
+            <?php 
+                echo $vyapari['photo'] 
+                    ? '<a target="_blank" href="' . base_url('uploads/vyapari_photo/' . $vyapari['photo']) . '">View</a>' 
+                    : '';  
+            ?>         
+        </label>
             <input type="file" class="form-control" name="photo" accept="image/*">
         </div>
 
