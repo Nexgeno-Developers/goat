@@ -42,15 +42,20 @@ $users = $this->db->where('id !=', 1)->where('id !=', $this->session->userdata('
             <td>
                 
                 <?php if(access('manage_user_button')){ ?>
-
+                   
+                  <?php if (in_array($this->session->userdata('role_type'), ['admin', 'gate_manager', 'superadmin'])){ ?>
+                     <?php if(access('print_user_button')){ ?>
+                          <a target="_blank" class="btn-sm btn-secondary" href="<?php echo base_url('superadmin/manage_admins/print/'.$user['id']); ?>">Print</a>
+                      <?php  } ?>
+                    <?php } ?>
                 
                   <?php if (in_array($this->session->userdata('role_type'), ['admin', 'gate_manager'])){ ?>
 
                     <?php if (in_array($user['role_type'], ['inward', 'outward'])){ ?>
 
-                      <?php if(access('print_user_button')){ ?>
+                      <?php /*if(access('print_user_button')){ ?>
                           <a target="_blank" class="btn-sm btn-secondary" href="<?php echo base_url('superadmin/manage_admins/print/'.$user['id']); ?>">Print</a>
-                      <?php  } ?>
+                      <?php  }*/ ?>
 
                       <?php if($user['user_status'] == 'active'){ ?>
                         <!-- item-->
@@ -68,9 +73,9 @@ $users = $this->db->where('id !=', 1)->where('id !=', $this->session->userdata('
 
                   <?php } else { ?>
 
-                    <?php if(access('print_user_button')){ ?>
+                    <?php /*if(access('print_user_button')){ ?>
                         <a target="_blank" class="btn-sm btn-secondary" href="<?php echo base_url('superadmin/manage_admins/print/'.$user['id']); ?>">Print</a>
-                    <?php }  ?>
+                    <?php }*/  ?>
 
                     <?php if($user['user_status'] == 'active'){ ?>
                       <!-- item-->
