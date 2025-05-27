@@ -102,7 +102,7 @@ class Cronjob extends CI_Controller {
 
         date_default_timezone_set('Asia/Kolkata');
         $subject = "Goat Movement Report Till Now " . date('d-M-Y h:i:s A');
-        $logoUrl = $this->settings_model->get_logo_light();
+        $logoUrl = $this->settings_model->get_logo_light().'?v='.time();
         $body = '
 <html>
 <head>
