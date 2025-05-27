@@ -52,3 +52,27 @@
 	  $.NotificationApp.send("<?php echo get_phrase('oh_snap'); ?>!", "<?php echo get_phrase('please_fill_all_the_required_fields'); ?>" ,"top-right","rgba(0,0,0,0.2)","error");
 	}
 </script>
+
+<script>
+	const login_time = '<?php echo $this->session->userdata('login_time'); ?>'; // e.g. "11:00:00"
+	const logout_time = '<?php echo $this->session->userdata('logout_time'); ?>'; // e.g. "23:15:00"
+	const current_time = '<?php echo date("H:i:s"); ?>'; // server time
+
+	console.log("LOGIN TIME : " + login_time);
+	console.log("LOGOUT TIME : " + logout_time);
+	console.log("SERVER TIME : " + current_time);
+
+	if (login_time && logout_time) {
+		// Convert to comparable numbers (HHMMSS)
+		const toComparable = (timeStr) => parseInt(timeStr.replace(/:/g, ''));
+
+		const current = toComparable(current_time);
+		const login = toComparable(login_time);
+		const logout = toComparable(logout_time);
+
+		if (current < login || current > logout) {
+			alert("You are being logged out. Your shift time has ended.");
+			window.location.href = "<?php echo base_url('login/logout'); ?>";
+		}
+	}
+</script>

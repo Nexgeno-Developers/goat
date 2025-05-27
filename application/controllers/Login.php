@@ -102,6 +102,10 @@ class Login extends CI_Controller {
 
 			
 			$this->session->set_userdata('user_login_type', true);
+
+			$this->session->set_userdata('login_time', $login_time);
+			$this->session->set_userdata('logout_time', $logout_time);
+
 			if($row->role == 'superadmin'){
 				$this->session->set_userdata('superadmin_login', true);
 				$this->session->set_userdata('user_id', $row->id);

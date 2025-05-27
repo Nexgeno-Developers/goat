@@ -48,7 +48,7 @@
         
         <div class="form-group col-md-6" id="gate_no">
             <label for="gate_no"><?php echo get_phrase('gate_no'); ?></label>
-            <input type="text" class="form-control" name="gate_no" required>
+            <input type="text" class="form-control" name="gate_no" value="0" required>
         </div> 
         
         <div class="form-group col-md-6" id="address">
