@@ -125,7 +125,7 @@ class Cronjob extends CI_Controller {
         </tr>
         <tr>
             <td style="padding:20px; padding-top:0px !important;">
-                <h2 style="color:#333333; margin-bottom:20px; text-align:center; margin-top:0px;">Goat Movement Summary Report</h2>
+                <h2 style="color:#333333; margin-bottom:20px; text-align:center; margin-top:0px;">Goat Movement Summary Report Till Now '. date('d-M-Y h:i:s A') .'</h2>
                 <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse: collapse; font-size:14px;">
                     <thead>
                         <tr>
