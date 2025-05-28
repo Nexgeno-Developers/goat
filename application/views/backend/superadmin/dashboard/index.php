@@ -355,10 +355,14 @@ new Chart("myChart", {
 $(document).ready(function() {
     var today = new Date().getDate();
     for (var i = 0; i < xValues.length; i++) {
+
+        var dayx = xValues[i];
+        var labelMonthYear = (dayx >= 21) ? 'May 2025' : 'June 2025';
+
         if (xValues[i] <= today) {
             var row = '<tr>' +
                 '<td>' + (i + 1)  + '</td>' +
-                '<td>' + xValues[i] + ' May 2025</td>' +
+                '<td>' + xValues[i] + ' ' + labelMonthYear + '</td>' +
                 '<td>' + yValuesIN[i] + '</td>' +
                 '<td>' + yValuesOut[i] + '</td>' +
                 '</tr>';
