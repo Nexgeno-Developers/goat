@@ -120,7 +120,7 @@ if($user_type == 'parent'){
           
           <?php if(access('menu_agent')){ ?>
           <li>
-             <a href="<?php echo site_url($controller.'/reports/gwala'); ?>">Agent (Gowala)</a>
+             <a href="<?php echo site_url($controller.'/reports/gwala'); ?>">Agent (Dawanwala)</a>
           </li> 
           <?php } ?>
 
