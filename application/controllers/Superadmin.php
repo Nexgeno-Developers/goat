@@ -457,7 +457,7 @@ class Superadmin extends CI_Controller {
             if (empty($param1))
             {
                 $page_data['folder_name']  = 'gwala-users';
-                $page_data['page_title'] = 'Gwala Users';
+                $page_data['page_title'] = 'Gawala Users';
                 $this->load->view('backend/index', $page_data);
             }    
     }

@@ -51,6 +51,12 @@ $users = $this->db->order_by('id', 'desc')->get('app_gwala')->result_array();
                 <a href="javascript:void(0);" class="btn-sm btn-success" onclick="rightModal('<?php echo site_url('modal/popup/gwala-users/edit/'.$user['id'])?>', '<?php echo get_phrase('edit_gawala'); ?>');"><?php echo get_phrase('edit'); ?></a>
                 
                 <?php } ?>
+
+                <?php if($this->session->userdata('role_type') == 'inward') { ?>
+
+                  <a href="javascript:void(0);" class="btn-sm btn-success" onclick="rightModal('<?php echo site_url('modal/popup/gwala-users/edit/'.$user['id'])?>', '<?php echo get_phrase('edit_gawala'); ?>');"><?php echo get_phrase('edit'); ?></a>
+                  
+                <?php } ?>
                 
             </td>
           </tr>

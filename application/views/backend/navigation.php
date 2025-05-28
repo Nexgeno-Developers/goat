@@ -65,17 +65,29 @@ if($user_type == 'parent'){
            <span><?php echo get_phrase('Master'); ?></span>
            </a>
            <ul class="side-nav-second-level collapse" aria-expanded="false">
+
+              <?php if($this->session->userdata('role_type') != 'inward') { ?>
     
-              <?php if(access('master_list')){ ?>
-              <li>
-                 <a href="<?php echo site_url($controller.'/manage_broker'); ?>">Manage Broker</a>
-              </li>
-              <?php } ?>
-              
-              <?php if(access('master_list')){ ?>
-              <li>
-                 <a href="<?php echo site_url($controller.'/manage_gwala'); ?>">Manage Gawala</a>
-              </li>
+                <?php if(access('master_list')){ ?>
+                <li>
+                  <a href="<?php echo site_url($controller.'/manage_broker'); ?>">Manage Broker</a>
+                </li>
+                <?php } ?>
+                
+                <?php if(access('master_list')){ ?>
+                <li>
+                  <a href="<?php echo site_url($controller.'/manage_gwala'); ?>">Manage Gawala</a>
+                </li>
+                <?php } ?>
+
+              <?php } else { ?>
+
+                <?php if(access('master_list')){ ?>
+                <li>
+                  <a href="<?php echo site_url($controller.'/manage_gwala'); ?>">Manage Gawala</a>
+                </li>
+                <?php } ?>
+
               <?php } ?>
               
            </ul>

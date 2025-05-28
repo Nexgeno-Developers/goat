@@ -215,7 +215,7 @@ function access($action)
 
         elseif($action == 'master_list') //manage admin page
         {
-            if($role == 'admin' || $role == 'bmc')
+            if($role == 'admin' || $role == 'bmc' || $role == 'inward')
             {
                 return true;
             }
