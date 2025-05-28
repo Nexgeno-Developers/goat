@@ -215,7 +215,7 @@
                                         <?php $bk_n = $this->db->get_where('app_broker', array('id' => $row['broker_id']))->row()->applicant_name ?>
                                         <?php $gw_n = $this->db->get_where('app_gwala', array('id' => $row['gwala_id']))->row()->applicant_name ?>
                                         <br> <label>Broker Name : <?php echo $bk_n; ?></label>
-                                        <br> <label>Gowala Name : <?php echo $gw_n; ?></label>
+                                        <br> <label>Gawala Name : <?php echo $gw_n; ?></label>
                                     </td>
                                     <td><?php echo $row['timestamp']; ?></td>
                                     <td class="options_buttons">

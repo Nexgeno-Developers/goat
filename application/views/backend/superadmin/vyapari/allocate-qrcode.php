@@ -112,10 +112,10 @@
                     </div>  
                     
                     <div class="form-group col-md-6">
-                        <label style="margin: 0;" for="pandaal_no">Gowala</label>
+                        <label style="margin: 0;" for="pandaal_no">Gawala</label>
                        <select name="gwala_id" class="form-control select2" required>
                            <?php $app_gwala = $this->db->select('id,license_no,applicant_name')->order_by('id', 'ASC')->get('app_gwala')->result_array(); ?>
-                           <option value="">Select Gowala</option>
+                           <option value="">Select Gawala</option>
                            <?php foreach($app_gwala as $row): ?>
                            <option value="<?= $row['id']; ?>"><?= $row['applicant_name']; ?> / Licence No. <?= $row['license_no']; ?></option>
                            <?php endforeach; ?>

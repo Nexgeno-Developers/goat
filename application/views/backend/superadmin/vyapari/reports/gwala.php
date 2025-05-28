@@ -117,7 +117,7 @@
         		buttons: [
         		    {
                         extend: 'csvHtml5',
-                        filename: 'agent-gowala', 
+                        filename: 'agent-gawala', 
                         text: 'Export',
                         className: 'btn-sm btn-secondary btn-data-export',
                         exportOptions: {

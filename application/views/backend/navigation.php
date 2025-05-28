@@ -74,7 +74,7 @@ if($user_type == 'parent'){
               
               <?php if(access('master_list')){ ?>
               <li>
-                 <a href="<?php echo site_url($controller.'/manage_gwala'); ?>">Manage Gowala</a>
+                 <a href="<?php echo site_url($controller.'/manage_gwala'); ?>">Manage Gawala</a>
               </li>
               <?php } ?>
               
