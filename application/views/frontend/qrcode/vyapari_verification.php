@@ -429,22 +429,22 @@ $(document).ready(function() {
     }
 
     // Geolocation
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-            position => {
-                $('input[name="latitude"]').val(position.coords.latitude);
-                $('input[name="longitude"]').val(position.coords.longitude);
-                $('body').show();
-            },
-            error => {
-                alert("You must allow location access to view this page.");
-                $('body').html("<h5 style='display: flex;align-items: center;height: 100vh;justify-content: center;text-align: center;'>Access Denied. Location permission required. Please Allow Location From Browser</h5>");
-            }
-        );
-    } else {
-        alert("Geolocation is not supported by your browser.");
-        $('body').html("<h5 style='display: flex;align-items: center;height: 100vh;justify-content: center;text-align: center;'>Your browser does not support location access.</h5>");
-    }
+    // if (navigator.geolocation) {
+    //     navigator.geolocation.getCurrentPosition(
+    //         position => {
+    //             $('input[name="latitude"]').val(position.coords.latitude);
+    //             $('input[name="longitude"]').val(position.coords.longitude);
+    //             $('body').show();
+    //         },
+    //         error => {
+    //             alert("You must allow location access to view this page.");
+    //             $('body').html("<h5 style='display: flex;align-items: center;height: 100vh;justify-content: center;text-align: center;'>Access Denied. Location permission required. Please Allow Location From Browser</h5>");
+    //         }
+    //     );
+    // } else {
+    //     alert("Geolocation is not supported by your browser.");
+    //     $('body').html("<h5 style='display: flex;align-items: center;height: 100vh;justify-content: center;text-align: center;'>Your browser does not support location access.</h5>");
+    // }
 });
 </script>
 </body>
