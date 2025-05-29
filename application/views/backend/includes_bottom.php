@@ -53,10 +53,10 @@
 	}
 </script>
 
-<script>
-	const login_time = '<?php echo $this->session->userdata('login_time'); ?>'; // e.g. "11:00:00"
-	const logout_time = '<?php echo $this->session->userdata('logout_time'); ?>'; // e.g. "23:15:00"
-	const current_time = '<?php echo date("H:i:s"); ?>'; // server time
+<!-- <script>
+	const login_time = '<?php //echo $this->session->userdata('login_time'); ?>'; // e.g. "11:00:00"
+	const logout_time = '<?php //echo $this->session->userdata('logout_time'); ?>'; // e.g. "23:15:00"
+	const current_time = '<?php //echo date("H:i:s"); ?>'; // server time
 
 	console.log("LOGIN TIME : " + login_time);
 	console.log("LOGOUT TIME : " + logout_time);
@@ -75,4 +75,4 @@
 			window.location.href = "<?php echo base_url('login/logout'); ?>";
 		}
 	}
-</script>
+</script> -->

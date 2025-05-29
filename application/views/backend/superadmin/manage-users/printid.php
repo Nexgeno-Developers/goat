@@ -21,9 +21,9 @@ p
 
 .vyapari_coluom_one img
 {
-    width:90px;
-    margin-top:10px;
-    margin-bottom:10px;
+    width:80px;
+    margin-top:0px;
+    margin-bottom:0px;
 }
 .vyapari_coluom_two
 {
@@ -41,6 +41,11 @@ p
     text-align:center;
     padding-bottom:5px;
 }
+
+.signature_img
+{
+    width:60px;
+}
 td, th {
         padding:0px 8px 8px 8px;
     }
@@ -57,10 +62,12 @@ td, th {
 </head>
 <body>
     <!--position:absolute; left:140px; top:385px; transform: rotate(90deg);-->
-    <div style="position:relative; left:0px; top:40px; width:220px; margin-left:auto; margin-right:auto; display:block;border:1px solid #ccc3;">
+    <div style="position:relative; left:0px; top:40px; width:240px; margin-left:auto; margin-right:auto; display:block;border:1px solid #ccc3;">
         <div>
-      <img width="220px" height="auto" src="uploads/top_image.png?<?php echo time(); ?>">
+      <img width="240px" height="auto" src="uploads/top_image.png?<?php echo time(); ?>">
       </div>
+
+      <p style="text-align:center; font-size:16px; font-weight:bold; padding-top:0px;">Deonar Bakra EID 2025</p>
        <div class="vyapari_coluom_one" style="text-align:center;">
             <?= file_exists('uploads/users/'.$vyapari['id'].'.jpg') ? '<img src="uploads/users/'.$vyapari['id'].'.jpg?'.time().'">' : '<img src="uploads/emp_photo/logo.png?'.time().'">'?>
        </div> 
@@ -104,13 +111,15 @@ td, th {
            </table>
            <!--<p style="padding-top:10px;"><b><span>Emerg No &nbsp;</span>:</b> ‪+91 9773375525‬ <br> &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp;  &nbsp; &nbsp;  &nbsp; &nbsp;‪+91 9029075525‬</p>-->
            
-           <p style="padding-top:40px;padding-bottom:5px; text-align:left;">Signature or Stamp -------</p>
+
+           <img class="signature_img" src="uploads/signature.png" style="padding-top:20px; margin-left:10px;">
+           <p style="padding-top:0px;padding-bottom:5px; text-align:left; margin-top:-10px;">Signature or Stamp  </p>
            
            
        </div>
        
         <div>
-      <img width="220px" height="" src="uploads/bottom_icons1.png?<?php echo time(); ?>">
+      <img width="240px" height="" src="uploads/bottom_icons1.png?<?php echo time(); ?>">
       </div>
         
     </div>
