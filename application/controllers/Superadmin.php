@@ -643,7 +643,7 @@ class Superadmin extends CI_Controller {
 
       // Total Unblock + Exit QR Codes
       $page_data['unblock'] = cache_with_ttl('dashboard.unblock', function() use ($CI) {
-          return $CI->db->where_in('status', ['unblock', 'exit'])->count_all_results('app_qrcode');
+          return $CI->db->where_in('status', ['unblock', 'exit', 'block'])->count_all_results('app_qrcode');
       }, $cache_duration);
 
       // Total Block QR Codes
