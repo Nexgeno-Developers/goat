@@ -309,7 +309,21 @@ class Superadmin extends CI_Controller {
             $page_data['page_name']  = 'vyapari/reports/goats-by-states';
             $page_data['page_title'] = 'State Goat Report';
             $this->load->view('backend/index', $page_data);
-        }         
+        }  
+        
+        if($param1 == 'goats-by-agent')
+        {
+          $page_data['page_name']  = 'vyapari/reports/goats-by-agent';
+          $page_data['page_title'] = 'Agent Goat Report';
+          $this->load->view('backend/index', $page_data);
+        }      
+        
+        if($param1 == 'goats-by-gawala')
+        {
+          $page_data['page_name']  = 'vyapari/reports/goats-by-gawala';
+          $page_data['page_title'] = 'Gawala Goat Report';
+          $this->load->view('backend/index', $page_data);
+        }           
         
         if($param1 == 'gwala')
         {

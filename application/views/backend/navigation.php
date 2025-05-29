@@ -146,7 +146,19 @@ if($user_type == 'parent'){
           <li>
              <a href="<?php echo site_url($controller.'/reports/goats-by-states'); ?>">State Goats</a>
           </li> 
-          <?php } ?>          
+          <?php } ?>  
+          
+          <?php if(access('agentwise_goat_report')){ ?>
+          <li>
+             <a href="<?php echo site_url($controller.'/reports/goats-by-agent'); ?>">Agent Goats</a>
+          </li> 
+          <?php } ?>   
+          
+          <?php if(access('gawalawise_goat_report')){ ?>
+          <li>
+             <a href="<?php echo site_url($controller.'/reports/goats-by-gawala'); ?>">Gawala Goats</a>
+          </li> 
+          <?php } ?>           
           
        </ul>
     </li>    
