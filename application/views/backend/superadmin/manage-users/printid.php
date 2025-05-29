@@ -72,12 +72,12 @@ td, th {
             <?= file_exists('uploads/users/'.$vyapari['id'].'.jpg') ? '<img src="uploads/users/'.$vyapari['id'].'.jpg?'.time().'">' : '<img src="uploads/emp_photo/logo.png?'.time().'">'?>
        </div> 
        
-       <div style="font-size:14px; margin-top:-5px; font-weight:700; text-align:center;"><?= $vyapari['name']; ?></div>
+       <div style="font-size:14px; margin-top:-5px; font-weight:700; text-align:center; text-transform:capitalize;"><?= $vyapari['name']; ?></div>
        <div style="font-size:10px; margin-top:-5px; font-weight:600; text-align:center; text-transform:capitalize;"><?= $vyapari['role_type']; ?></div>
        
        
        
-       <div class="vyapari_coluom_two" style="margin-top:10px; padding-left:20px; padding-bottom:5px; padding-right:20px; text-align:left">
+       <div class="vyapari_coluom_two" style="margin-top:10px; padding-left:20px; padding-bottom:5px; padding-right:20px; text-align:left;">
            
            
                 
@@ -111,10 +111,12 @@ td, th {
            </table>
            <!--<p style="padding-top:10px;"><b><span>Emerg No &nbsp;</span>:</b> ‪+91 9773375525‬ <br> &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp;  &nbsp; &nbsp;  &nbsp; &nbsp;‪+91 9029075525‬</p>-->
            
-  <div style="margin-left:55%; margin-top:-10px'">
-           <img class="signature_img" src="uploads/signature.png" style="padding-top:20px; margin-left:30px;">
-           <p style="padding-top:0px;padding-bottom:5px; text-align:left; margin-top:-2px;">Signature or Stamp  </p>
-           </div>
+          <div class="display: flex; justify-content: space-between; align-items: center;">
+             <p style="padding-top:0px;padding-bottom:5px; text-align:left; padding-top:45px;">Signature or Stamp  </p>
+             <div style="margin-left:55%; margin-top:-10px'">
+               <img class="signature_img" src="uploads/signature.png" style="margin-top:-50px;padding-top:20px; margin-left:30px;">
+             </div>
+             </div>
            
        </div>
        
