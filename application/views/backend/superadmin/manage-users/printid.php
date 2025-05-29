@@ -67,7 +67,7 @@ td, th {
       <img width="240px" height="auto" src="uploads/top_image.png?<?php echo time(); ?>">
       </div>
 
-      <p style="text-align:center; font-size:16px; font-weight:bold; padding-top:0px;">Deonar Bakra EID 2025</p>
+      <p style="text-align:center; font-size:16px; font-weight:bold; padding-top:0px;">Deonar Abattoir</p>
        <div class="vyapari_coluom_one" style="text-align:center;">
             <?= file_exists('uploads/users/'.$vyapari['id'].'.jpg') ? '<img src="uploads/users/'.$vyapari['id'].'.jpg?'.time().'">' : '<img src="uploads/emp_photo/logo.png?'.time().'">'?>
        </div> 
@@ -111,10 +111,10 @@ td, th {
            </table>
            <!--<p style="padding-top:10px;"><b><span>Emerg No &nbsp;</span>:</b> ‪+91 9773375525‬ <br> &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp;  &nbsp; &nbsp;  &nbsp; &nbsp;‪+91 9029075525‬</p>-->
            
-
-           <img class="signature_img" src="uploads/signature.png" style="padding-top:20px; margin-left:10px;">
-           <p style="padding-top:0px;padding-bottom:5px; text-align:left; margin-top:-10px;">Signature or Stamp  </p>
-           
+  <div style="margin-left:55%">
+           <img class="signature_img" src="uploads/signature.png" style="padding-top:20px; margin-left:30px;">
+           <p style="padding-top:0px;padding-bottom:5px; text-align:left; margin-top:-2px;">Signature or Stamp  </p>
+           </div>
            
        </div>
        
