@@ -71,7 +71,7 @@ $broker_out_counts = array_column($forGraph, 'total_out');
                                 <thead>
                                     <tr>
                                         <th>Sr.</th>
-                                        <th>Broker</th>
+                                        <th>Gawala</th>
                                         <th>In</th>
                                         <th>Out</th>
                                     </tr>
