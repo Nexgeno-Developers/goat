@@ -111,7 +111,7 @@ td, th {
            </table>
            <!--<p style="padding-top:10px;"><b><span>Emerg No &nbsp;</span>:</b> ‪+91 9773375525‬ <br> &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp;  &nbsp; &nbsp;  &nbsp; &nbsp;‪+91 9029075525‬</p>-->
            
-  <div style="margin-left:55%">
+  <div style="margin-left:55%; margin-top:-10px'">
            <img class="signature_img" src="uploads/signature.png" style="padding-top:20px; margin-left:30px;">
            <p style="padding-top:0px;padding-bottom:5px; text-align:left; margin-top:-2px;">Signature or Stamp  </p>
            </div>
