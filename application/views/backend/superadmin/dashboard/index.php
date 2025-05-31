@@ -359,7 +359,7 @@ $(document).ready(function() {
         var dayx = xValues[i];
         var labelMonthYear = (dayx >= 21) ? 'May 2025' : 'June 2025';
 
-        if (xValues[i] <= today) {
+        // if (xValues[i] <= today) {
             var row = '<tr>' +
                 '<td>' + (i + 1)  + '</td>' +
                 '<td>' + xValues[i] + ' ' + labelMonthYear + '</td>' +
@@ -367,7 +367,7 @@ $(document).ready(function() {
                 '<td>' + yValuesOut[i] + '</td>' +
                 '</tr>';
             $('#chart-table-body').append(row);
-        }
+        // }
     }
 });
 </script>
