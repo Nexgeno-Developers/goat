@@ -309,7 +309,21 @@ class Superadmin extends CI_Controller {
             $page_data['page_name']  = 'vyapari/reports/goats-by-states';
             $page_data['page_title'] = 'State Goat Report';
             $this->load->view('backend/index', $page_data);
-        }         
+        }  
+        
+        if($param1 == 'goats-by-agent')
+        {
+          $page_data['page_name']  = 'vyapari/reports/goats-by-agent';
+          $page_data['page_title'] = 'Agent Goat Report';
+          $this->load->view('backend/index', $page_data);
+        }      
+        
+        if($param1 == 'goats-by-gawala')
+        {
+          $page_data['page_name']  = 'vyapari/reports/goats-by-gawala';
+          $page_data['page_title'] = 'Gawala Goat Report';
+          $this->load->view('backend/index', $page_data);
+        }           
         
         if($param1 == 'gwala')
         {
@@ -629,7 +643,7 @@ class Superadmin extends CI_Controller {
 
       // Total Unblock + Exit QR Codes
       $page_data['unblock'] = cache_with_ttl('dashboard.unblock', function() use ($CI) {
-          return $CI->db->where_in('status', ['unblock', 'exit'])->count_all_results('app_qrcode');
+          return $CI->db->where_in('status', ['unblock', 'exit', 'block'])->count_all_results('app_qrcode');
       }, $cache_duration);
 
       // Total Block QR Codes
