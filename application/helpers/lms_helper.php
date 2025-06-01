@@ -137,7 +137,7 @@ function access($action)
         
          elseif($action == 'manage_bulk_pass_button') //block /unblock pass of vyapari
         {
-            if($role == 'doctor')
+            if($role == 'doctor' || $role == 'inward')
             {
                 return true;
             }
