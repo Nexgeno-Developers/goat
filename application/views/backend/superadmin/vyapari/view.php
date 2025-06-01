@@ -143,8 +143,8 @@
                     <select id="actionSelect" name="action" class="form-control action">
                         <option value="" data-event="alert('select action first!')">Bulk actions</option>
                         <option value="block" data-event="rightModal('<?php echo site_url('modal/popup/vyapari/bulk-complaint-qrcode/'.$vyapari['vyapari_id'].'/block'); ?>', '<?php echo get_phrase('block_qrcode'); ?>')">Block</option>
-                        <option value="unblock" data-event="rightModal('<?php echo site_url('modal/popup/vyapari/bulk-complaint-qrcode/'.$vyapari['vyapari_id'].'/unblock'); ?>', '<?php echo get_phrase('unblock_qrcode'); ?>')">Unblock</option>
                         <?php if($this->session->userdata('user_id') == 1): ?>
+                        <option value="unblock" data-event="rightModal('<?php echo site_url('modal/popup/vyapari/bulk-complaint-qrcode/'.$vyapari['vyapari_id'].'/unblock'); ?>', '<?php echo get_phrase('unblock_qrcode'); ?>')">Unblock</option>
                         <option value="delete" data-event="rightModal('<?php echo site_url('modal/popup/vyapari/bulk-delete-qrcode/'.$vyapari['vyapari_id'].'/delete'); ?>', '<?php echo get_phrase('delete_qrcode'); ?>')">Delete</option>
                         <option value="transfer" data-event="rightModal('<?php echo site_url('modal/popup/vyapari/bulk-transfer-qrcode/'.$vyapari['vyapari_id'].'/transfer'); ?>', '<?php echo get_phrase('transfer_qrcode'); ?>')">Transfer</option>
                         <?php endif; ?>
