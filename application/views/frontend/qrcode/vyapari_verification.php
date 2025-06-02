@@ -395,6 +395,7 @@ $(document).ready(function() {
                       </div>
                       <p class="pt-2 pb-0 mb-1">${response.data.name}</p>
                       <p><b>ID:</b> ${response.data.vyapari_id}</p>
+                      <p><b>Phone No:</b> ${response.data.phone}</p>
                       <p><b>Inward Total Goat:</b> ${response.data.total_inward}</p>
                       <p><b>Outward Total Goat:</b> ${response.data.total_outward}</p>
                       <p><b>Pass Blocked:</b> ${response.data.total_block}</p>

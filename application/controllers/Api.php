@@ -257,6 +257,7 @@ class Api extends CI_Controller
             v.name,
             v.photo,
             v.timestamp,
+            v.phone,
             COUNT(q.qrcode_id) as total_inward,
             SUM(CASE WHEN q.status = "exit" THEN 1 ELSE 0 END) as total_outward,
             SUM(CASE WHEN q.status = "block" THEN 1 ELSE 0 END) as total_block
@@ -276,6 +277,7 @@ class Api extends CI_Controller
                 'total_inward' => $result['total_inward'],
                 'total_outward' => $result['total_outward'],
                 'total_block' => $result['total_block'],
+                'phone' => $result['phone'],
                 'date' => date('d M, Y H:iA', strtotime($result['timestamp'])),
                 'photo' => base_url('uploads/vyapari_photo/' . $result['photo']) . '?' . time()
             ];
