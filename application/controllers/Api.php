@@ -247,9 +247,25 @@ class Api extends CI_Controller
         $qrcode = trim($this->db->escape_str($this->input->post('qrcode', true)));
 
         // Fetch data
-        $this->db->select('vyapari_id, name, photo, timestamp');
-        $this->db->from('app_vyapari');
-        $this->db->where('vyapari_id', base64_decode($qrcode));
+        // $this->db->select('vyapari_id, name, photo, timestamp');
+        // $this->db->from('app_vyapari');
+        // $this->db->where('vyapari_id', base64_decode($qrcode));
+        // $result = $this->db->get()->row_array();
+
+        $this->db->select('
+            v.vyapari_id,
+            v.name,
+            v.photo,
+            v.timestamp,
+            COUNT(q.qrcode_id) as total_inward,
+            SUM(CASE WHEN q.status = "exit" THEN 1 ELSE 0 END) as total_outward,
+            SUM(CASE WHEN q.status = "block" THEN 1 ELSE 0 END) as total_block
+        ');
+        $this->db->from('app_vyapari v');
+        $this->db->join('app_qrcode q', 'q.vyapari_id = v.vyapari_id', 'left');
+        $this->db->where('v.vyapari_id', base64_decode($qrcode));
+        $this->db->group_by('v.vyapari_id');
+
         $result = $this->db->get()->row_array();
 
         // Format response
@@ -257,6 +273,9 @@ class Api extends CI_Controller
             $data = [
                 'vyapari_id' => vyapari_id($result['vyapari_id']),
                 'name' => ucfirst($result['name']),
+                'total_inward' => $result['total_inward'],
+                'total_outward' => $result['total_outward'],
+                'total_block' => $result['total_block'],
                 'date' => date('d M, Y H:iA', strtotime($result['timestamp'])),
                 'photo' => base_url('uploads/vyapari_photo/' . $result['photo']) . '?' . time()
             ];
