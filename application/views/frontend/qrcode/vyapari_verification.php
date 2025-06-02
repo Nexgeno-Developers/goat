@@ -351,13 +351,18 @@ $(document).ready(function() {
             method: 'POST',
             data: postData,
             beforeSend: function() {
+                // $('#result').html(`
+                //     <div class="alert alert-secondary">
+                //         Processing... Please wait <span id="timer">0</span>s
+                //     </div>
+                // `);
                 $('#result').html(`
                     <div class="alert alert-secondary">
-                        Processing... Please wait <span id="timer">10</span>s
+                        Processing... Please wait
                     </div>
                 `);
                 $('#preview, #manualForm, #btnBack, #btnFront, .scan-box').hide();
-                window.countdownInterval = startCountdown(10, '#timer');
+                window.countdownInterval = startCountdown(0, '#timer');
             },
             success: function(response) {
                 setTimeout(() => {
@@ -368,7 +373,7 @@ $(document).ready(function() {
                       top: document.body.scrollHeight,
                       behavior: 'smooth'
                     });
-                }, 10000);
+                }, 0);
             },
             error: function() {
                 $('#result').html('<div class="alert alert-warning">Server error validating the pass.</div>');
