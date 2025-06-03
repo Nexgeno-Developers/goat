@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Api extends CI_Controller
 {
     private $max_requests = 3; // Max requests allowed
-    private $time_window = 120; // Time window in seconds
+    private $time_window = 60; // Time window in seconds
 
     public function __construct()
     {
@@ -244,7 +244,13 @@ class Api extends CI_Controller
             return;       
         }        
 
-        $qrcode = trim($this->db->escape_str($this->input->post('qrcode', true)));
+        $qrcodeInput = trim($this->db->escape_str($this->input->post('qrcode', true)));
+
+        // Check if base64 encoded
+        $decodedQrcode = base64_decode($qrcodeInput, true);
+        $isBase64 = $decodedQrcode !== false && base64_encode($decodedQrcode) === $qrcodeInput;
+
+        $vyapariId = $isBase64 ? $decodedQrcode : end(explode('-', $qrcodeInput));        
 
         // Fetch data
         // $this->db->select('vyapari_id, name, photo, timestamp');
@@ -264,7 +270,7 @@ class Api extends CI_Controller
         ');
         $this->db->from('app_vyapari v');
         $this->db->join('app_qrcode q', 'q.vyapari_id = v.vyapari_id', 'left');
-        $this->db->where('v.vyapari_id', base64_decode($qrcode));
+        $this->db->where('v.vyapari_id', $vyapariId);
         $this->db->group_by('v.vyapari_id');
 
         $result = $this->db->get()->row_array();

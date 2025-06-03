@@ -253,6 +253,11 @@ button:focus {
           <i class="fa-solid fa-qrcode"></i> Scan QR
         </button>
       </li>
+      <li class="nav-item" role="presentation">
+        <button class="" id="manual-tab" data-toggle="tab" data-target="#manual" type="button" role="tab" aria-controls="manual" aria-selected="false">
+          <i class="fa-solid fa-keyboard"></i> Manual Verification
+        </button>
+      </li>      
     </ul>
     
     <div class="tab-content" id="myTabContent">
@@ -264,17 +269,44 @@ button:focus {
         </div>
         
         <div class="scanner-wrapper position-relative">
-        <video id="preview"></video>
-  <div class="scan-box">
-    <div class="corner top-left"></div>
-    <div class="corner top-right"></div>
-    <div class="corner bottom-left"></div>
-    <div class="corner bottom-right"></div>
-    <div class="scan-line"></div>
-  </div>
-        
+          <video id="preview"></video>
+          <div class="scan-box">
+            <div class="corner top-left"></div>
+            <div class="corner top-right"></div>
+            <div class="corner bottom-left"></div>
+            <div class="corner bottom-right"></div>
+            <div class="scan-line"></div>
+          </div>
         </div>
       </div>
+
+      <div class="tab-pane fade" id="manual" role="tabpanel" aria-labelledby="manual-tab">
+        <?php
+            $digitLength = 10; //get_common_settings('validate_qrcode_digit');
+            $pattern = '^\d{' . $digitLength . '}$';
+            $title = 'Please enter exactly ' . $digitLength . ' digits pass number (e.g., ' . str_pad('1', $digitLength, '0', STR_PAD_LEFT) . ')';
+        ?>        
+        <form id="manualForm">
+          <div class="form-group">
+            <label for="manualCode">Vyapari ID</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              id="manualCode" 
+              placeholder="Enter vyapari ID"
+              value="<?= vyapari_id() ?>"
+              minlength="1"
+              maxlength="<?= $digitLength ?>"              
+              onwheel="this.blur()"
+              onkeydown="if(event.key === 'ArrowUp' || event.key === 'ArrowDown'){event.preventDefault();}"             
+            required>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block submit_bttns" style="background: #555;">
+            <i class="fa-solid fa-magnifying-glass"></i> Verify
+          </button>
+        </form>
+      </div>
+
     </div>
     
     <input type="hidden" name="latitude">
