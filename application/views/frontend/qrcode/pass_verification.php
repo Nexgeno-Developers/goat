@@ -258,6 +258,11 @@ button:focus {
           <i class="fa-solid fa-keyboard"></i> Manual Verification
         </button>
       </li>
+      <li class="nav-item" role="presentation">
+        <a href="" style="color: #71357c; display: inline-flex; align-items: center; justify-content: center; text-decoration: none;">
+          <i class="fa-solid fa-refresh" style="margin-top: 8px; font-size: 16px;"></i>
+        </a>
+      </li>      
     </ul>
     
     <div class="tab-content" id="myTabContent">
