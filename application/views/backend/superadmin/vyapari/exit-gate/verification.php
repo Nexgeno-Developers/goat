@@ -56,8 +56,11 @@
                     <div class="text-center exit_button">
                         <a class="btn btn-sm <?php echo ($vtype == 'hardware-scanner') ? 'btn-success' : 'btn-light'; ?>" href="<?php echo base_url('superadmin/exit_verification/?vtype=hardware-scanner'); ?>">Device Scanner</a>
                         <a class="btn btn-sm <?php echo ($vtype == 'scanner') ? 'btn-success' : 'btn-light'; ?>" href="<?php echo base_url('superadmin/exit_verification/?vtype=scanner'); ?>">WebCam Scanner</a>
+
+                        <?php /*
                         <a class="btn btn-sm <?php echo ($vtype == 'manual') ? 'btn-success' : 'btn-light'; ?>" href="<?php echo base_url('superadmin/exit_verification/?vtype=manual'); ?>">Manual</a>  
-                        
+                        */ ?>
+
                         
                         <div class="mb-3"></div>
                         
@@ -293,6 +296,21 @@
         $('#scanned_content').prepend(msg_html);
         $('#scanned_content').scrollTop(0);
     }
+</script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', function () {
+        const currentUrl = window.location.href;
+
+        // Check if URL contains vtype=manual
+        if (currentUrl.includes('vtype=manual')) {
+            // Replace vtype=manual with vtype=hardware-scanner
+            const newUrl = currentUrl.replace('vtype=manual', 'vtype=hardware-scanner');
+            
+            // Redirect to the new URL
+            window.location.href = newUrl;
+        }
+    });
 </script>
 
 <style>
